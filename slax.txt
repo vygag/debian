@@ -1,0 +1,140 @@
+https://slax.org.ru/imodules.html
+https://komar.in/ru/архив/slax
+https://4pda.to/forum/index.php?showtopic=1056034
+https://slax.org.ru/forum/index.php?topic=821.0
+https://slax9.blogspot.com/p/slax-9.html
+https://forum.puppyrus.org/index.php?topic=23244.0
+
+wget https://ftp.sh.cvut.cz/slax/Slax-11.x/slax-64bit-11.6.0.iso
+85621ae3f6633017a59dc1ec79919d76  slax-64bit-11.6.0.iso  md5sum
+md5sum slax-64bit-11.6.0.iso
+
+lsblk
+sudo fdisk -l
+// С помощью dd удалите таблицу разделов
+sudo dd if=/dev/zero of=/dev/sdb bs=1M count=1
+
+sudo cfdisk /dev/sdb
+Выберите тип метки
+dos
+
+Свободное пространство - Новый - основной 
+тип - c W95 FAT32 (LBA)
+
+форматировать USB флешку в файловую систему FAT32
+sudo mkfs.vfat /dev/sdb1
+
+Распаковать slax-64bit-11.6.0.iso
+скопировать папку slax на флешку
+перейдите в каталог /slax/boot/ на вашем USB
+sudo bash bootinst.sh
+
+./bootinst.sh
+sudo chmod 755 bootinst.sh
+sudo chmod 777 bootinst.sh
+sudo chmod a+rx bootinst.sh
+sudo chmod ugo+x bash bootinst.sh
+
+apt update
+apt list --upgradeable
+apt upgrade
+apt clean
+
+// Локализация
+apt install --reinstall locales
+dpkg-reconfigure locales
+en_US.UTF-8 UTF-8
+ru_RU.UTF-8 UTF-8
+выбор локали по умолчанию
+ru_RU.UTF-8
+
+перезагрузка
+
+locales
+locales-all
+util-linux-locales
+
+/usr/share/locale/ru/LC_MESSAGES/pcmanfm.mo
+/usr/share/locale/ru/LC_MESSAGES/xarchiver.mo
+/usr/share/locale/ru/LC_MESSAGES/mc.mo
+/usr/share/locale/ru/LC_MESSAGES/connman-gtk.mo
+
+apt install
+bash-completion
+udisks2
+fonts-liberation
+xfce4-terminal
+gnote
+geany
+gpicview
+cherrytree
+evince
+transmission-gtk
+links
+git
+curl
+
+nmap
+aircrack-ng
+tshark
+wireshark-gtk
+pixiewps
+
+sdcv
+mediainfo
+mpv
+
+abiword
+gnumeric
+
+https://mozilla-russia.org/products/thunderbird/history.html
+https://mozilla-russia.org/products/thunderbird/linux.html
+https://mozilla-russia.org/products/firefox/history.html
+https://dist.torproject.org/torbrowser/12.0.4/tor-browser-linux64-12.0.4_ALL.tar.xz
+desktop.telegram.org                                          tsetup.4.6.0
+7-zip.org/download.html                                   7z2201-linux-x64
+
+
+Чтобы посмотреть доступные языковые настройки (локали), воспользуйтесь командой    locale -a
+Чтобы добавить новую локаль, откройте файл /etc/locale.gen:                        sudo gedit /etc/locale.gen
+И раскомментируйте там строки с желаемыми новыми локалями Затем выполните команду: sudo locale-gen
+Чтобы поменять язык и кодировку для текущей сессии                                 
+# Установить английскую локаль
+export LANG=en_US.UTF-8
+# Установить русскую локаль
+export LANG=ru_RU.UTF-8
+Если в вашей системе это не сработало, то замените переменную LANG на переменную LANGUAGE
+export LANGUAGE=en_US.UTF-8
+sudo localectl set-locale LANG=ru_RU.UTF-8
+sudo gedit /etc/locale.conf LANG=ru_RU.UTF-8
+
+sudo apt update
+apt list --upgradeable
+--installed --all-versions
+sudo apt upgrade
+sudo apt full-upgrade
+sudo apt clean Очистка кэша установочных файлов
+sudo apt autoclean
+
+apt search fbreader
+apt list fbreader
+apt show fbreader
+sudo apt install fbreader
+
+sudo apt purge qbittorrent
+sudo apt autoremove
+
+install remove
+
+apt show whatsapp  информацию о пакете
+apt search whatsapp
+
+sudo apt install ПАКЕТ
+sudo apt install -f    Исправление ошибок установки пакетов и зависимостей
+sudo apt download ПАКЕТ  скачать пакет без установки
+apt list ПАКЕТ Поиск пакетов только по названию
+https://hackware.ru/?p=13848
+https://hackware.ru/?p=8185
+
+sudo apt check    находит битые зависимости программ, а также конфликтующие пакеты
+https://zalinux.ru/?p=5291

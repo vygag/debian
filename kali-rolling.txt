@@ -1,0 +1,413 @@
+Kali Linux debootstrap
+
+https://forum.antichat.com/threads/470976/
+https://odba.ru/programma-debootstrap-zavershila-svoyu-rabotu-iz-za-oshibki-kod-oshibki-1-kali-linux/
+
+wget https://cdimage.kali.org/kali-2023.1/kali-linux-2023.1-installer-netinst-amd64.iso
+wget https://cdimage.kali.org/kali-2023.1/SHA256SUMS
+wget https://mirror.truenetwork.ru/kali-images/kali-2023.1/SHA256SUMS
+
+344a8c948af62f7a288e3dc658291ec3d3cfcdbe5ad1e2f45334740bd6ff481d  kali-linux-2023.1-installer-netinst-amd64.iso
+sha256sum kali-linux-2023.1-installer-netinst-amd64.iso
+
+// С помощью dd удалите таблицу разделов
+sudo dd if=/dev/zero of=/dev/sdb bs=1M count=1
+// записать образ на флэшку
+sudo dd if=kali-linux-2023.1-installer-netinst-amd64.iso of=/dev/sdb
+
+--------------------------------------------------ПОДГОТОВКА HDD----------------------------------------------
+
+// Форматирование разделов
+lsblk
+sudo fdisk -l
+// sda1 swap
+// sda2 /
+// Форматирования раздела подкачки
+sudo mkswap /dev/sda1
+// Форматирования раздела корень
+sudo mkfs.ext4 /dev/sda2
+// Монтирование разделов
+sudo swapon /dev/sda1
+sudo mount /dev/sda2 /mnt
+
+--------------------------------------------------USB-МОДЕМ----------------------------------------------
+
+Настройки - Сеть и интернет - Точка доступа и модем - USB-модем
+ip link show
+ip addr show
+
+sudo nano /etc/network/interfaces
+auto usb0
+iface usb0 inet dhcp
+
+sudo systemctl restart networking.service
+ping ya.ru
+
+------------------------------------------------СЕТЬ-----------------------------------------------------
+
+sudo nano /etc/network/interfaces
+auto usb0
+iface usb0 inet dhcp
+
+sudo systemctl restart networking.service
+
+------------------------------------------------ДРОВА WIFI----------------------------------------------
+
+Режим монитора можно включить, установив CONFIG_WIFI_MONITOR = y  /rtl8192eu-linux/Makefile
+CONFIG_WIFI_MONITOR = n
+
+CONFIG_IP_R_MONITOR = n #arp VOQ and high rate
+
+make
+
+uname -r
+modinfo ./8192eu.ko
+vermagic:       5.10.0-20-amd64 SMP mod_unload modversions
+
+sudo rmmod rtl8xxxu
+sudo insmod ./8192eu.ko     -f  --force-vermagic
+lsmod | grep 8192
+
+sudo cp 8192eu.ko /usr/lib/modules/6.3.1-arch2-1/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu/
+sudo depmod -a
+sudo modprobe 8192eu
+sudo modinfo 8192eu
+
+ping ya.ru
+
+-------------------------------------PROVERKA WI-FI---------------------------------------
+https://hackware.ru/?p=4666
+sudo aireplay-ng -9 wlan0      Injection is working
+sudo airodump-ng wlan0 --manufacturer --uptime --wps
+
+-------------------------------------------------DEBOOTSTRAP--------------------------------------------
+
+// Установка debootstrap
+sudo apt update
+sudo apt install debootstrap
+
+// Запуск debootstrap
+sudo debootstrap --arch amd64 kali-rolling /mnt http://http.kali.org/kali
+
+// Монтирование устройств
+sudo mount --bind /dev /mnt/dev
+sudo mount --bind /proc /mnt/proc
+sudo mount --bind /sys /mnt/sys
+sudo mount --rbind /dev/pts /mnt/dev/pts
+
+---------------------------------------------СОЗДАЁМ ФАЙЛ FSTAB--------------------------------------------
+
+sudo blkid /dev/sda2
+sudo blkid /dev/sda1
+
+sudo nano /mnt/etc/fstab
+# /dev/sda2
+UUID=4d0776d8-d9a9-442e-9aeb-d25500f0f198       /               ext4            rw,relatime     0 1
+
+# /dev/sda1
+UUID=fb24d12b-e028-40f1-89d1-f30ab5e59294       none            swap            defaults        0 0
+
+----------------------------------------------НАСТРОЙКА СЕТИ---------------------------------------------
+
+// Настройка сети
+// Укажите ваши серверы имён и директивы поиска в /etc/resolv.conf
+
+sudo nano /mnt/etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+sudo nano /mnt/etc/hostname
+debian
+
+sudo nano /mnt/etc/hosts
+127.0.0.1       localhost
+:1              localhost
+127.0.1.1       debian
+
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+-------------------------------------------НАСТРОЙКА APT РЕПЫ---------------------------------
+
+sudo nano /mnt/etc/apt/sources.list
+
+// Репа kali-rolling
+
+deb http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware
+
+--------------------------------------------ЧЕРУТИМСЯ---------------------------------------------------
+
+sudo chroot /mnt /usr/bin/bash
+
+-----------------------------------------------ЛОКАЛИЗАЦИЯ---------------------------------------
+
+apt update
+apt install
+
+// Установка и настройка локализации
+apt install locales
+dpkg-reconfigure locales
+en_US.UTF-8 UTF-8
+ru_RU.UTF-8 UTF-8
+выбор локали по умолчанию
+ru_RU.UTF-8
+
+// Консоль
+apt install console-setup
+dpkg-reconfigure keyboard-configuration
+
+-----------------------------------------------УСТАНОВКА СОФТА---------------------------------------
+
+// Ядро
+apt install linux-image-amd64 linux-headers-amd64
+
+apt install intel-microcode
+apt install dkms build-essential
+
+// Xorg
+apt install xserver-xorg-core x11-xserver-utils x11-xkb-utils
+
+// Wi-Fi
+apt install iw network-manager git curl wget links
+
+// Утилиты
+apt install bash-completion udisks2 gvfs gpm alsa-utils fonts-liberation libmtp-common libmtp-runtime
+apt install dosfstools ntfs-3g libmtp9 man-db manpages
+apt install grub-pc nano mc
+
+// Ставим иксы
+apt install lxdm icewm dunst lxappearance network-manager-gnome
+
+// Иксовый софт
+apt install xfce4-terminal thunar thunar-archive-plugin xarchiver geany gnote gpicview
+
+-----------------------------------------------------НАСТРОЙКА-------------------------------------------
+
+// Настройка часового пояса
+nano /etc/adjtime
+0.0 0 0.0
+0
+LOCAL
+
+dpkg-reconfigure tzdata
+
+// установить время
+date -s 09:17
+
+// Установка системных часов
+timedatectl
+// Отключить utc
+timedatectl set-local-rtc 1
+trace_clock=local
+
+timedatectl set-time "гггг-мм-дд чч:мм:сс"
+timedatectl set-time "2023-04-12 14:59:00"
+timedatectl set-time "20:43:36"
+
+// Аппаратные часы биос
+hwclock -r           отобразить часы реального времени
+hwclock -s           копирования часов биос в системные
+hwclock -W           копирования системных часов в биос
+hwclock -l           localtime
+hwclock --set --date="2011-01-25 08:55:01"
+
+------------------------------------------НОВЫЙ ПОЛЬЗОВАТЕЛЬ---------------------------------------------
+
+nano /etc/group
+groupadd группа                                 создать новую группу
+usermod -aG доп_группы пользователь             добавить в группы
+
+// Добавим нового пользователя
+useradd -m -G sudo -s /bin/bash -U vyga
+groups vyga
+
+-m создавать домашний каталог пользователя в home
+-G Список дополнительных групп
+-s командная оболочка для пользователя
+-U Создайте группу с тем же именем что и у пользователя и добавьте
+
+------------------------------------------------ПАРОЛЬ---------------------------------------------------
+
+// Задать пароль
+passwd vyga
+
+// visudo
+EDITOR=nano visudo
+// показывать звёздочки во время ввода пароля sudo
+Defaults    env_reset,pwfeedback
+// права root для группы wheel
+%sudo ALL=(ALL:ALL) ALL
+
+---------------------------------------------------------------------------------------------------------
+
+// Настройка приглашения Bash
+nano /home/vyga/.bashrc
+[[ $- != *i* ]] && return
+PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;35m\]\u\[\e[0m\]@\[\e[1;36m\]\H\[\e[0m\]:\[\e[1;32m\]\w\[\e[0m\]\n\[\e[1;32m\]\$\[\e[0m\] '
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias mouse='gpm -m /dev/input/mice -t exps2'
+alias sd='udisksctl power-off -b /dev/sdb'
+
+---------------------------------------------------------------------------------------------------------
+
+// Монтирование thunar в media
+mkdir /media
+nano /etc/udev/rules.d/99-udisks2.rules
+# UDISKS_FILESYSTEM_SHARED
+# ==1: mount filesystem to a shared directory (/media/VolumeName)
+# ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
+# See udisks(8)
+ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
+
+---------------------------------------------------------------------------------------------------------
+
+// Включить менеджер входа
+systemctl enable lxdm.service
+// включить авто вход в систему
+nano /etc/lxdm/lxdm.conf
+autologin=vyga
+session=/usr/bin/icewm-session
+
+---------------------------------------------------------------------------------------------------------
+
+// Включить NetworkManager
+systemctl enable NetworkManager.service
+
+---------------------------------------------УСТАНОВКА GRUB--------------------------------------------------
+
+nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT=""
+
+grub-install /dev/sda
+update-grub
+
+----------------------------------------------------ДРАЙВЕР WI-FI USB------------------------------------
+
+// Wi-Fi USB Adapter Wireless N300 D-Link DWA-137 Realtek RTL8192EU
+
+git clone https://github.com/clnhub/rtl8192eu-linux
+./install_wifi.sh
+
+git clone https://github.com/Mange/rtl8192eu-linux-driver
+dkms add .
+dkms install rtl8192eu/1.0
+
+ip link
+iw dev
+
+---------------------------------------------------ЗАВЕРШЕНИЕ---------------------------------------------------
+
+exit
+sudo umount -R /mnt
+sudo umount /mnt/dev
+sudo umount /mnt/proc
+sudo umount /mnt/sys
+sudo umount /mnt
+
+systemctl poweroff
+shutdown -h now
+
+---------------------------------------------НАСТРОЙКА СИСТЕМЫ----------------------------------------------------
+
+echo $PS1
+export PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;35m\]\u\[\e[0m\]@\[\e[1;36m\]\H\[\e[0m\]:\[\e[1;32m\]\w\[\e[0m\]\n\[\e[1;32m\]\$\[\e[0m\] '
+
+echo $PATH
+
+/usr/bin:
+/usr/sbin:
+/usr/local/bin:
+/usr/local/sbin:
+
+/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+export PATH=$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+sudo nano /etc/environment
+PATH=$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+/etc/profile
+
+sudo nano /home/vyga/.bashrc
+export PATH=$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+sudo apt install ./firmware-realtek_20230210-4_all.deb     установить локальный .deb пакет
+sudo apt install -f                                        исправить отсутствующи зависимост 
+
+sudo systemctl start NetworkManager
+alias nms='sudo systemctl start NetworkManager'
+
+nmcli general status
+nmcli device wifi list
+nmcli device status
+nmcli connection show
+nmcli radio wifi
+nmcli radio wifi on
+nmcli radio wifi off
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+// настройка политики монтирования
+nano /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
+<action id="org.freedesktop.udisks2.filesystem-mount-system">
+    <defaults>
+      <allow_any>yes</allow_any>
+      <allow_inactive>yes</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+
+---------------------------------------------------------------------------------------------------------
+
+// Реакции на закрывание-открывание крышки.
+nano /etc/systemd/logind.conf
+IdleAction=ignore                  действие при бездействии системы
+HandlePowerKey=poweroff            действие после нажатия клавиши питания
+HandleLidSwitch=ignore             действие после закрытия крышки
+
+--------------------------------------------КАТАЛОГИ И ФАЙЛЫ НАСТРОЕК------------------------------------
+
+// Каталоги
+doc cfg inf man
+down
+foto
+hack
+torrent
+prg
+
+// Копирование файлов настройки и каталогов
+/home/vyga/.config/dunst/dunstrc
+
+// Сменить владельца каталога файла
+chown -R vyga:vyga /home/vyga/.config
+
+/home/vyga/.thunderbird/
+/home/vyga/.config/Thunar/uca.xml
+/home/vyga/.local/share/gnote
+/home/vyga/.config/geany/colorschemes/dark.conf
+/home/vyga/.config/geany/geany.conf
+/home/vyga/.config/geany/keybindings.conf
+/home/vyga/.config/geany/ui_toolbar.xml
+/usr/share/stardict/dic/magus
+
+# Установка sdcv stardict
+mkdir -p /usr/share/stardict/dic
+cp -r /root/hdd/archhome/magus /usr/share/stardict/dic
+
+tts
+аудиокниги
+видео
+документы
+загрузки
+инфа
+книги
+музыка
+разное
+софт
+фото
+
+Шрифты Liberation mono system-ui

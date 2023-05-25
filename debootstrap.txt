@@ -1,0 +1,489 @@
+                                                         УСТАНОВКА DEBIAN С DEBOOTSTRAP
+
+https://wiki.debian.org/ru/Debootstrap
+https://manpages.debian.org/bullseye/debootstrap/debootstrap.8.en.html
+https://wiki.debian.org/chroot
+https://manpages.ubuntu.com/manpages/jammy/en/man2/chroot.2.html
+https://manpages.debian.org/bullseye/mount/mount.8.en.html
+https://www.debian.org/releases/stable/amd64/apds03.ru.html
+https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
+https://laurvas.ru/chroot/
+https://itproffi.ru/izmenenie-kornevoj-sistemy-komanda-chroot-v-linux/
+https://blog.desdelinux.net/ru/reparacion-del-sistema-howto-chroot/
+https://wiki.debian.org/ru/fstab
+https://zalinux.ru/?p=4895
+https://blog.bayrell.org/ru/linux/linux-from-scratch/119-ustanovka-ubuntu-debootstrap.html
+https://www.debian.org/
+
+https://cdimage.debian.org/cdimage/unofficial/non-free/
+https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.7.0-live+nonfree/amd64/iso-hybrid/debian-live-11.7.0-amd64-lxde+nonfree.iso
+https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.7.0-live+nonfree/amd64/iso-hybrid/debian-live-11.7.0-amd64-lxde+nonfree.packages
+https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.7.0-live+nonfree/amd64/iso-hybrid/SHA256SUMS
+
+https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.7.0+nonfree/amd64/iso-cd/firmware-11.7.0-amd64-netinst.iso
+https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.7.0+nonfree/amd64/iso-cd/SHA256SUMS
+
+sha256sum 
+
+
+---------------------------------------------------APT-----------------------------------------------------
+sudo apt update
+apt list --upgradeable
+sudo apt upgrade
+sudo apt full-upgrade
+
+apt search 
+apt list 
+apt show 
+apt-cache search 
+apt-cache depends ПАКЕТ                     зависимости пакета
+apt-file search 
+
+
+sudo apt install 
+apt download 
+sudo apt remove 
+sudo apt purge 
+sudo apt install ./firmware-realtek.deb     установить локальный .deb пакет
+sudo apt install -f                         исправить отсутствующи зависимост 
+
+https://hackware.ru/?p=13848
+https://zalinux.ru/?p=5291
+https://hackware.ru/?p=8185
+
+------------------------------------------------ЗАПИСЬ ФЛЕШКИ----------------------------------------------
+                    
+// С помощью dd удалите таблицу разделов
+sudo dd if=/dev/zero of=/dev/sdb bs=1M count=1
+// Записать образ на флэшку
+sudo dd if=debian-live-11.6.0-amd64-lxde+nonfree.iso of=/dev/sdb
+// Записать образ на dvd
+wodim -v -dao speed=4 dev=/dev/sr0 debian-live-11.6.0-amd64-lxde+nonfree.iso
+
+-----------------------------------------------РАЗМЕТКА HDD-------------------------------------------
+
+sudo fdisk -l
+sudo cfdisk /dev/sda
+Загруз./Bootable     Сделать раздел загрузочным
+Удалить/Delete       Удалить раздел
+Resize
+Выход/Quit  
+Тип/Type             Тип раздела
+Справка/Help
+Запись/Write         Сохранить изменения
+Дамп/Dump
+Новый/New            Создать новый раздел
+
+Delete - New - Размер раздела 5G - Основной
+Тип - 82 Linux swap
+Тип - 83 Linux
+
+1. 5G      82 Linux swap
+2. 40G     83 Linux /     Загруз./Bootable
+3. 420,8   83 Linux hdd
+
+Запись - yes
+
+--------------------------------------------------ПОДГОТОВКА HDD----------------------------------------------
+
+// Форматирование разделов
+lsblk
+sudo fdisk -l
+// sda1 swap
+// sda2 /
+// Форматирования раздела подкачки
+sudo mkswap /dev/sda1
+// Форматирования раздела корень
+sudo mkfs.ext4 /dev/sda2
+// Монтирование разделов
+sudo swapon /dev/sda1
+sudo mount /dev/sda2 /mnt
+
+--------------------------------------------------USB-МОДЕМ----------------------------------------------
+
+Настройки - Сеть и интернет - Точка доступа и модем - USB-модем
+ip link show
+ip addr show
+
+sudo nano /etc/network/interfaces
+auto usb0
+iface usb0 inet dhcp
+
+sudo systemctl restart networking.service
+ping ya.ru
+
+-------------------------------------------------DEBOOTSTRAP--------------------------------------------
+
+// Установка debootstrap
+sudo apt update
+sudo apt install debootstrap wget
+
+// Запуск debootstrap
+sudo debootstrap --arch amd64 bookworm /mnt http://deb.debian.org/debian/
+sudo debootstrap --arch amd64 bullseye /mnt http://deb.debian.org/debian/
+sudo debootstrap --arch i386 bullseye /mnt http://deb.debian.org/debian/
+
+// Ubuntu
+sudo debootstrap --arch amd64 jammy /mnt http://archive.ubuntu.com/ubuntu/
+
+// Kali
+sudo debootstrap --arch amd64 kali-rolling /mnt https://http.kali.org/kali
+
+// Монтирование устройств
+sudo mount --bind /dev /mnt/dev
+sudo mount --bind /proc /mnt/proc
+sudo mount --bind /sys /mnt/sys
+sudo mount --rbind /dev/pts /mnt/dev/pts
+
+---------------------------------------------СОЗДАЁМ ФАЙЛ FSTAB--------------------------------------------
+
+sudo blkid /dev/sda2
+sudo blkid /dev/sda1
+
+sudo nano /mnt/etc/fstab
+# /dev/sda2
+UUID=4d0776d8-d9a9-442e-9aeb-d25500f0f198       /               ext4            rw,relatime     0 1
+
+# /dev/sda1
+UUID=fb24d12b-e028-40f1-89d1-f30ab5e59294       none            swap            defaults        0 0
+
+----------------------------------------------НАСТРОЙКА СЕТИ---------------------------------------------
+
+// Настройка сети
+// Укажите ваши серверы имён и директивы поиска в /etc/resolv.conf
+
+sudo nano /mnt/etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+sudo nano /mnt/etc/hostname
+debian
+
+sudo nano /mnt/etc/hosts
+127.0.0.1       localhost
+:1              localhost
+127.0.1.1       debian
+
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+-------------------------------------------НАСТРОЙКА APT РЕПЫ---------------------------------
+
+sudo nano /mnt/etc/apt/sources.list
+
+// Тестовая репа bookworm
+deb http://deb.debian.org/debian/ bookworm main contrib non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free-firmware
+deb http://deb.debian.org/debian/ bookworm-updates main contrib non-free-firmware
+
+
+// Стабильная репа bullseye
+deb http://deb.debian.org/debian/ bullseye main contrib non-free
+deb http://security.debian.org/debian-security bullseye-security main contrib non-free
+deb http://deb.debian.org/debian/ bullseye-updates main contrib non-free
+
+
+// Репа Ubuntu 22.04.2 LTS Jammy Jellyfish
+deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb http://archive.canonical.com/ubuntu/ jammy partner
+jammy-proposed
+
+// Репа kali-rolling
+deb https://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware
+
+--------------------------------------------ЧЕРУТИМСЯ---------------------------------------------------
+
+sudo chroot /mnt
+
+-----------------------------------------------ЛОКАЛИЗАЦИЯ---------------------------------------
+
+apt update
+apt install
+
+// Установка и настройка локализации
+apt install locales
+dpkg-reconfigure locales
+en_US.UTF-8 UTF-8
+ru_RU.UTF-8 UTF-8
+выбор локали по умолчанию
+ru_RU.UTF-8
+
+// Консоль
+apt install console-setup
+dpkg-reconfigure keyboard-configuration
+
+-----------------------------------------------УСТАНОВКА СОФТА---------------------------------------
+
+// Ядро
+apt install linux-image-amd64 linux-headers-amd64
+
+// Прошивки
+apt install ?firmware-linux?
+
+// Дрова
+// видеокарта Intel
+xserver-xorg-video-intel                           графическая карта выпущена до 2007 года
+xserver-xorg-core           modesetting            графическая карта выпущена в 2007 году и новее
+// видеокарта AMD/ATI
+xserver-xorg-video-ati firmware-amd-graphics libgl1-mesa-dri libglx-mesa0
+
+apt install intel-microcode firmware-realtek
+apt install dkms build-essential
+
+// Авто установка пакетов дров для нового оборудования
+apt install isenkram-cli
+sudo isenkram-autoinstall-firmware
+
+// Xorg
+apt install xserver-xorg-core x11-xserver-utils x11-xkb-utils
+
+// Wi-Fi
+apt install iw network-manager git curl wget links aircrack-ng tshark iproute2 nmap pixiewps traceroute 
+
+// Утилиты
+apt install bash-completion udisks2 gvfs gpm alsa-utils fonts-liberation libmtp-common libmtp-runtime
+apt install dosfstools ntfs-3g libmtp9 man-db manpages
+apt install grub-pc
+
+// Ставим иксы
+apt install lxdm icewm dunst lxappearance network-manager-gnome
+
+// Иксовый софт
+apt install xfce4-terminal thunar thunar-archive-plugin geany gnote gpicview evince foliate cherrytree chromium chromium-l10n xarchiver
+firefox-esr firefox-esr-l10n-ru https://desktop.telegram.org/
+apt install abiword gnumeric mtpaint transmission-gtk thunderbird thunderbird-l10n-ru zathura zathura-pdf-poppler zenity
+
+// Консольный софт
+apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo p7zip-full wodim growisofs eyed3 id3v2 mc
+rhvoice rhvoice-russian tesseract-ocr tesseract-ocr-rus
+
+-----------------------------------------------------НАСТРОЙКА-------------------------------------------
+
+// Настройка часового пояса
+nano /etc/adjtime
+0.0 0 0.0
+0
+LOCAL
+
+dpkg-reconfigure tzdata
+
+// установить время
+date -s 09:17
+
+// Установка системных часов
+timedatectl
+// Отключить utc
+timedatectl set-local-rtc 1
+trace_clock=local
+
+timedatectl set-time "гггг-мм-дд чч:мм:сс"
+timedatectl set-time "2023-04-12 14:59:00"
+timedatectl set-time "20:43:36"
+
+// Аппаратные часы биос
+hwclock -r           отобразить часы реального времени
+hwclock -s           копирования часов биос в системные
+hwclock -W           копирования системных часов в биос
+hwclock -l           localtime
+hwclock --set --date="2011-01-25 08:55:01"
+
+------------------------------------------НОВЫЙ ПОЛЬЗОВАТЕЛЬ---------------------------------------------
+
+nano /etc/group
+groupadd группа                                 создать новую группу
+usermod -aG доп_группы пользователь             добавить в группы
+
+// Добавим нового пользователя
+useradd -m -G sudo -s /bin/bash -U vyga
+groups vyga
+
+-m создавать домашний каталог пользователя в home
+-G Список дополнительных групп
+-s командная оболочка для пользователя
+-U Создайте группу с тем же именем что и у пользователя и добавьте
+
+------------------------------------------------ПАРОЛЬ---------------------------------------------------
+
+// Задать пароль
+passwd vyga
+
+// visudo
+EDITOR=nano visudo
+// показывать звёздочки во время ввода пароля sudo
+Defaults    env_reset,pwfeedback
+// права root для группы wheel
+%sudo ALL=(ALL:ALL) ALL
+
+---------------------------------------------------------------------------------------------------------
+
+// Настройка приглашения Bash
+nano /home/vyga/.bashrc
+[[ $- != *i* ]] && return
+PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;35m\]\u\[\e[0m\]@\[\e[1;36m\]\H\[\e[0m\]:\[\e[1;32m\]\w\[\e[0m\]\n\[\e[1;32m\]\$\[\e[0m\] '
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias mouse='gpm -m /dev/input/mice -t exps2'
+alias sd='udisksctl power-off -b /dev/sdb'
+
+---------------------------------------------------------------------------------------------------------
+
+// Монтирование thunar в media
+mkdir /media
+nano /etc/udev/rules.d/99-udisks2.rules
+# UDISKS_FILESYSTEM_SHARED
+# ==1: mount filesystem to a shared directory (/media/VolumeName)
+# ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
+# See udisks(8)
+ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
+
+---------------------------------------------------------------------------------------------------------
+
+// Включить менеджер входа
+systemctl enable lxdm.service
+// включить авто вход в систему
+nano /etc/lxdm/lxdm.conf
+autologin=vyga
+session=/usr/bin/icewm-session
+
+---------------------------------------------------------------------------------------------------------
+
+// Включить NetworkManager
+systemctl enable NetworkManager.service
+
+---------------------------------------------УСТАНОВКА GRUB--------------------------------------------------
+
+nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT=""
+
+grub-install /dev/sda
+update-grub
+
+----------------------------------------------------ДРАЙВЕР WI-FI USB------------------------------------
+
+// Wi-Fi USB Adapter Wireless N300 D-Link DWA-137 Realtek RTL8192EU
+
+git clone https://github.com/clnhub/rtl8192eu-linux
+./install_wifi.sh
+
+git clone https://github.com/Mange/rtl8192eu-linux-driver
+dkms add .
+dkms install rtl8192eu/1.0
+
+ip link
+iw dev
+
+---------------------------------------------------ЗАВЕРШЕНИЕ---------------------------------------------------
+
+exit
+sudo umount -R /mnt
+sudo umount /mnt/dev
+sudo umount /mnt/proc
+sudo umount /mnt/sys
+sudo umount /mnt
+
+systemctl poweroff
+shutdown -h now
+
+---------------------------------------------НАСТРОЙКА СИСТЕМЫ----------------------------------------------------
+
+echo $PS1
+export PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;35m\]\u\[\e[0m\]@\[\e[1;36m\]\H\[\e[0m\]:\[\e[1;32m\]\w\[\e[0m\]\n\[\e[1;32m\]\$\[\e[0m\] '
+
+echo $PATH
+
+/usr/bin:
+/usr/sbin:
+/usr/local/bin:
+/usr/local/sbin:
+
+/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+export PATH=$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+sudo nano /etc/environment
+PATH=$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+/etc/profile
+
+sudo nano /home/vyga/.bashrc
+export PATH=$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+sudo apt install ./firmware-realtek_20230210-4_all.deb     установить локальный .deb пакет
+sudo apt install -f                                        исправить отсутствующи зависимост 
+
+sudo systemctl start NetworkManager
+alias nms='sudo systemctl start NetworkManager'
+
+nmcli general status
+nmcli device wifi list
+nmcli device status
+nmcli connection show
+nmcli radio wifi
+nmcli radio wifi on
+nmcli radio wifi off
+
+---------------------------------------------------------------------------------------------------------
+
+// настройка политики монтирования
+nano /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
+<action id="org.freedesktop.udisks2.filesystem-mount-system">
+    <defaults>
+      <allow_any>yes</allow_any>
+      <allow_inactive>yes</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+
+---------------------------------------------------------------------------------------------------------
+
+// Реакции на закрывание-открывание крышки.
+nano /etc/systemd/logind.conf
+IdleAction=ignore                  действие при бездействии системы
+HandlePowerKey=poweroff            действие после нажатия клавиши питания
+HandleLidSwitch=ignore             действие после закрытия крышки
+
+--------------------------------------------КАТАЛОГИ И ФАЙЛЫ НАСТРОЕК------------------------------------
+
+// Каталоги
+doc cfg inf man
+down
+foto
+hack
+torrent
+prg
+
+// Копирование файлов настройки и каталогов
+/home/vyga/.config/dunst/dunstrc
+
+// Сменить владельца каталога файла
+chown -R vyga:vyga /home/vyga/.config
+
+/home/vyga/.thunderbird/
+/home/vyga/.config/Thunar/uca.xml
+/home/vyga/.local/share/gnote
+/home/vyga/.config/geany/colorschemes/dark.conf
+/home/vyga/.config/geany/geany.conf
+/home/vyga/.config/geany/keybindings.conf
+/home/vyga/.config/geany/ui_toolbar.xml
+/usr/share/stardict/dic/magus
+
+# Установка sdcv stardict
+mkdir -p /usr/share/stardict/dic
+cp -r /root/hdd/archhome/magus /usr/share/stardict/dic
+
+tts
+аудиокниги
+видео
+документы
+загрузки
+инфа
+книги
+музыка
+разное
+софт
+фото
+
+Шрифты Liberation mono system-ui
