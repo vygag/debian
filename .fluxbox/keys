@@ -1,0 +1,96 @@
+## keys ##
+
+# Нажмите на рабочий стол чтобы открыть меню
+OnDesktop Mouse1 :HideMenus
+OnDesktop Mouse2 :WorkspaceMenu
+OnDesktop Mouse3 :RootMenu
+
+# Начните перетаскивать чтобы изменить размер окна как если бы вы захватили окно в указанном углу
+OnLeftGrip Move1 :StartResizing bottomleft
+OnRightGrip Move1 :StartResizing bottomright
+
+# Дважды щелкните на строке заголовка чтобы затенить
+OnTitlebar Double Mouse1 :Shade
+
+# Средний щелчок по строке заголовка чтобы переключить окна таб
+OnTitlebar Mouse2 :Lower
+
+# Щелкните правой кнопкой мыши на строке заголовка чтобы открыть меню опций
+OnTitlebar Mouse3 :WindowMenu
+
+# Щелкните левой кнопкой мыши на строке заголовка чтобы переместить окно
+OnTitlebar Move1 :StartMoving
+
+# Активирует окно под мышью
+OnTitlebar Mouse1 :Focus
+
+# Переход к следуюшему ( предыдущему ) окну alt-tab
+Mod1 Tab :NextWindow
+
+# Свернуть окно
+Mod4 x :Minimize
+
+# Fullscreen развернуть на весь экран
+Mod4 a :Fullscreen
+
+# Закрыть текущее окно
+Mod4 q :Close
+
+# Убить окно
+Mod4 Return :Kill
+
+# Свернуть все окна
+Mod4 d :ShowDesktop
+
+# Переместить плавающее окно
+OnWindow Mod1 Mouse1 :StartMoving
+
+# Тайлинг
+# Основное левое окно
+Mod1 1 :MacroCmd {ResizeTo 1211 857} {MoveTo 00 00 BottomLeft}
+# Основное правое окно
+Mod1 2 :MacroCmd {ResizeTo 705 857} {MoveTo 00 00 BottomRight}
+# Горизонтальное разделение вниз
+Mod1 3 :MacroCmd {ResizeTo 100% 75%} {MoveTo 00 00 Bottom}
+# Центр
+Mod1 4 :MoveTo 00 00 Center
+# Нижний Центр
+Mod1 5 :MoveTo 00 00 BottomCenter
+# Веретикальное разделение
+Mod1 F1 :MacroCmd {ResizeTo 955 857} {MoveTo 00 00 BottomLeft}
+Mod1 F2 :MacroCmd {ResizeTo 955 857} {MoveTo 00 00 BottomRight}
+
+# Управление звуком Alsa
+Control Up :Exec amixer set Master 2%+
+Control Down :Exec amixer set Master 2%-
+
+# Сделать скриншот Print scrot
+Print :Exec scrot -u /home/vyga/foto/scr.png
+Shift Print :Exec scrot /home/vyga/foto/screen.png
+Control Print :Exec scrot -s /home/vyga/foto/scrn.png
+
+# Вызов меню
+Mod4 space :RootMenu
+
+# Открыть терминал 
+Mod4 z :Exec xfce4-terminal
+
+# Запуск программ
+Mod4 1 :Exec geany
+Mod4 2 :Exec gnote
+Mod4 3 :Exec thunar
+Mod4 4 :Exec firefox-esr
+Mod4 5 :Exec transmission-gtk
+Mod4 6 :Exec thunderbird
+Mod4 7 :Exec /home/vyga/prg/Telegram/Telegram 
+Mod4 8 :Exec chromium
+Mod4 9 :Exec cherrytree
+Mod4 0 :Exec mtpaint
+Mod4 p :Exec /home/vyga/prg/palemoon/palemoon
+Mod4 h :Exec homebank
+
+Mod4 c :Exec zenity --calendar
+Mod4 k :Exec galculator
+
+# Выход
+Mod4 Escape :Exit

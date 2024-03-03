@@ -1,0 +1,208 @@
+[app] (name=fbrun) (class=FbRun)
+[Position]	(UPPERLEFT)	{22% 56%}
+[end]
+
+[app] (name=nm-connection-editor) (class=Nm-connection-editor)
+[Position] (UPPERLEFT) {29% 57%}
+[end]
+
+[app] (name=nm-applet) (class=Nm-applet)
+[Position] (UPPERLEFT) {31% 51%}
+[end]
+
+[app] (name=galculator)
+[Position]	(UPPERLEFT)	{1220 510}
+[end]
+
+[app] (name=zenity)
+[Position] (UPPERLEFT)	{64% 73%}
+[end]
+
+[app] (name=xfce4-terminal)
+[Dimensions] {1211 650}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=geany)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gnote)
+[Dimensions] {700 837}
+[Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=homebank)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Navigator) (class=Firefox-esr) (role=browser)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Places) (class=Firefox-esr) (role=Organizer)
+[Position] (UPPERLEFT) {11% 41%}
+[end]
+
+[app](name=Navigator)(class=Pale moon)(role=browser)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Places) (class=Pale moon) (role=Organizer)
+[Position] (UPPERLEFT) {11% 41%}
+[end]
+
+[app] (name=chromium) (class=Chromium) (role=browser)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=transmission-gtk)
+[Dimensions] {700 630}
+[Position] (BottomRight) {0 0}
+[end]
+
+[transient] (name=transmission-gtk)
+[Dimensions] {700 630}
+[Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=Mail) (class=thunderbird-default) (role=3pane)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Msgcompose) (class=thunderbird-default) (role=Msgcompose)
+[Position]	(UPPERLEFT)	{7% 21%}
+[end]
+
+[app] (name=Telegram) (class=TelegramDesktop)
+[Dimensions] {707 837}
+[Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=Navigator) (class=Tor Browser) (role=browser)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=cherrytree)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=mtpaint)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gimp)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=org.gnome.Maps) (class=org.gnome.Maps)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=abiword)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gnumeric)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=libreoffice)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=evince)
+[Dimensions]  {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=FBReader) (class=FBReader)
+[Dimensions]  {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=xchm)
+[Dimensions]  {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gpicview)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gl) (class=mpv)
+[Dimensions] {790 360}
+[Position] (Center) {0 0}
+[end]
+
+[app] (name=gnome-chess)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=xarchiver)
+[Position] (UPPERLEFT) {400 530} 
+[end]
+
+[app] (name=lxappearance)
+[Position] (Bottom) {0 0} 
+[end]
+
+[app] (name=winecfg.exe) (class=winecfg.exe)
+[Position]	(UPPERLEFT)	{63% 46%}
+[end]
+
+[app] (name=doublecmd.exe) (class=doublecmd.exe)
+[Position] (BottomLeft) {0 0}
+[Dimensions] {1211 650}
+[end]
+
+[app] (name=balabolka.exe) (class=balabolka.exe)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=demagog.exe) (class=demagog.exe)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=aimpate.exe) (class=aimpate.exe)
+[Position] (BottomLeft) {0 0}
+[Dimensions] {1211 857}
+[end]
+
+[app] (name=routerscan.exe) (class=routerscan.exe)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=myhomelib.exe) (class=myhomelib.exe)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gp.exe) (class=gp.exe)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=akelpad.exe) (class=akelpad.exe)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
