@@ -1,5 +1,13 @@
 [app] (name=fbrun) (class=FbRun)
-[Position]	(UPPERLEFT)	{22% 56%}
+[Position]	(UPPERLEFT)	{25% 56%}
+[end]
+
+[app] (name=feh)
+[Position]	(UPPERLEFT)	{25% 56%}
+[end]
+
+[app] (name=mediainfo-gui) (class=Mediainfo-gui)
+[Position] (UPPERLEFT) {14% 44%}
 [end]
 
 [app] (name=nm-connection-editor) (class=Nm-connection-editor)
@@ -11,7 +19,7 @@
 [end]
 
 [app] (name=galculator)
-[Position]	(UPPERLEFT)	{1220 510}
+[Position]	(UPPERLEFT)	{80% 50%}
 [end]
 
 [app] (name=zenity)
@@ -38,12 +46,21 @@
 [Position] (BottomLeft) {0 0}
 [end]
 
-[app] (name=Navigator) (class=Firefox-esr) (role=browser)
+[app] (name=Navigator) (class=Tor Browser) (role=browser)
 [Dimensions] {1211 857}
 [Position] (BottomLeft) {0 0}
 [end]
 
-[app] (name=Places) (class=Firefox-esr) (role=Organizer)
+[app] (name=Places) (class=Tor Browser) (role=Organizer)
+[Position] (UPPERLEFT) {11% 41%}
+[end]
+
+[app] (name=Navigator) (class=firefox) (role=browser)
+[Dimensions] {1211 857}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Places) (class=firefox) (role=Organizer)
 [Position] (UPPERLEFT) {11% 41%}
 [end]
 
@@ -59,6 +76,14 @@
 [app] (name=chromium) (class=Chromium) (role=browser)
 [Dimensions] {1211 857}
 [Position] (BottomLeft) {0 0}
+[end]
+
+[transient] (name=chromium) (class=Chromium) (role=GtkFileChooserDialog)
+[Position] (UPPERLEFT)	{12% 35%}
+[end]
+
+[transient] (name=xdg-desktop-portal-gtk) (class=Xdg-desktop-portal-gtk) (role=GtkFileChooserDialog)
+[Position] (UPPERLEFT)	{12% 35%}
 [end]
 
 [app] (name=transmission-gtk)
@@ -83,11 +108,6 @@
 [app] (name=Telegram) (class=TelegramDesktop)
 [Dimensions] {707 837}
 [Position] (BottomRight) {0 0}
-[end]
-
-[app] (name=Navigator) (class=Tor Browser) (role=browser)
-[Dimensions] {1211 857}
-[Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=cherrytree)

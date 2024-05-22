@@ -402,7 +402,7 @@ trace_clock=local
 
 timedatectl set-time "гггг-мм-дд чч:мм:сс"
 timedatectl set-time "2023-04-12 14:59:00"
-timedatectl set-time "20:43:36"
+timedatectl set-time "08:01:36"
 
 // Аппаратные часы биос
 hwclock -r           отобразить часы реального времени
@@ -569,8 +569,12 @@ theme=Arch-Dark
 sudo apt install gnote evince xchm cherrytree galculator gpicview
 sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2 xarchiver pkexec zenity
 
+// Шрифты
+sudo apt install fonts-terminus fonts-cantarell fonts-noto-color-emoji
+adobe-source-code-pro-fonts    git clone https://github.com/adobe-fonts/source-code-pro
+
 // Inet
-sudo apt install firefox-esr firefox-esr-l10n-ru transmission-gtk thunderbird thunderbird-l10n-ru network-manager-gnome
+sudo apt install transmission-gtk thunderbird thunderbird-l10n-ru network-manager-gnome
 sudo apt install chromium chromium-l10n gnome-maps
 sudo apt install git curl wget links
 
@@ -580,10 +584,12 @@ sudo apt install abiword gnumeric homebank mtpaint gimp
 
 // Утилиты
 sudo apt install alsa-utils usbutils pciutils lm-sensors lxappearance
-pulseaudio pulseaudio-utils  ?pamixer?
+pulseaudio (pulseaudio-utils pactl pacmd)  ?pamixer?
+exec pactl set-sink-volume 0 +5%
+exec pactl set-sink-volume 0 -5%
 
 // Консольный софт
-sudo apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo id3v2
+sudo apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo mediainfo-gui id3v2
 sudo apt install rhvoice rhvoice-russian
  
 // dvd
@@ -607,6 +613,17 @@ sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-bui
 sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
 sudo apt update
 sudo apt install --install-recommends winehq-stable
+
+// Установка Firefox
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list
+echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+sudo apt update
+sudo apt install firefox firefox-l10n-ru
 
 // Настройка приглашения Bash
 nano /home/vyga/.bashrc
@@ -813,8 +830,8 @@ reboot
 cd prg/rtl8192eu-linux
 make
 modinfo ./8192eu.ko | grep vermagic:
-sudo mkdir -v /usr/lib/modules/6.1.0-18-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
-sudo cp -v 8192eu.ko /usr/lib/modules/6.1.0-18-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+sudo mkdir -v /usr/lib/modules/6.1.0-21-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+sudo cp -v 8192eu.ko /usr/lib/modules/6.1.0-21-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
 sudo depmod -a
 modinfo 8192eu
 reboot
