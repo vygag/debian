@@ -118,4 +118,6 @@ Mod4 c :Exec zenity --calendar
 Mod4 k :Exec galculator
 
 # Выход
-Mod4 Escape :Exit
+Mod4 BackSpace :Exit
+# Выключение
+Mod4 Escape :Exec systemctl poweroff

@@ -568,6 +568,11 @@ theme=Arch-Dark
 // Иксовый софт
 sudo apt install gnote evince xchm cherrytree galculator gpicview
 sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2 xarchiver pkexec zenity
+onboard
+
+// Шахматы
+sudo apt install gnome-chess gnuchess
+sudo cp -v /usr/games/* /usr/bin
 
 // Шрифты
 sudo apt install fonts-terminus fonts-cantarell fonts-noto-color-emoji

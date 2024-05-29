@@ -1,0 +1,817 @@
+FLUXBOX(1)                                                         Fluxbox Manual
+
+NAME
+       fluxbox - Легкий оконный менеджер для оконной системы X
+
+SYNOPSIS
+       fluxbox [-rc rcfile] [-no-slit] [-no-toolbar] [-log logfile] [-display display] [-screen all|scr,scr...] [-verbose] [-sync]
+
+       fluxbox [-v | -version] | [-h | -help] | [-i | -info] | [-list-commands]
+
+DESCRIPTION   описание
+fluxbox(1) - это оконный менеджер. Таким образом, он обеспечивает настраиваемое оформление окон, корневое меню для запуска приложений
+и панель инструментов, которая показывает текущее название рабочей области, набор имен приложений и текущее время.
+Существует также меню рабочей области для добавления или удаления рабочих пространств.
+       
+Fluxbox может отображать (или сворачивать) окна на панели инструментов одним щелчком мыши, и они появляются снова.
+Двойной щелчок по строке заголовка окна затенит его; т.е. окно исчезнет, и только строка заголовка останется видимой.
+
+Также есть две области, обычно используемые небольшими апплетами: “slit” может использоваться для стыковки небольших приложений; 
+например, большинство “bbtools” и "Window Maker dockapps" могут использовать slit, а "systray", который находится на панели инструментов, 
+поддерживает стандартные значки в системном трее, предоставляемые некоторыми приложениями.
+
+Fluxbox использует свой собственный графический класс для рендеринга своих изображений на лету. Используя файлы стилей, вы можете в 
+мельчайших деталях определить, как выглядит ваш рабочий стол. стили fluxbox совместимы со стилями Blackbox 0.65 или более ранних версий, 
+поэтому пользователи, которые переходят, все еще могут использовать свои текущие любимые темы.
+Большинство действий с клавиатурой и кнопками мыши по умолчанию, упомянутых в этом руководстве, можно изменить и настроить в файле "ключи".
+
+Этот мощный конфигурационный файл также может быть использован для автоматизации практически любых действий, которые вы, возможно, 
+захотите выполнить, от запуска приложений до перемещения окон по экрану. Подробности см. в разделе fluxbox-keys(5).
+       
+Fluxbox также может запоминать определенные атрибуты отдельных окон приложений и восстанавливать эти настройки при следующем открытии окна.
+Смотрите fluxbox-apps(5) для получения подробной информации.
+
+Fluxbox поддерживает большинство спецификаций расширенных подсказок оконного менеджера (EWMH), а также множество других стандартов отображения 
+подсказок в окнах. Это позволяет всем совместимым оконным менеджерам предоставлять общий интерфейс для стандартных функций, используемых 
+приложениями и настольными утилитами.
+       
+
+OPTIONS   опции
+       -display дисплей
+Запустите fluxbox на указанном дисплее. Программы, запущенные с помощью fluxbox, также будут совместно использовать переменную среды отображения.
+
+       -h, -help
+           Display command line options.
+
+       -i, -info
+           Отобразите полезную информацию, касающуюся настроек по умолчанию и встроенных опций.
+
+       -log logfile
+           Запуск fluxbox с этой опцией укажет файл, в который вы хотите записывать события.
+
+       -no-slit
+           Не используйте контейнер для док-приложений (он же разрез)
+
+       -no-toolbar
+           Не используйте панель инструментов
+
+       -rc rcfile
+           Используйте другой конфигурационный файл, отличный от используемого по умолчанию ~/.fluxbox/init.
+
+       -v, -version
+           Установленная версия fluxbox.
+
+       -screen all|scr,scr...
+           Запуск только на указанных экранах или на всех (по умолчанию).
+
+       -verbose
+           Распечатайте дополнительную информацию в процессе работы.
+
+       -sync
+           Синхронизируйте с X-сервером для отладки.
+
+       -list-commands
+           Перечислены все доступные внутренние команды.
+
+STARTING FLUXBOX   ЗАПУСК FLUXBOX
+fluxbox(1) поставляется с программой под названием startfluxbox(1), обычно расположенной там, где вы установили fluxbox.
+Этот скрипт предоставляет вам множество опций и переменных, которые можно задать при запуске fluxbox.
+Чтобы действительно вызвать fluxbox и начать его использовать, вы должны поместить “exec startfluxbox” в свой ~/.xinitrc в качестве 
+последней выполненной команды. Это предполагает, что расположение fluxbox(1) и startfluxbox(1) находятся в $PATH вашей оболочки.
+Также обратите внимание, что вам может потребоваться создать файл ~/.xinitrc или вместо него в вашей программе установки может 
+использоваться ~/.xsession, в зависимости от вашей настройки X. Некоторые менеджеры входа в систему X, такие как gdm(1) или kdm(1),
+могут просто предоставить вам сеанс “Fluxbox” без необходимости изменять какие-либо настройки.
+Используя fluxbox -i, вы увидите значения по умолчанию, используемые fluxbox(1). Это то, что fluxbox ищет при запуске.
+        
+В списке “Значения по умолчанию:” вы увидите расположение файла меню, именно здесь вы можете предоставить своим пользователям файл 
+общесистемного меню. При выходе или перезапуске fluxbox сохранит пользовательские настройки по умолчанию в файле ~/.fluxbox/init.
+Ресурсы в этом файле также можно редактировать вручную, более подробную информацию смотрите в разделе РЕСУРСЫ.
+В fluxbox(1) также есть множество инструментов для их редактирования; просмотрите главное меню, как только fluxbox начнет работать, 
+чтобы найти различные способы управления вашим сеансом.
+
+USING FLUXBOX   ИСПОЛЬЗОВАНИЕ FLUXBOX
+При первом использовании fluxbox пользователи, которые больше привыкли к полноценным рабочим средам, таким как KDE или Gnome, могут быть 
+немного удивлены минимальным содержимым экрана. fluxbox спроектирован так, чтобы быть быстрым и мощным, поэтому к нему может 
+потребоваться некоторое привыкание, однако награда того стоит. В этом разделе мы дадим краткое изложение общих моментов.
+        
+Однако мы рекомендуем вам ознакомиться с разделами данного руководства, на которые даны ссылки, чтобы лучше понять, что вы можете делать с fluxbox.
+
+   Root Window (Main)   Корневое окно (Главное)
+Взглянув на рабочий стол fluxbox сразу после запуска, вы, как правило, увидите только одно: панель инструментов.
+Если вы щелкнете правой кнопкой мыши (кнопка мыши 3) где-нибудь на рабочем столе, вы сможете получить доступ к корневому меню. 
+Средний щелчок (кнопка мыши 2) на рабочем столе показывает вам меню рабочей области.
+
+   Root Menu and Workspace Menu   Корневое меню и меню рабочей области
+Из корневого меню вы можете запускать приложения и настраивать fluxbox. WorkspaceMenu показывает все окна и в каких рабочих пространствах 
+они находятся. Смотрите раздел МЕНЮ о том, как настроить эти меню.
+
+   Toolbar   Панель инструментов
+       Панель инструментов содержит любую комбинацию следующих инструментов, по умолчанию в таком порядке:
+
+       •   Имя рабочей области: Название текущей видимой рабочей области
+
+       •   Workspace Arrows: Стрелки рабочего пространства: Предыдущее/следующее рабочее пространство
+
+       •   Iconbar: Панель значков: Список окон, управляемых fluxbox
+
+       •   Window Arrows: Стрелки окна: Предыдущее/Следующее окно приложения
+
+       •   System Tray: Системный трей: Область для апплетов
+
+       •   Clock: Часы: Дата и время
+
+       •   Button.<name>: Кнопка.<имя>: универсальная кнопка с настраиваемой меткой и действиями мыши
+
+       Содержимое и поведение панели инструментов можно настроить, подробности см. в разделе Панель инструментов.
+
+   Slit   Щель
+Поначалу вы не сможете увидеть щель. Он есть, но пока не используется, что поначалу сбивает некоторых людей с толку. 
+Думайте об этом как о док-станции, где вы можете размещать программы меньшего размера. Если вы просматривали какие-либо скриншоты 
+на официальном веб-сайте fluxbox, вы наверняка заметили несколько небольших программ на краю некоторых экранов.
+Скорее всего, это были закрепленные программы в щели. Чтобы узнать больше о slit, у нас есть целый раздел SLIT ниже, 
+в котором подробно рассказывается о доступных вам вариантах.
+
+   Layers   Слои
+       fluxbox управляет следующими уровнями (от самого высокого к самому низкому):
+
+       •   Above Dock   Над доком
+
+       •   Dock         Док
+
+       •   Top          Верхний
+
+       •   Normal       Обычный
+
+       •   Bottom       Дно
+
+       •   Desktop      Рабочий стол
+
+Окна на более высоком уровне всегда будут отображаться над окнами на более низком. Эти слои можно использовать в окнах приложений, 
+в слоте или на панели инструментов. Вы можете назначить приложения определенному слою, указав его в файле "приложения" или через WindowMenu.
+Мы обсуждаем файл ‘apps’ в fluxbox-apps(5). Мы обсуждаем WindowMenu в разделе МЕНЮ. Более подробно мы обсудим слои в разделе СЛОИ.
+
+   Focus Model   Модель фокуса
+Окно, находящееся в фокусе, - это то, которое получает события нажатия клавиши и мыши. Модель фокуса выбирается через меню конфигурации, 
+расположенное в корневом меню. Мы обсудим различные типы фокусировки ниже, в разделе МОДЕЛЬ ФОКУСИРОВКИ.
+
+   Windows
+Щелчок левой кнопкой мыши (кнопка мыши 1) по любой части границы окна поднимет его. Затем перетаскивание перемещает окно в другую часть 
+рабочего стола. Щелчок правой кнопкой мыши и перетаскивание по границе изменяют размер окна. Перетаскивание ручек изменения размера 
+в левом и правом нижних углах также приведет к изменению размера окна. Средний щелчок по границе или строке заголовка немедленно опустит окно.
+Щелчок правой кнопкой мыши по строке заголовка открывает меню окна. Команды, уникальные для этого меню, подробно обсуждаются в разделе Меню окна.
+
+   Tabs   Вкладки
+fluxbox позволяет ‘группировать’ окна, щелкая средним щелчком и удерживая вкладку окна и перетаскивая ее в другое окно. 
+Эта ‘вкладка’ позволяет вам разместить несколько приложений в одном месте на рабочем столе и выполнить несколько операций 
+(например, перемещение или изменение размера) для всех окон в группе. По умолчанию вкладки расположены непосредственно над окном, 
+но они могут быть встроены в строку заголовка или перемещены в другие места за пределами окна.
+Конфигурация обсуждается в разделе ПАРАМЕТРЫ вкладки.
+в любом месте окна текущее окно опускается.
+Вы также можете настроить автоматическую группировку, используя файл "приложения". Смотрите разделы ГРУППЫ в fluxbox-apps(5) 
+для получения подробной информации.
+
+   Key Bindings   Привязки клавиш
+По умолчанию установлен ряд привязок клавиш, которые можно настроить и расширить практически до всего, что вы можете себе представить 
+с помощью клавиатуры. Смотрите fluxbox-keys(5) для получения подробной информации о том, как это сделать.
+        
+Привязки по умолчанию, установленные fluxbox, следующие:
+
+       Щелкает мышью по пустому рабочему столу:
+
+       •   Left-click (Button 1):  Щелкните левой кнопкой мыши: скрывает все меню fluxbox
+
+       •   Middle-click (Button 2): Средний щелчок: показывает меню рабочей области
+
+       •   Right-click (Button 3): Щелкните правой кнопкой мыши: показывает корневое меню
+
+       •   Scroll wheel (Buttons 4 and 5): Колесо прокрутки: переход к предыдущему/следующему рабочему пространству
+
+       Жесты мыши в окне:
+
+       •   ALT+Drag Left-click ALT+Перетащите Щелкните левой кнопкой мыши: в любом месте окна окно перемещается
+
+       •   ALT+Drag Right-click ALT+Перетащите Щелкните правой кнопкой мыши: в любом месте окна изменяется размер окна.
+
+       •   ALT+Middle-click ALT+Средний щелчок: в любом месте окна текущее окно опускается.
+
+       Жесты мыши на строке заголовка окна:
+
+       •   CTRL+Drag перетаскивание Left-click на панели заголовков окна позволяет перетаскивать окно, чтобы присоединить его к другой группе
+                                               вкладок
+
+       •   Двойной Left-click на панели заголовка окна затеняет окно
+
+       •   Middle-click на панели заголовка окна опускает окно
+
+       •   Right-click на панели заголовков окна появляется меню окна
+
+       Жесты мыши на панели инструментов:
+
+       •   Колесо прокрутки на панели инструментов циклически перемещается по окнам
+
+       Привязки клавиатуры:
+
+       •   ALT+Tab / ALT+Shift+Tab: Циклический просмотр окон
+
+       •   WIN+Tab / WIN+Shift+Tab: Циклический переход по вкладкам
+
+       •   WIN+1 - WIN+9: Выберите 1-ю → 9-ю вкладку в текущем окне
+
+       •   ALT+F1: Run xterm(1) чтобы открыть новый терминал
+
+       •   ALT+F2: Run fbrun(1) для небольшого диалогового окна ”запустить программу"
+
+       •   ALT+F4: Закройте текущее окно
+
+       •   ALT+F5: Закройте текущее окно (например, xkill(1))
+
+       •   ALT+F9: Свернуть Minimize (обозначить значком) текущее окно
+
+       •   ALT+F10: Разверните Maximize текущее окно
+
+       •   ALT+F11: Полноэкранный режим текущего окна
+
+       •   ALT+Space: Откройте меню окна
+
+       •   CTRL+ALT+Del: Exit fluxbox (log out)
+
+       •   CTRL+ALT+Left / CTRL+ALT+Right: Перейти к предыдущему/следующему рабочему пространству
+
+       •   WIN+Left / WIN+Right: Отправьте текущее окно в предыдущую/следующую рабочую область, но оставайтесь в этой рабочей области
+
+       •   CTRL+WIN+Left / CTRL+WIN+Right: Перенесите текущее окно в предыдущее/следующее рабочее пространство и переключитесь
+                                           на это рабочее пространство
+
+       •   CTRL+F1 - CTRL+F12: Переключитесь на 1-е → 12-е рабочее пространство
+
+       •   WIN+F1 - WIN+F12: Отправьте текущее окно в определенную рабочую область
+
+       •   CTRL+WIN+F1 - CTRL+WIN+F12: Перенесите текущее окно в определенную рабочую область
+
+MENUS
+       fluxbox предоставляет функцию всплывающего меню, которая используется несколькими различными типами встроенных меню.
+
+Когда меню открыто, вы можете щелкнуть по элементам с помощью мыши, чтобы активировать их. Некоторые специальные пункты меню 
+реагируют немного по-разному в зависимости от используемой кнопки мыши, но обычно вы захотите щелкнуть левой кнопкой мыши (кнопка 1).
+Вы также можете использовать клавишу со стрелкой на клавиатуре для навигации или даже ввести первые несколько букв метки элемента, 
+чтобы выбрать его, и “enter”, чтобы активировать элемент.
+       
+Обычно активация пункта прейскуранта должна привести к закрытию меню. Вы также можете щелкнуть правой кнопкой мыши заголовок меню 
+или нажать “esc”, чтобы закрыть его, не активируя пункт.
+
+   Root Menu
+Корневое меню - это место, где вы можете запускать часто используемые приложения и изменять различные аспекты fluxbox, просто нажав на пункт меню.
+По умолчанию он открывается щелчком правой кнопки мыши на пустой области рабочего стола.
+
+       Содержимое этого меню можно настроить, подробности см. в fluxbox-menu(5).
+
+Меню по умолчанию, которое создается командой “fluxbox-generate_menu”, содержит меню для установленных приложений, 
+а также специальный пункт “Меню Fluxbox” с элементами, подробно описанными ниже:
+
+       Configure   Конфигурировать
+Следующий уровень в этом меню - это то, где вы можете настроить определенные ресурсы и действительно начать настраивать внешний вид 
+вашего рабочего стола.
+           Смотрите раздел меню настройки ниже для получения более подробной информации.
+
+       System Styles   Системные стили
+Здесь перечислены стандартные стили. Вы можете выбрать один из них, нажав на него, и он будет применен немедленно.
+Системные стили находятся в /usr/share/fluxbox/styles/ при установке по умолчанию. Помните, что вы можете подтвердить это с помощью fluxbox -i.
+
+           User Styles   Пользовательские стили
+Здесь перечислены ваши пользовательские стили. В нем будут перечислены любые стили из ~/.fluxbox/styles/, которые могут быть стилями, 
+которые вы берете из Интернета, или вашими собственными пользовательскими стилями, при условии, что вы следуете стандартам, 
+описанным в fluxbox-style(5).
+
+
+           Workspace List   Список рабочих областей
+               Это то же самое, что и меню рабочей области, подробно описанное ниже.
+
+           Tools   Инструменты
+Здесь перечислены различные инструменты, которые вы можете использовать. Вы можете переименовать свое рабочее пространство, 
+запускать программы из командной строки или повторно создать свое меню.
+
+           Window Managers  Оконные менеджеры
+                Позволяет вам переключать ваш оконный менеджер. (Указан только в том случае, если у вас установлены
+                другие оконные менеджеры / среды рабочего стола.)
+
+           Lock Screen    Экран блокировки
+               Блокирует экран, если была обнаружена подходящая программа блокировки.
+
+           Fluxbox Command
+               Появится небольшая командная строка, в которой вы можете ввести команду fluxbox. Эти команды те же, что описаны в fluxbox-keys(5).
+
+           Reload config   Перезагрузить конфигурацию
+               Используйте это для перезагрузки конфигурационных файлов fluxbox. Вы должны сделать это после редактирования файла 
+               ‘keys’, файла ‘init’ или текущего style.
+
+           Restart   Перезапуск
+               Перезапусти всю эту чертову штуку. Это запускает совершенно новый процесс fluxbox, считывает файлы и перерисовывает
+               все графические элементы. Однако запущенные приложения останутся открытыми и будут восстановлены в тех же рабочих пространствах,
+               в которых они были ранее, как только fluxbox вернется.
+
+           Exit
+               Завершает работу fluxbox, который, в свою очередь, либо выключает сервер X Window, либо возвращает вас
+               к графическому экрану входа в систему.
+
+   Configuration Menu     Меню конфигурации
+               Это меню предоставляет возможность настроить fluxbox. Он содержит множество опций, которые можно изменить вручную
+               в файле ‘init’, но это более простой и быстрый способ изменить наиболее распространенные настройки.
+       
+               Все изменения вступают в силу немедленно.
+
+       Focus Model     Модель фокусировки
+               Позволяет настроить модель фокусировки окна. Для получения подробной информации смотрите МОДЕЛЬ ФОКУСИРОВКИ ниже.
+
+       Maximize Options  
+               Позволяет настроить, что происходит при разворачивании окна. Существует четыре варианта::
+
+           Full Maximization:  Развернуть на весь экран
+               Обычно развернутое окно не будет перекрывать панель инструментов, щель или какие-либо закрепленные окна (например, панели).
+               Включение этой опции позволяет увеличить размер развернутых окон до фактического разрешения экрана.
+
+           Ignore Resize Increment:  Игнорировать изменение размера:
+               Обычно окна терминала указывают “увеличение размера”, что означает, что fluxbox изменит размер окна только на четное число,
+               кратное размеру символа. Включение этой опции приведет к игнорированию этой спецификации при максимальном увеличении.
+               
+
+           Disable Moving / Disable Resizing:   Отключить перемещение / Отключить изменение размера:
+               Обычно развернутые окна Normally все еще можно перемещать и изменять их размер.
+               Включение этих опций предотвращает подобное поведение.
+
+       Tab Options  Параметры вкладки
+               Позволяет настраивать свойства вкладок. Подробная информация приведена на вкладке ПАРАМЕТРЫ ниже.
+
+       Slit    Щель
+               Это меню также можно найти, щелкнув правой кнопкой мыши по разрезу (если он виден). Более подробную информацию о параметрах
+               этого меню вы найдете в разделе меню Slit ниже.
+               
+
+       Toolbar     Панель инструментов
+               Это меню также можно найти, щелкнув правой кнопкой мыши любую часть панели инструментов, не содержащую значков.
+               Более подробную информацию о параметрах этого меню вы найдете в разделе меню панели инструментов ниже.
+           
+
+       Transparency    Прозрачность
+               Это устанавливает прозрачность по умолчанию для сфокусированных окон, несфокусированного окна и меню.
+               Используйте левую кнопку мыши, чтобы уменьшить значение, и правую кнопку мыши, чтобы увеличить его.
+               0 невидим, 255 вообще непрозрачен.
+           
+               Прозрачность отдельных окон приложений может быть переопределена в файле "Приложения" (fluxbox-apps(5)).
+           
+Параметр ForcePseudoTransparency заставит fluxbox игнорировать расширение xcomposite и использовать псевдопрозрачность
+вместо истинной прозрачности. Примечание: Когда включена псевдопрозрачность, значения прозрачности здесь влияют только на заголовки,
+а не на содержимое окна.
+                  
+
+       Opaque Window Moving     Движущееся непрозрачное окно
+      Если включено enabled, вы будете видеть содержимое окна при его перетаскивании. В противном случае будет показан только контур окна.
+
+       Opaque Window Resizing     Изменение размера непрозрачного окна
+      Если включено enabled, вы будете видеть содержимое окна при изменении его размера. В противном случае будет показан только контур окна.
+
+       Workspace Warping      Деформация Искажение рабочего пространства
+Если включено enabled, вы можете перетаскивать окна из одной рабочей области в другую. Существуют параметры, которые можно устанавливать
+независимо от того, происходит ли это деформирование по горизонтали и / или вертикали, и в каждом направлении вы можете установить
+количество рабочих областей, на которые будет выполняться переход при деформировании (чтобы обеспечить виртуальную прямоугольную сетку
+рабочих областей). При деформировании рабочие области с меньшими номерами располагаются выше/слева, а рабочие области с большими номерами
+- ниже/справа.
+
+
+   Window Menu      Оконное меню
+       Меню окна отображается, когда вы щелкаете правой кнопкой мыши на строке заголовка окна.
+
+       Чтобы настроить это меню, смотрите раздел меню WINDOW в fluxbox-menu(5).
+
+       По умолчанию это меню содержит:
+
+       Shade   Тень
+           Затените окно (отобразите только строку заголовка title bar).
+
+       Stick    Приклеить
+           (Не) Приклеивать окно. ‘Зависшее’ окно всегда будет отображаться на всех рабочих пространствах.
+
+       Send To...    Отправить по адресу...
+           Отправить окно в другое рабочее пространство. Когда вы выберете рабочую область средним щелчком мыши, fluxbox отправит
+           вас вместе с приложением в выбранную рабочую область.
+           
+
+       Maximize    Развернуь
+           (Не) Разворачивать окно. В зависимости от вашей панели инструментов и конфигурации разреза функция maximize может закрывать их. 
+           Вы можете использовать разные кнопки мыши для различных аспектов функции максимизации.
+           
+
+           •   Button Кнопка 1 (Не) Разворачивать как обычно.
+
+           •   Button Кнопка 2 (Не) Разверните окно по вертикали.
+
+           •   Button Кнопка 3 (Не) Разверните окно по горизонтали.
+
+       Iconify   Обозначать
+           Обозначьте окно значком (или сверните его). "Значок" можно найти в подменю "Значки" меню "Рабочая область", а также на 
+           панели инструментов (если выбран режим отображения значков на панели инструментов).
+           
+
+       Raise    Поднимать
+           Поднимите окно над всеми остальными на том же слое.
+
+       Lower   Ниже
+           Опустите окно ниже всех остальных на том же слое.
+
+       Layer...  Слой...
+           Измените слой этого окна. Слои семян для получения более подробной информации.
+
+       Transparency    Прозрачность
+           Измените прозрачность этого окна, переопределив значения по умолчанию в меню конфигурации.
+
+       Remember...     Помнить...
+           Укажите, какие настройки окна следует сохранить в файле "apps" и возобновить при следующем открытии этого окна.
+
+           В частности, настройки, которые вы можете сохранить, следующие:
+
+           Workpace:    Рабочее пространство
+               Откройте это в том же рабочем пространстве, где в данный момент находится окно.
+
+           Jump to workspace:    Перейти в рабочее пространство:
+               Когда выбрано рабочее пространство, fluxbox перейдет к соответствующему рабочему пространству, когда там откроется это окно.
+               Если этот параметр не выбран, окно откроется в фоновом режиме.
+               
+
+           Head:    Глава
+               Только для пользователей xinerama запустите это окно в текущей заголовке (или на экране).
+
+           Dimensions:   Размеры
+               Запишите текущую высоту height и ширину width окна.
+               
+
+           Position:   Позиция  Положение
+               Запишите текущие координаты X и Y окна.
+
+           Sticky:  Липкий  Прикрепить
+               Запишите, находится ли окно на всех рабочих столах или нет.
+
+           Decorations:    Украшения
+               Запишите текущий набор украшений (строка заголовка title bar, ручки, вкладки и т.д.) в окне.
+
+           Shaded:    Затененный
+               Запишите, затенено ли окно (или свернуто) или нет.
+
+           Minimized:   Свернуть
+               Record whether the window is iconified (or minimized) or not.
+
+           Maximized:
+               Record whether the window is maximized or not.
+
+           Fullscreen:
+               Record whether the window is in fullscreen mode or not.
+
+           Transparency:
+               Record the current Transparency settings.
+
+           Layer:
+               Record the current layer.
+
+           Save on close:
+               If selected, any of the above items which are also selected will be updated with the window’s current values as it is closed.
+
+           These are is covered in more detail in fluxbox-apps(5).
+
+       Close
+           Close the application softly.
+
+       Kill
+           Kill the window’s parent process, like xkill(1).
+
+   Workspace Menu
+       The workspace menu can be found, by default, by middle-clicking on the background. This menu contains entries to explore the currently
+       defined workspaces, windows, and add/remove/rename workspaces.
+
+       Icons
+           This menu shows any iconified (or, minimized) windows. Clicking on a window in this menu will raise it on the current workspace.
+
+       Workspaces
+           The next section provides one submenu per workspace. Middle-clicking on a workspace name will take you to that workspace. The submenu
+           contains a list of all open windows on that workspace. Clicking on a window name will take you to that window and raise it, changing the
+           active workspace if necessary.
+
+       New Workspace
+           This entry adds a new workspace to the end of the list of current workspaces.
+
+       Edit current workspace name
+           Pops up a dialog to enter a new name for the current workspace.
+
+       Remove Last
+           Remove the last workspace in the list. Any windows currently open there will be sent to the next-to-last workspace.
+
+TOOLBAR
+       The toolbar is a small area to display information like a clock, workspace name, a system tray or a taskbar (iconbar) that can contain the
+       running programs. The color, look, font etc. is defined in the STYLE.
+
+       The tools in the toolbar can be enabled/disabled in the ‘init’ file with the session.screen0.toolbar.tools resource. See the RESOURCES
+       section for details on how to alter this value.
+
+       The possible tools are:
+
+       Clock
+           This will show an area to display a clock and the date according to the format specification listed in "man strtftime"
+
+       Button.<name>
+           При этом отображается интерактивная метка с пользовательским текстом.
+
+       Iconbar
+           This is the area that contains all windows (all running applications, all minimized windows or maybe no window, all depending on the
+           Toolbar Settings).
+
+       Systemtray
+           The Systemtray can hold applications that are made to use it.
+
+       WorkspaceName
+           This displays the name of the current workspace. Also, one is able to switch to the workspace left of the current one with a left click
+           and to the workspace right of the current one with a right click.
+
+       PrevWorkspace
+           This displays an arrow that allows one to switch to the workspace left of the current one.
+
+       NextWorkspace
+           This displays an arrow that allows one to switch to the workspace right of the current one.
+
+       PrevWindow
+           This displays an arrow that switches focus to the previous visible window on the current workspace.
+
+       NextWindow
+           This displays an arrow that switches focus to the next visible window on the current workspace.
+
+       Other aspects of the toolbar can be configured in two ways: through the toolbar menu, which is accessible in the Configuration part of the
+       RootMenu or with a middle click on the edge the toolbar, or by editing the init file (see the RESOURCES section for more information about
+       that).
+
+   Toolbar Menu
+       This menu can be opened by right-clicking on the toolbar (though not on a window’s name in the iconbar), or from the Configuration Menu.
+
+       All changes take effect immediately. Here are the settings:
+
+       Visible
+           Sets the toolbar either to visible or invisible.
+
+       Auto hide
+           If this is enabled the toolbar will disappear after a defined time when the mouse pointer leaves the toolbar. It will slide in when the
+           cursor hits the remaining edge of the toolbar. See the session.autoRaiseDelay resource for the delay time.
+
+       Auto raise
+           If this is enabled the toolbar will elevate after a defined time when the mouse pointer enters the it. It will fall back when the cursor
+           leaves the toolbar. See the session.autoRaiseDelay resource for the delay time.
+
+       Toolbar width percentage
+           Sets the width of the toolbar in a percentage of your total screen size. Use the left mouse button to decrease and the right
+           mouse-button to increase the value. The value can be from 1-100.
+
+       Maximize Over
+           Enabling this option will allow windows to maximize over the toolbar. With this switched on they will only expand to the edge of the
+           bar. This option may be overridden by the “Full Maximization” from the Configuration Menu. If that option is enabled, this option will
+           have no effect..
+
+       Layer...
+           This sets the layer on which the toolbar is set. With this you can set the toolbar to "Always on top".
+
+       Placement
+           Sets the toolbar to any edge of the screen, either centered or aligned with a corner.
+
+       Alpha
+           This sets the alpha value for the toolbar. Use the left mouse button to decrease and the right mouse button to increase the value. 0 is
+           invisible, 255 is not transparent at all.
+
+       Iconbar Mode
+           Specifies various modes of the iconbar’s operation.
+
+           The first section outlines what types of windows will be shown in the iconbar:
+
+           None:
+               Will not show any windows
+
+           Icons:
+               Shows windows from all workspaces that are iconified (or, minimized)
+
+           NoIcons:
+               Shows windows from all workspaces that are not iconified
+
+           WorkspaceIcons:
+               Shows windows from the current workspace that are iconified
+
+           WorkspaceNoIcons:
+               Shows windows from the current workspace that are not iconified
+
+           Workspace:
+               Shows all windows (iconified or not) from the current workspace
+
+           All Windows:
+               Shows all windows (iconified or not) from all workspaces
+
+           The next section specifies the alignment of the window names shown in the iconbar. The width is specified via the
+           session.screen0.iconbar.iconWidth resource:
+
+           Left:
+               All icons will be left-aligned with the width set in the ‘init’ file
+
+           Relative:
+               All icons will be sized evenly to fill the iconbar completely
+
+           RelativeSmart:
+               All icons will initially be sized evenly, but icons with long titles will be larger
+
+           Right:
+               All icons will be right-aligned with the width set in the ‘init’ file
+
+           The last option in this submenu is:
+
+           Show Pictures:
+               If enabled the iconbar will show the application’s icon (if provided by the application)
+
+       Clock
+           Lets you switch between the 00:00am - 11:59pm and 00:00 - 23:59 notation
+
+       Edit Clock Format
+           clicking this entry will pop up a dialog window in which the clock format can be set according to man strftime (or man date).
+
+FOCUS MODEL
+       The Focus Model defines how windows gain focus (i.e. become the active window, which receives keyboard and mouse events). The focus model
+       can be changed in the configuration menu (usually located under fluxbox menu in the Root Menu.
+
+       There are two main aspects of the focus model: how windows gain focus and how tabs gain focus. Each of these has two options: focus follows
+       mouse and click to focus. Focus follows mouse means that windows will gain focus when the mouse hovers over them. Click to focus means that
+       windows will gain focus when the mouse clicks on them.
+
+       Thus, there are four main options when choosing a focus model. You should choose one of the first two and one of the last two. They are:
+
+       Click To Focus
+           Click to focus windows.
+
+       Mouse Focus
+           Window focus follows mouse.
+
+       Mouse Focus (Strict)
+           Like Mouse Focus, but no mouse movement is required, ie. the window is also focused if it moves below the mouse, eg. because it shows up
+           or you change the virtual desktop.
+
+       ClickTabFocus
+           Click to focus tabs.
+
+       MouseTabFocus
+           Tab focus follows mouse.
+
+       There are three more settings in the “Focus Model” menu:
+
+       Focus New Windows
+           If enabled, a new window will grab X focus as soon as it is opened.
+
+           Auto Raise
+               If enabled, focusing on a new window will automatically raise that window above all others within its layer. When disabled, you must
+               explicitly raise a focused window using the window menu, keybinding, or Click Raises.
+
+           Click Raises
+               If enabled, clicking anywhere on a window will raise it above all others within its layer.
+
+TAB OPTIONS
+       This section of fluxbox configuration menu lets you configure many features of tabs. Inside of it there are three main options:
+
+       Placement
+           You can choose where the external tabs will be positioned relative to the window. For these options to work, Tabs in Titlebar must be
+           off.
+
+       Tabs in Titlebar
+           When this option is on, tabs are fixed in window titlebar and the width varies according to the amount of windows grouped.
+
+       Maximize Over
+           When this option is on, maximizing a window will disregard the size and location of external tabs, which means they may be pushed out of
+           the screen entirely.
+
+       External Tab Width
+           This specifies in pixels the width of external tabs.
+
+STYLES
+       fluxbox enables you to use specialized files that contain X(1) resources to specify colors, textures, pixmaps and fonts, and thus the
+       overall look of your window borders, menus and the toolbar.
+
+       The default installation of fluxbox provides some of these style files. See fluxbox-style(5) to accommodate the growing number of style
+       components.
+
+   Style Overlay
+       In addition to the style file, the overlay file, whose location is specified by session.screen0.styleOverlay (default: ~/.fluxbox/overlay)
+       can be used to set style resources that override all styles. For more information about which parts of fluxbox can be controlled by the
+       overlay file, see fluxbox-style(5).
+
+THE SLIT   ЩЕЛЬ  РАЗРЕЗ
+Щель представляет собой специальную оконную раму fluxbox, которая может содержать закрепляемые приложения, такие как “bbtools”
+или “window maker dockapps”.
+
+Когда приложения запускаются в slit, у них нет собственных границ окна; вместо этого они обрамляются в slit и всегда видны
+в текущей рабочей области workspace.
+       
+Большинство закрепляемых приложений используют опцию -w для запуска в slit. Например, вы могли бы поместить в свой ~/.fluxbox/startup:
+
+           bbmail -w &
+           bbpager -w &
+           wmdrawer &
+           exec fluxbox
+
+Чтобы использовать slit, вы должны скомпилировать его в fluxbox. Это настройка по умолчанию.
+
+   Slit Menu
+       
+Это меню можно открыть, щелкнув правой кнопкой мыши на слоте (хотя и не в приложении, запущенном внутри слота), или из меню конфигурации.
+
+Все изменения вступают в силу немедленно. Вот настройки:
+
+       Placement         Размещение
+           This lets you set the position of the slit.
+
+       Layer             Слой
+           See LAYERS for details on the layer order.
+
+       Auto hide         Автоматическое скрытие
+           If this is enabled the slit will disappear after a defined time when the mouse pointer leaves the slit. It will slide in when the cursor
+           hits the remaining edge of the slit. See the session.autoRaiseDelay resource for the delay time.
+ 
+       Auto raise        Автоматический подъем
+           If this is enabled the slit will elevate after a defined time when the mouse pointer enters the it. It will fall back when the cursor
+           leaves the slit. See the session.autoRaiseDelay resource for the delay time.
+
+       Maximize Over     Максимизировать Над выше
+           Enabling this option will allow windows to maximizing over the slit. With this switched off they will only expand to the edge of the
+           slit. This option may be overridden by the “Full Maximization” from the Configuration Menu. If that option is enabled, this option will
+           have no effect..
+
+       Alpha             Альфа
+           This sets the alpha value for the slit. Use the left mouse button to decrease and the right mouse button to increase the value. 0 is
+           invisible, 255 is not transparent at all.
+
+       Clients           Клиенты
+           This submenu lets you reorder the the applications running in the slit. You are able to hide apps from the slit by unselecting them in
+           the list showing. This will not kill the app. You can make them re-appear by selecting them in the list. The "Save SlitList" option
+           saves the new order to you slitlist located in ~/.fluxbox/slitlist. See the next section for details.
+
+   Slitlist File   Файл списка разрезов (щелей)
+       
+Файл slitlist от fluxbox доступен для тех, кто использует dockapps в slit. Этот файл помогает fluxbox отслеживать порядок расположения
+приложений dock, когда они находятся в slit. Файл обычно находится по адресу ~/.fluxbox/slitlist.
+
+Простая процедура получения последовательностей разрезов в том виде, в каком вам нравится:
+1. Запустите fluxbox без предварительно загруженных dockapps
+2. Запустите dockapps по отдельности в нужном вам порядке
+3. Добавьте dockapps в свой скрипт startfluxbox(1)
+       
+Эта последовательность будет сохранена по умолчанию в ~/.fluxbox/slitlist и будет сохранена для будущих экземпляров fluxbox.
+       
+Пользователи могут свободно редактировать файл slitlist вручную. Это простой список имен окон, заданный xprop(1),
+по одному для каждого dockapp. Аналогично файлу init, его не следует редактировать во время работы fluxbox.
+В противном случае изменения могут быть перезаписаны.
+       
+У пользователя также есть возможность выбрать другой путь для slitlistfile, установив ресурс session.session0.slitlistFile.
+       
+
+LAYERS          СЛОИ
+       
+Слои влияют на то, как окна будут накладываться друг на друга на экране. Окна на более высоком уровне всегда будут отображаться
+над окнами на более низком, независимо от того, сфокусированы они или нет.
+Fluxbox использует 13 слоев, начиная с 1 (самого высокого) (highest).
+
+Есть два способа назначить окно другому слою. Когда окно открыто, вы можете выбрать слой в подменю "Слой..." ‘Layer...‘ меню окна.
+Меню предоставляет шесть вариантов для слоя, которым fluxbox управляет по имени.
+Имена следующие (от самого высокого уровня к самому низкому) (from highest to lowest layer):
+
+       •   2 - Above Dock    Над доком (Поверх Дока)
+
+       •   4 - Dock          Док
+
+       •   6 - Top           Верхний (Поверх)
+
+       •   8 - Normal        Обычный
+
+       •   10 - Bottom       Нижний
+
+       •   12 - Desktop      Рабочий стол
+
+       Другой способ установить слой для окна - через файл ‘apps’ ‘приложения’. Этот метод описан в fluxbox-apps(5).
+
+ENVIRONMENT     ОКРУЖАЮЩАЯ СРЕДА
+       HOME
+     fluxbox использует $HOME для поиска файла .fluxbox/init и для определения имен файлов стилей и каталогов
+
+       DISPLAY     ДИСПЛЕЙ
+Если в командной строке не было указано никакого другого отображения, fluxbox запустится на дисплее, указанном этой переменной.
+
+fluxbox также может использовать преимущества других переменных окружения, если они установлены до запуска fluxbox.
+Например, если задано значение $TERM, то оно будет доступно всякий раз, когда fluxbox использует оболочку, например,
+команду EXEC файла ‘keys’ или тег [exec] корневого меню. Подробности смотрите в разделе fluxbox-keys(5) и fluxbox-menu(5).
+       
+Файл ‘keys’ также содержит две команды, которые могут изменять текущую среду fluxbox: SetEnv и Export. Любые изменения,
+внесенные этими командами, также повлияют на среду, которую видит fluxbox, и на все дочерние процессы, запущенные после этого момента.
+Подробности смотрите в разделе fluxbox-keys(5).
+
+Для получения дополнительной информации о переменных окружения в целом обратитесь к руководству вашей оболочки.
+
+
+SIGNALS       СИГНАЛЫ
+       fluxbox реагирует на следующие сигналы:
+
+       •   SIGUSR1 restarts fluxbox.
+
+       •   SIGUSR2 Принудительная перезагрузка конфигурации.

@@ -30,6 +30,7 @@
     [exec] (HomeBank) {homebank} </home/vyga/.fluxbox/icon/homebank.png>
     [exec] (MtPaint) {mtpaint} </home/vyga/.fluxbox/icon/mtpaint.png>
     [exec] (Gimp) {gimp} </home/vyga/.fluxbox/icon/gimp.png>
+    [exec] (Onboard) {onboard} </home/vyga/.fluxbox/icon/onboard.png>
      [separator]
     [exec] (Шахматы) {GTK_THEME=Minwaita-Vanilla-Dark:dark gnome-chess} </home/vyga/.fluxbox/icon/chess.png>
      [separator]
