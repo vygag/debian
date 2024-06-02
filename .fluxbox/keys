@@ -53,15 +53,21 @@ Mod4 d :ToggleDecor
 Mod1 Tab :NextWindow
 
 # Тайлинг
-# Основное левое окно мой шаблон
-Mod1 1 :MacroCmd {ResizeTo 1211 857} {MoveTo 00 00 BottomLeft}
-# Основное правое окно мой шаблон
-Mod1 2 :MacroCmd {ResizeTo 705 857} {MoveTo 00 00 BottomRight}
-# Горизонтальное разделение мой шаблон
-Mod1 3 :MacroCmd {ResizeTo 80% 75%} {MoveTo 00 00 BottomLeft}
+# Мои шаблоны: Alt+1-5
+# Мой шаблон: Основное левое окно.
+Mod1 1 :MacroCmd {ResizeTo 1210 790} {MoveTo 00 00 BottomLeft}
+# Мой шаблон: Основное правое окно.
+Mod1 2 :MacroCmd {ResizeTo 705 790} {MoveTo 00 00 BottomRight}
+# Мой шаблон: Верхнее правое окно.
+Mod1 3 :MacroCmd {ResizeTo 1210 265} {MoveTo 00 00 TopLeft}
+# Мой шаблон: Верхнее левое окно.
+Mod1 4 :MacroCmd {ResizeTo 705 265}  {MoveTo 00 00 TopRight}
+# Мой шаблон: Thunar
+Mod1 5 :MacroCmd {ResizeTo 1500 790} {MoveTo 00 00 BottomLeft}
+# Тайлинг: Win+1-4
 # Веретикальное разделение
-Mod4 1 :MacroCmd {ResizeTo 955 857} {MoveTo 00 00 BottomLeft}
-Mod4 2 :MacroCmd {ResizeTo 955 857} {MoveTo 00 00 BottomRight}
+Mod4 1 :MacroCmd {ResizeTo 50% 100%} {MoveTo 00 00 Left}
+Mod4 2 :MacroCmd {ResizeTo 50% 100%} {MoveTo 00 00 Right}
 # Горизонтальное разделение
 Mod4 3 :MacroCmd {ResizeTo 100% 50%} {MoveTo 00 00 Top}
 Mod4 4 :MacroCmd {ResizeTo 100% 50%} {MoveTo 00 00 Bottom}

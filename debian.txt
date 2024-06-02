@@ -572,7 +572,7 @@ onboard
 
 // Шахматы
 sudo apt install gnome-chess gnuchess
-sudo cp -v /usr/games/* /usr/bin
+sudo mv -v /usr/games/* /usr/bin
 
 // Шрифты
 sudo apt install fonts-terminus fonts-cantarell fonts-noto-color-emoji
@@ -648,7 +648,7 @@ alias nmu2='nmcli connection up точка'
 alias nmd2='nmcli connection down точка'
 
 // Монтирование thunar в media
-mkdir /media
+sudo mkdir /media
 sudo nano /etc/udev/rules.d/99-udisks2.rules
 # UDISKS_FILESYSTEM_SHARED
 # ==1: mount filesystem to a shared directory (/media/VolumeName)
@@ -656,7 +656,7 @@ sudo nano /etc/udev/rules.d/99-udisks2.rules
 # See udisks(8)
 ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
 
-// настройка политики монтирования
+// Настройка политики монтирования
 sudo nano /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
 <action id="org.freedesktop.udisks2.filesystem-mount-system">
     <defaults>
@@ -666,6 +666,38 @@ sudo nano /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
     </defaults>
     
     org.freedesktop.udisks2.power-off-drive-system
+    
+// Запустить Geany от суперпользователя
+sudo nano /usr/share/polkit-1/actions/org.geany.policy
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+ <vendor>geany</vendor>
+ <vendor_url>https://geany.org/</vendor_url>
+ <icon_name>geany</icon_name>
+
+ <action id="org.geany">
+ 
+ <description>Run Geany as root</description>
+ <description xml:lang="ru">Запустить Geany от суперпользователя</description>
+ <message>Authentication is required to run Geany as root.</message>
+ <message xml:lang="ru">Требуется аутентификация для запуска Geany от суперпользователя</message>
+
+ <defaults>
+ <allow_any>yes</allow_any>
+ <allow_inactive>yes</allow_inactive>
+ <allow_active>yes</allow_active>
+ </defaults>
+ <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/geany</annotate>
+ <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+ </action>
+
+</policyconfig>
+
+sudo nano /usr/share/polkit-1/actions/org.xfce.thunar.policy
 
 ---------------------------------------------------------------------------------------------------------
 
@@ -790,7 +822,7 @@ gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle=hintfull
 
-// Настройка темы
+// Настройка темы gtk
 sudo nano /usr/share/themes/Minwaita-Vanilla-Dark/gtk-3.0/gtk.css
 scale highlight, progressbar progress {
   min-height: 3px;

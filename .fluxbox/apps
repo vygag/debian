@@ -1,3 +1,11 @@
+[app] (name=-c) (class=-c)
+  [Position]	(UPPERLEFT)	{23% 50%}
+[end]
+[app] (name=onboard) (class=Onboard)
+  [Dimensions]	{48% 25%}
+  [Position]	(UPPERLEFT)	{54% 0%}
+[end]
+
 [app] (name=fbrun) (class=FbRun)
 [Position]	(UPPERLEFT)	{25% 56%}
 [end]
@@ -19,7 +27,7 @@
 [end]
 
 [app] (name=galculator)
-[Position]	(UPPERLEFT)	{80% 50%}
+[Position]	(UPPERLEFT)	{1505 750}
 [end]
 
 [app] (name=zenity)
@@ -27,27 +35,27 @@
 [end]
 
 [app] (name=xfce4-terminal)
-[Dimensions] {1211 650}
+[Dimensions] {1210 650}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=geany)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=gnote)
-[Dimensions] {700 837}
+[Dimensions] {705 790}
 [Position] (BottomRight) {0 0}
 [end]
 
 [app] (name=homebank)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=Navigator) (class=Tor Browser) (role=browser)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
@@ -56,7 +64,7 @@
 [end]
 
 [app] (name=Navigator) (class=firefox) (role=browser)
-[Dimensions] {1211 857}
+[Dimensions] {1210 770}
 [Position] (BottomLeft) {0 0}
 [end]
 
@@ -65,7 +73,7 @@
 [end]
 
 [app](name=Navigator)(class=Pale moon)(role=browser)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
@@ -74,7 +82,7 @@
 [end]
 
 [app] (name=chromium) (class=Chromium) (role=browser)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
@@ -87,17 +95,17 @@
 [end]
 
 [app] (name=transmission-gtk)
-[Dimensions] {700 630}
+[Dimensions] {705 630}
 [Position] (BottomRight) {0 0}
 [end]
 
 [transient] (name=transmission-gtk)
-[Dimensions] {700 630}
+[Dimensions] {705 630}
 [Position] (BottomRight) {0 0}
 [end]
 
 [app] (name=Mail) (class=thunderbird-default) (role=3pane)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
@@ -111,57 +119,57 @@
 [end]
 
 [app] (name=cherrytree)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=mtpaint)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=gimp)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=org.gnome.Maps) (class=org.gnome.Maps)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=abiword)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=gnumeric)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=libreoffice)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=evince)
-[Dimensions]  {1211 857}
+[Dimensions]  {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=FBReader) (class=FBReader)
-[Dimensions]  {1211 857}
+[Dimensions]  {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=xchm)
-[Dimensions]  {1211 857}
+[Dimensions]  {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=gpicview)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
@@ -171,7 +179,7 @@
 [end]
 
 [app] (name=gnome-chess)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
@@ -189,40 +197,41 @@
 
 [app] (name=doublecmd.exe) (class=doublecmd.exe)
 [Position] (BottomLeft) {0 0}
-[Dimensions] {1211 650}
+[Dimensions] {1210 650}
 [end]
 
 [app] (name=balabolka.exe) (class=balabolka.exe)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=demagog.exe) (class=demagog.exe)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=aimpate.exe) (class=aimpate.exe)
 [Position] (BottomLeft) {0 0}
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [end]
 
 [app] (name=routerscan.exe) (class=routerscan.exe)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=myhomelib.exe) (class=myhomelib.exe)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=gp.exe) (class=gp.exe)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
 
 [app] (name=akelpad.exe) (class=akelpad.exe)
-[Dimensions] {1211 857}
+[Dimensions] {1210 790}
 [Position] (BottomLeft) {0 0}
 [end]
+
