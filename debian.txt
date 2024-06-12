@@ -357,6 +357,10 @@ dpkg-reconfigure keyboard-configuration
 Страна - Русская и Раскладка - Русская
 нет временного переключателя
 
+// Активация сглаживания шрифтов
+https://wiki.debian.org/ru/PatchCairo
+dpkg-reconfigure fontconfig-config
+
 -----------------------------------------------------УСТАНОВКА СОФТА ЧЕРУТ-------------------------------------
 
 // Ядро
@@ -589,9 +593,7 @@ sudo apt install abiword gnumeric homebank mtpaint gimp
 
 // Утилиты
 sudo apt install alsa-utils usbutils pciutils lm-sensors lxappearance
-pulseaudio (pulseaudio-utils pactl pacmd)  ?pamixer?
-exec pactl set-sink-volume 0 +5%
-exec pactl set-sink-volume 0 -5%
+sudo apt install pulseaudio
 
 // Консольный софт
 sudo apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo mediainfo-gui id3v2
@@ -721,13 +723,15 @@ sudo chown -R vyga:vyga /home/vyga/.config
 
 // Копирование файлов настройки и каталогов
 /home/vyga/.thunderbird/
-/home/vyga/.config/Thunar/uca.xml
 /home/vyga/.local/share/gnote
+/home/vyga/.config/Thunar/uca.xml
 /home/vyga/.config/geany/colorschemes/blk-pgb.conf
 /home/vyga/.config/geany/geany.conf
 /home/vyga/.config/geany/keybindings.conf
 /home/vyga/.config/geany/ui_toolbar.xml
 /home/vyga/.config/mpv/input.conf
+~/.config/pulse/
+/usr/share/pulseaudio/
 /usr/share/stardict/dic/magus
 /usr/share/themes/Minwaita-Vanilla-Dark/gtk-3.0/gtk.css
 
@@ -747,7 +751,7 @@ tts
 софт
 фото
 
-Шрифты Liberation mono system-ui
+Шрифты system-ui, sans, cantarell, liberation mono, source-code-pro, terminus
 
 // Установка датчиков yes на все вопросы
 sudo sensors-detect

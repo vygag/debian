@@ -88,6 +88,21 @@ Mod4 Down :ResizeVertical +2
 # Управление звуком Alsa
 Control Up :Exec amixer set Master 2%+
 Control Down :Exec amixer set Master 2%-
+Mod4 Delete :Exec amixer set Master toggle
+#
+# Управление звуком PulseAudio
+#Control Up :Exec amixer -D pulse sset Master 2%+
+#Control Down :Exec amixer -D pulse sset Master 2%-
+#Mod4 Delete :Exec amixer -D pulse sset Master toggle
+#
+#Control Up :Exec pactl set-sink-volume 0 +2%
+#Control Down :Exec pactl set-sink-volume 0 -2%
+#Mod4 Delete :Exec pactl set-sink-mute 0 toggle
+#
+# Перевести звук в колонки
+Mod4 bracketleft :Exec pactl set-sink-port 'alsa_output.pci-0000_00_1b.0.analog-stereo' 'analog-output-lineout'
+# Перевести звук в наушники
+Mod4 bracketright :Exec pactl set-sink-port 'alsa_output.pci-0000_00_1b.0.analog-stereo' 'analog-output-headphones'
 
 # Сделать скриншот Print scrot
 Print :Exec scrot -u /home/vyga/foto/scr.png
