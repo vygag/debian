@@ -17,6 +17,18 @@ https://blog.bayrell.org/ru/linux/linux-from-scratch/119-ustanovka-ubuntu-deboot
 https://manpages.debian.org/buster/debconf/dpkg-reconfigure.8.en.html
 https://manpages.debian.org/buster/debconf/debconf-show.1.en.html
 
+--------------------------------------------------------------------MANUALS--------------------------------------
+
+https://www.debian.org/releases/stable/amd64/install.ru.pdf
+https://www.debian.org/doc/manuals/debian-faq/debian-faq.ru.pdf
+https://www.debian.org/doc/manuals/refcard/refcard.ru.pdf
+https://www.debian.org/releases/stable/amd64/release-notes.ru.pdf
+https://www.debian.org/doc/manuals/developers-reference/developers-reference.ru.pdf
+https://www.debian.org/doc/manuals/debmake-doc/debmake-doc.ru.pdf
+https://www.debian.org/doc/manuals/maint-guide/maint-guide.ru.pdf
+https://www.debian.org/doc/manuals/packaging-tutorial/packaging-tutorial.ru.pdf
+https://www.debian.org/doc/manuals/project-history/project-history.ru.pdf
+
 ---------------------------------------------------------------------ХАРД----------------------------------------
 
 cat /proc/cpuinfo
@@ -308,11 +320,28 @@ deb http://mirror.hyperdedic.ru/debian bookworm-updates contrib main non-free no
 #deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
 #deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
 
-# Multimedia #
+# Multimedia # https://www.deb-multimedia.org/
 #deb http://www.deb-multimedia.org/ bookworm main contrib non-free non-free-firmware
+deb http://mirror.yandex.ru/debian-multimedia/ bookworm main contrib non-free non-free-firmware
+sudo apt install deb-multimedia-keyring
 
 # Репозиторий с руссифицированными man-страницами #
 #deb http://manpages.stupin.su/repo/ bookworm main
+
+# Google
+deb http://dl.google.com/linux/chrome/deb/ stable main
+deb http://dl.google.com/linux/earth/deb/ stable main
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+# MediaInfo
+wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-24_all.deb && dpkg -i repo-mediaarea_1.0-24_all.deb
+
+# Double Commander
+echo 'deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:Alexx2000.list
+curl -fsSL https://download.opensuse.org/repositories/home:Alexx2000/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_Alexx2000.gpg > /dev/null
+sudo apt update
+sudo apt install doublecmd-gtk
+
 ------------------------------------------------------------------------------------------------------------
 
 // Тестовая репа trixie

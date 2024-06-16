@@ -49,9 +49,9 @@ session.screen0.window.unfocus.alpha:	            255
 session.screen0.windowScrollReverse:	            false
 session.screen0.focusNewWindows:	                true
 session.screen0.focusLastWindow:	                true
-session.screen0.windowPlacement:	                RowMinOverlapPlacement
+session.screen0.windowPlacement:	                ColSmartPlacement
 session.screen0.rowPlacementDirection:	            LeftToRight
-session.screen0.colPlacementDirection:	            TopToBottom
+session.screen0.colPlacementDirection:	            BottomToTop
 session.screen0.showwindowposition:	                true
 session.screen0.windowScrollAction:	                false
 session.screen0.showposinsidewindow:	            true
@@ -137,6 +137,6 @@ session.keyFile:	                                ~/.fluxbox/keys
 
 #session.screen0.rootCommand:	                    ~/.fehbg -l
 session.screen0.toolbar.button.togshowdesk.commands:  ShowDesktop
-session.screen0.toolbar.button.togshowdesk.label:     свр
+session.screen0.toolbar.button.togshowdesk.label:     s
 #session.screen0.toolbar.button.homenu.commands:      Rootmenu
 #session.screen0.toolbar.button.homenu.label:         Menu
