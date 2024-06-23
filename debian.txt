@@ -297,11 +297,22 @@ updates                                   Обновления
 proposed-updates                          Предложенные обновления
 backports                                 Патчи
 
-stable   bookworm                         Стабильный
-testing  trixie                           Тестовый
-sid                                       Не стабильный
+stable            bookworm                Стабильный
+testing           trixie                  Тестовый
+sid               forky                   Не стабильный
 
 sudo nano /mnt/etc/apt/sources.list
+
+------------------------------------------sources.list-------------------------------------------------------
+
+deb http://mirror.hyperdedic.ru/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://mirror.hyperdedic.ru/debian bookworm-updates contrib main non-free non-free-firmware
+#deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
+#deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
+deb https://www.deb-multimedia.org bookworm main non-free
+
+-----------------------------------------sources.list--------------------------------------------------------
 
 // Стабильная репа bookworm----------------------------------------------------------------------------------
 #deb http://mirror.hyperdedic.ru/debian      Россия
@@ -320,26 +331,30 @@ deb http://mirror.hyperdedic.ru/debian bookworm-updates contrib main non-free no
 #deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
 #deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
 
-# Multimedia # https://www.deb-multimedia.org/
-#deb http://www.deb-multimedia.org/ bookworm main contrib non-free non-free-firmware
-deb http://mirror.yandex.ru/debian-multimedia/ bookworm main contrib non-free non-free-firmware
+# Multimedia #
+deb https://www.deb-multimedia.org bookworm main non-free
+#deb https://mirror.yandex.ru/debian-multimedia bookworm main non-free
+#deb http://mirror.mephi.ru/debian-multimedia bookworm main non-free
+#deb ftp://mirror.mephi.ru/debian-multimedia bookworm main non-free
 sudo apt install deb-multimedia-keyring
+wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb
+sudo dpkg -i deb-multimedia-keyring_2016.8.1_all.deb
 
 # Репозиторий с руссифицированными man-страницами #
-#deb http://manpages.stupin.su/repo/ bookworm main
+#deb https://manpages.stupin.su/repo/ bookworm main
 
-# Google
+# Google #
 deb http://dl.google.com/linux/chrome/deb/ stable main
 deb http://dl.google.com/linux/earth/deb/ stable main
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
-# MediaInfo
-wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-24_all.deb && dpkg -i repo-mediaarea_1.0-24_all.deb
+# MediaInfo #
+wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-24_all.deb
+sudo dpkg -i repo-mediaarea_1.0-24_all.deb
 
-# Double Commander
+# Double Commander #
 echo 'deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:Alexx2000.list
 curl -fsSL https://download.opensuse.org/repositories/home:Alexx2000/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_Alexx2000.gpg > /dev/null
-sudo apt update
 sudo apt install doublecmd-gtk
 
 ------------------------------------------------------------------------------------------------------------
@@ -655,11 +670,13 @@ sudo apt install --install-recommends winehq-stable
 // Установка Firefox
 wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc
 echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list
+
 echo '
 Package: *
 Pin: origin packages.mozilla.org
 Pin-Priority: 1000
 ' | sudo tee /etc/apt/preferences.d/mozilla
+
 sudo apt update
 sudo apt install firefox firefox-l10n-ru
 
