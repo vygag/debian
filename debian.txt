@@ -475,10 +475,12 @@ Defaults    env_reset,pwfeedback
 
 nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_BACKGROUND=0
 
 grub-install /dev/sda
 update-grub
 
+// Заставка
 /usr/share/plymouth/themes/debian-theme/Emerald_plymouth.svg
 /usr/share/desktop-base/lines-theme/grub/grub-4x3.png
 
