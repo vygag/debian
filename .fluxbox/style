@@ -29,14 +29,14 @@ toolbar.iconbar.focused.borderColor:	#ffffff
 toolbar.iconbar.focused:				Flat
 toolbar.iconbar.focused.color:			#000000
 toolbar.iconbar.focused.textColor:		#4cf50a
-toolbar.iconbar.focused.font:           cantarelllight-8
+toolbar.iconbar.focused.font:           sans-8
 toolbar.iconbar.focused.justify:		center
 toolbar.iconbar.unfocused.borderWidth:	1
 toolbar.iconbar.unfocused.borderColor:	#ffffff
 toolbar.iconbar.unfocused:				Flat
 toolbar.iconbar.unfocused.color:		#000000
 toolbar.iconbar.unfocused.textColor:	#ffffff
-toolbar.iconbar.unfocused.font:         cantarelllight-8
+toolbar.iconbar.unfocused.font:         sans-8
 toolbar.iconbar.unfocused.justify:		center
 
 toolbar.workspace:					    Flat
@@ -117,7 +117,7 @@ window.label.focus.font:                terminus-9
 window.label.unfocus:					flat
 window.label.unfocus.color:				#515152		
 window.label.unfocus.textColor:			#828385
-window.label.unfocus.font:              terminus-9
+window.label.unfocus.font:              sans-9
 
 window.frame.focusColor:                #f7f302
 window.frame.unfocusColor:              #515152
