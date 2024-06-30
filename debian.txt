@@ -616,9 +616,8 @@ theme=Arch-Dark
 -----------------------------------------------------------FLUXBOX----------------------------------------------------
 
 // Иксовый софт
-sudo apt install gnote evince xchm cherrytree galculator gpicview
+sudo apt install gnote evince xchm cherrytree galculator gpicview geany-plugin-spellcheck
 sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2 xarchiver pkexec zenity
-onboard
 
 // Шахматы
 sudo apt install gnome-chess gnuchess
@@ -650,6 +649,12 @@ sudo apt install wodim growisofs dvd+rw-tools
 
 // blackarch
 sudo apt install wireshark-gtk tshark aircrack-ng nmap pixiewps traceroute john winbind
+
+// Установка Fluxbox со всеми обновами
+git clone https://github.com/fluxbox/fluxbox             Version 1.3.7 is a bug fix releas
+./configure
+make
+sudo make install
 
 // Установка yt-dlp
 yt-dlp --version 2023.07.06
@@ -696,6 +701,16 @@ alias nmu1='nmcli connection up "точка с пробелом"'
 alias nmd1='nmcli connection down "точка с пробелом"'
 alias nmu2='nmcli connection up точка'
 alias nmd2='nmcli connection down точка'
+
+// Проверка орфографии в Geany
+sudo apt install hunspell-ru geany-plugin-spellcheck  ?hunspell?
+Правка - Настройки - Общее - Запуск - Включить поддержку модулей
+Правка - Настройки - Общее - Запуск - Дополнительный путь для модулей ?
+Инструменты - Менеджер модулей - Проверка орфографии 
+Правка - Настройки модулей
+// Только если будут ошибки
+~/.config/geany/geany.conf
+active_plugins=/usr/lib/x86_64-linux-gnu/geany/spellcheck.so
 
 // Монтирование thunar в media
 sudo mkdir /media
@@ -747,6 +762,7 @@ sudo nano /usr/share/polkit-1/actions/org.geany.policy
 
 </policyconfig>
 
+// Открыть папку от sudo
 sudo nano /usr/share/polkit-1/actions/org.xfce.thunar.policy
 
 ---------------------------------------------------------------------------------------------------------
@@ -799,8 +815,6 @@ tts
 софт
 фото
 
-Шрифты system-ui, sans, cantarell, liberation mono, source-code-pro, terminus
-
 // Установка датчиков yes на все вопросы
 sudo sensors-detect
 
@@ -809,7 +823,7 @@ sudo sensors-detect
 // Темы GTK
 Minwaita-Vanilla-Dark
 Numix
-Шрифты Liberation mono system-ui
+Шрифты system-ui, sans, cantarell, liberation mono, source-code-pro, terminus
 gtk2 gtk3 gtk4
 // Тёмная тема для Gtk4
 GTK_THEME=Minwaita-Vanilla-Dark:dark transmission-gtk
@@ -821,7 +835,7 @@ papirus-icon-theme
 nano /usr/share/gtk-2.0/gtkrc
 gtk-icon-theme-name = "Numix"
 gtk-theme-name = "Minwaita-Vanilla-Dark"
-gtk-font-name = "System-ui 10"
+gtk-font-name = "Sans 10"
 
 GTK2_RC_FILES=/usr/share/themes/Raleigh/gtk-2.0/gtkrc
 
@@ -829,7 +843,7 @@ GTK2_RC_FILES=/usr/share/themes/Raleigh/gtk-2.0/gtkrc
 include "/home/vyga/.gtkrc-2.0.mine"
 gtk-theme-name="Minwaita-Vanilla-Dark"
 gtk-icon-theme-name="Numix"
-gtk-font-name="System-ui 10"
+gtk-font-name="Sans 10"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH
@@ -861,7 +875,7 @@ nano /usr/share/gtk-3.0/
 [Settings]
 gtk-theme-name=Minwaita-Vanilla-Dark
 gtk-icon-theme-name=Numix
-gtk-font-name=System-ui 10
+gtk-font-name=Sans 10
 gtk-cursor-theme-name=Adwaita
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH
@@ -880,7 +894,6 @@ scale highlight, progressbar progress {
   min-height: 3px;
   border-radius: 3px;
   background-color: #215d9c; светлосиний (выделение)  поменять на зелёный 7bfc03
-  
 
 menu menuitem:hover,
 .menu menuitem:hover,
@@ -902,7 +915,7 @@ nano /usr/share/gtk-4.0/
 [Settings]
 gtk-icon-theme-name = Numix
 gtk-theme-name = Minwaita-Vanilla-Dark
-gtk-font-name = System-ui 10
+gtk-font-name = Sans 10
 gtk-hint-font-metrics=1
 
 ---------------------------------------------------------------------------------------------------------------------
