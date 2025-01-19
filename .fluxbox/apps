@@ -1,0 +1,328 @@
+[app] (name=-c) (class=-c)
+[Position] (UPPERLEFT) {23% 50%}
+[end]
+
+[app] (name=gnome-disks)
+[Position] (UPPERLEFT) {43% 41%}
+[end]
+
+[app] (name=onboard) (class=Onboard)
+[Dimensions] {48% 25%}
+[Position] (UPPERLEFT) {54% 0%}
+[end]
+
+[app] (name=fbrun) (class=FbRun)
+[Position]	(UPPERLEFT)	{25% 56%}
+[end]
+
+[app] (name=feh)
+[Position]	(UPPERLEFT)	{25% 56%}
+[end]
+
+[app] (name=mediainfo-gui) (class=Mediainfo-gui)
+[Position] (UPPERLEFT) {14% 44%}
+[end]
+
+[app] (name=nm-connection-editor) (class=Nm-connection-editor)
+[Position] (UPPERLEFT) {29% 57%}
+[end]
+
+[app] (name=nm-applet) (class=Nm-applet)
+[Position] (UPPERLEFT) {31% 51%}
+[end]
+
+[app] (name=zenity)
+[Position] (UPPERLEFT) {1213 784}
+[end]
+
+[app] (name=xfce4-terminal)
+[Dimensions] {1210 650}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=geany)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gnote)
+[Dimensions] {705 790}
+[Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=thunar)
+[Position] (BottomLeft) {0 0}
+[end]
+
+[transient] (name=thunar) (title=Переименование нескольких файлов)
+[Dimensions] {920 590}
+[Position] (UPPERLEFT) {190 400}
+[end]
+
+[app] (title=Переименовать *) (class=Thunar)
+[Dimensions] {650 130}
+[Position] (UPPERLEFT) {190 420}
+[end]
+
+[app] (title=Действия над файлами) (class=Thunar)
+[Dimensions] {650 130}
+[Position] (UPPERLEFT) {190 420}
+[end]
+
+[app] (name=Navigator) (class=firefox) (role=browser)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Places) (class=firefox) (role=Organizer)
+[Position] (UPPERLEFT) {11% 41%}
+[end]
+
+[app] (name=Navigator)(class=Pale moon)(role=browser)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Places) (class=Pale moon) (role=Organizer)
+[Position] (UPPERLEFT) {11% 41%}
+[end]
+
+[app] (name=netsurf-gtk) (class=Netsurf-gtk)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[transient] (name=netsurf-gtk) (class=Netsurf-gtk)
+[Position] (UPPERLEFT) {190 400}
+[end]
+
+[app] (name=chromium) (class=Chromium) (role=browser)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[transient] (name=chromium) (class=Chromium) (role=GtkFileChooserDialog)
+[Position] (UPPERLEFT)	{12% 35%}
+[end]
+
+[transient] (name=xdg-desktop-portal-gtk) (class=Xdg-desktop-portal-gtk) (role=GtkFileChooserDialog)
+[Position] (UPPERLEFT)	{12% 35%}
+[end]
+
+[app] (name=Navigator) (class=Tor Browser) (role=browser)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Places) (class=Tor Browser) (role=Organizer)
+[Position] (UPPERLEFT) {11% 41%}
+[end]
+
+[app] (name=transmission-gtk)
+[Dimensions] {705 650}
+[Position] (BottomRight) {0 0}
+[end]
+
+[transient] (name=transmission-gtk)
+[Dimensions] {705 630}
+[Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=Mail) (class=thunderbird-default) (role=3pane)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=Msgcompose) (class=thunderbird-default) (role=Msgcompose)
+[Position]	(UPPERLEFT)	{7% 21%}
+[end]
+
+[app] (name=Telegram) (class=TelegramDesktop)
+[Dimensions] {705 790}
+[Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=org.gnome.Maps) (class=org.gnome.Maps)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=cherrytree)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=mtpaint)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[transient] (name=mtpaint) (class=Mtpaint)
+[Dimensions] {44% 51%}
+[Position] (UPPERLEFT) {13% 42%}
+[end]
+
+[app] (name=gimp)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=abiword)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gnumeric)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=libreoffice)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=evince)
+[Dimensions]  {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=FBReader) (class=FBReader)
+[Dimensions]  {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=xchm)
+[Dimensions]  {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gpicview)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=org.pwmt.zathura) (class=Zathura)
+[Dimensions]  {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gl) (class=mpv)
+[Dimensions] {790 360}
+[Position] (UPPERLEFT) {555 520}
+[end]
+
+[app] (name=ffplay) (class=ffplay)
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=losslesscut) (class=LosslessCut) (role=browser-window)
+[Dimensions] {705 790}
+[Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=losslesscut) (class=Losslesscut) (role=GtkFileChooserDialog)
+[Dimensions] {920 590}
+[Position] (UPPERLEFT) {190 400}
+[end]
+
+[app] (name=xdg-desktop-portal-gtk) (class=Xdg-desktop-portal-gtk) (role=GtkFileChooserDialog)
+[Dimensions] {47% 62%}
+[Position] (UPPERLEFT) {16% 36%}
+[end]
+
+[app] (name=fr.handbrake.ghb) (class=Fr.handbrake.ghb)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=galculator)
+[Deco] {NONE}
+[Position]	(UPPERLEFT)	{1392 791}
+[end]
+
+[app] (name=homebank)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gnome-chess)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=xarchiver)
+[Position] (UPPERLEFT) {450 600} 
+[end]
+
+[app] (name=lxappearance)
+[Position] (Bottom) {0 0} 
+[end]
+
+[app] (name=winecfg.exe) (class=winecfg.exe)
+[Position]	(UPPERLEFT)	{63% 46%}
+[end]
+
+[app] (name=doublecmd.exe) (class=doublecmd.exe)
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=balabolka.exe) (class=balabolka.exe)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=demagog.exe) (class=demagog.exe)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=aimpate.exe) (class=aimpate.exe)
+[Position] (BottomLeft) {0 0}
+[Dimensions] {1210 790}
+[end]
+
+[app] (name=routerscan.exe) (class=routerscan.exe)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=myhomelib.exe) (class=myhomelib.exe)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=gp.exe) (class=gp.exe)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=akelpad.exe) (class=akelpad.exe)
+[Dimensions] {1210 790}
+[Position] (BottomLeft) {0 0}
+[end]
+
+[app] (name=CGoban Control) (class=CGoban)
+  [Position]	(UPPERLEFT)	{63% 75%}
+[end]
+
+[app] (name=Cgoban Setup) (class=CGoban)
+  [Position]	(UPPERLEFT)	{63% 49%}
+[end]
+
+[app] (name=CGoban File Selector) (class=CGoban)
+  [Position]	(UPPERLEFT)	{63% 43%}
+[end]
+
+[app] (name=Go Modem Protocol Setup) (class=CGoban)
+  [Position]	(UPPERLEFT)	{63% 51%}
+[end]
+
+[app] (name=Game Setup) (class=CGoban)
+  [Position]	(UPPERLEFT)	{63% 44%}
+[end]
+
+[app] (name=White \(W\) vs. Black \(B\)) (class=CGoban)
+  [Dimensions]	{55% 65%}
+  [Position]	(UPPERLEFT)	{0% 35%}
+[end]

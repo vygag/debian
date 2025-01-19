@@ -1,0 +1,965 @@
+                                                         УСТАНОВКА DEBIAN С DEBOOTSTRAP
+
+https://wiki.debian.org/ru/Debootstrap
+https://codej.ru/arts/a/prolinux/t/debian-install
+https://manpages.debian.org/bullseye/debootstrap/debootstrap.8.en.html
+https://wiki.debian.org/chroot
+https://manpages.ubuntu.com/manpages/jammy/en/man2/chroot.2.html
+https://manpages.debian.org/bullseye/mount/mount.8.en.html
+https://www.debian.org/releases/stable/amd64/apds03.ru.html
+https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
+https://laurvas.ru/chroot/
+https://itproffi.ru/izmenenie-kornevoj-sistemy-komanda-chroot-v-linux/
+https://blog.desdelinux.net/ru/reparacion-del-sistema-howto-chroot/
+https://wiki.debian.org/ru/fstab
+https://zalinux.ru/?p=4895
+https://blog.bayrell.org/ru/linux/linux-from-scratch/119-ustanovka-ubuntu-debootstrap.html
+https://manpages.debian.org/buster/debconf/dpkg-reconfigure.8.en.html
+https://manpages.debian.org/buster/debconf/debconf-show.1.en.html
+https://blog.bayrell.org/ru/linux/linux-from-scratch/504-ustanovka-debian-12-i-ubuntu-22-04-cherez-debootstrap.html
+
+--------------------------------------------------------------------MANUALS--------------------------------------
+
+https://www.debian.org/releases/stable/amd64/install.ru.pdf
+https://www.debian.org/doc/manuals/debian-faq/debian-faq.ru.pdf
+https://www.debian.org/doc/manuals/refcard/refcard.ru.pdf
+https://www.debian.org/releases/stable/amd64/release-notes.ru.pdf
+https://www.debian.org/doc/manuals/developers-reference/developers-reference.ru.pdf
+https://www.debian.org/doc/manuals/debmake-doc/debmake-doc.ru.pdf
+https://www.debian.org/doc/manuals/maint-guide/maint-guide.ru.pdf
+https://www.debian.org/doc/manuals/packaging-tutorial/packaging-tutorial.ru.pdf
+https://www.debian.org/doc/manuals/project-history/project-history.ru.pdf
+
+---------------------------------------------------------------------ХАРД----------------------------------------
+
+cat /proc/cpuinfo
+lscpu
+uname -m
+htop
+
+cat /proc/meminfo
+free -h
+lsmem
+swapon -s
+
+uname -r
+cat /proc/cmdline
+
+lspci
+lspci -vvvn
+lsusb
+lsusb -vt
+sudo airmon-ng
+
+iw list
+
+cat /proc/asound/cards
+lsmod
+ls /sys/class/net
+
+lshw
+
+// Сенсоры
+sudo sensors-detect
+sensors
+sensors | grep temp3:
+
+-------------------------------------------------------------------------------------------------------------------
+
+Монитор ViewSonic VA2248-LED     VS13818   SDC1247A4821     	RGB
+
+Корпус Microlab М4102 Silver
+
+Блок питания Microlab
+
+Проц  Intel(R) Pentium(R) 4 CPU 3.00GHz x86_64 Ядер 1
+нагрев до 60 градусов предел
+
+Мать Gigabyte GA-8I915G-MFD
+https://www.gigabyte.ru/products/page/mb/ga-8i915g-mfd  2006
+Сокет Socket LGA775 для процессоров Intel® Pentium® 4 FSB800
+DDR2 533/400 до 4 Гб
+Чипсет мат. Платы 	Intel 915G (NG82915G + FW82801FB (ICH6)) 
+Формат платы 	MicroATX (244 x 244 мм)
+Частота шины 	533, 800 МГц 
+Тип поддерживаемой памяти 	DDR2 PC2-4200 (DDR533), PC2-3200 (DDR400); 
+Количество разъемов DDR2 	4 (для активации 2х канального режима модули устанавливаются парами) 
+Максимальный объем оперативной памяти 	4 Гб 
+PCIE         1 шт
+PCIEx16      1 шт
+PCI          2 шт
+FDD          1 шт
+IDE          1 шт х2
+SATA         3 шт
+DIMM DDR2    4 шт
+USB разъемы на задней панели 	4x USB 2.0
+
+Intel GMA 900
+Intel Corporation 82915G/GV/910GL Integrated Graphics Controller (rev 0e
+
+Audio device: Intel 82801FB/FBM/FR/FW/FRW (ICH6 Family) High Definition Audio Controller (rev 03)
+
+Wi-Fi USB Adapter Wireless N300 D-Link DWA-137     Realtek RTL8192EU
+https://www.dlink.ru/ru/products/2/2460.html
+https://github.com/clnhub/rtl8192eu-linux
+https://github.com/Mange/rtl8192eu-linux-driver
+
+----------------------------------------------------------APT-----------------------------------------------------
+sudo apt update
+apt list --upgradeable
+sudo apt upgrade
+sudo apt full-upgrade
+
+apt search 
+apt list 
+apt show 
+apt-cache search 
+apt-cache depends ПАКЕТ                     зависимости пакета
+apt-file search 
+
+sudo apt install 
+apt download 
+sudo apt remove 
+sudo apt purge 
+sudo apt install ./firmware-realtek.deb     установить локальный .deb пакет
+sudo apt install -f                         исправить отсутствующи зависимост 
+
+https://losst.pro/kak-polzovatsya-apt?liveurl=1
+https://losst.pro/apt-vs-apt-get-v-chem-raznitsa?liveurl=1
+https://losst.pro/chto-delaet-komanda-aptitude?liveurl=1
+https://zalinux.ru/?p=5291
+https://zalinux.ru/?p=3988
+https://hackware.ru/?p=13848
+https://hackware.ru/?p=8185
+
+---------------------------------------------------СКАЧАТЬ DEBIAN LIVE--------------------------------------------
+
+wget https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-12.9.0-amd64-xfce.iso
+wget https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-12.9.0-amd64-xfce.iso.packages
+wget https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/SHA256SUMS
+
+wget https://mirror.yandex.ru/debian-cd/current-live/amd64/iso-hybrid/debian-live-12.9.0-amd64-xfce.iso
+wget https://mirror.yandex.ru/debian-cd/current-live/amd64/iso-hybrid/debian-live-12.9.0-amd64-xfce.iso.packages
+wget https://mirror.yandex.ru/debian-cd/current-live/amd64/iso-hybrid/SHA256SUMS
+
+4f507da37ebff4e3c5f9df83e3ac045f5bc6e8bd4a03c8e582a59046860ab6ff  debian-live-12.9.0-amd64-xfce.iso
+
+sha256sum debian-live-12.9.0-amd64-xfce.iso
+
+-----------------------------------------------------ЗАПИСЬ ФЛЕШКИ----------------------------------------------
+                    
+// С помощью dd удалите таблицу разделов
+sudo dd if=/dev/zero of=/dev/sdc bs=1M count=1
+// Записать образ на флэшку
+sudo dd if=debian-live-12.9.0-amd64-xfce.iso of=/dev/sdc
+
+-----------------------------------------------------РАЗМЕТКА HDD-----------------------------------------------
+
+sudo fdisk -l
+sudo cfdisk /dev/sda
+Загруз./Bootable     Сделать раздел загрузочным
+Удалить/Delete       Удалить раздел
+Resize
+Выход/Quit  
+Тип/Type             Тип раздела
+Справка/Help
+Запись/Write         Сохранить изменения
+Дамп/Dump
+Новый/New            Создать новый раздел
+
+Delete - New - Размер раздела 5G - Основной
+Тип - 82 Linux swap
+Тип - 83 Linux
+
+1. 5G      82 Linux swap
+2. 40G     83 Linux /     Загруз./Bootable
+3. 420,8   83 Linux hdd
+
+Запись - yes
+
+----------------------------------------------------ПОДГОТОВКА HDD----------------------------------------------
+
+// Форматирование разделов
+lsblk
+sudo fdisk -l
+// sda1 swap
+// sda2 /
+// Форматирования раздела подкачки
+sudo mkswap /dev/sda1                               
+// Форматирования раздела корень
+sudo mkfs.ext4 /dev/sda2                   
+// Монтирование разделов
+sudo swapon /dev/sda1
+sudo mount /dev/sda2 /mnt
+
+-------------------------------------------------------USB-МОДЕМ----------------------------------------------
+
+Настройки - Сеть и интернет - Точка доступа и модем - USB-модем
+ip link show
+ip addr show
+
+sudo nano /etc/network/interfaces
+auto usb0
+iface usb0 inet dhcp
+
+sudo systemctl restart networking.service
+ping ya.ru
+
+-------------------------------------------------------DEBOOTSTRAP--------------------------------------------
+
+// Проверить статус зеркал
+https://www.debian.org/mirror/mirrors_full
+https://www.debian.org/mirror/list-full
+https://manpages.debian.org/bookworm/netselect/netselect.1.en.html
+https://manpages.debian.org/bookworm/netselect-apt/netselect-apt.1.en.html
+
+sudo apt update
+sudo apt install netselect-apt
+
+-a    архитектура                                       amd64
+-c    страна                                            russia
+-t    количество зеркал                                 4
+-n    Включите также несвободный раздел
+-o    Используйте OUTFILE вместо sources.list.
+-i    Используйте INFILE вместо загрузки списка зеркал во временный файл. Файл должен быть в том же формате, что и mirrors_full.
+russia
+belarus
+germany
+sweden
+norway
+india
+australia
+
+sudo netselect-apt -c russia -t 4 -a amd64 -o netselect-apt.list.txt
+sudo netselect-apt -c russia -t 4 -a amd64 -n testing -o netselect-apt.list.txt
+
+// Установка debootstrap
+sudo apt install debootstrap wget
+
+// Запуск debootstrap
+sudo debootstrap --arch amd64 bookworm /mnt http://deb.debian.org/debian            stable
+sudo debootstrap --arch amd64 trixie /mnt http://deb.debian.org/debian              testing
+
+sudo debootstrap --arch amd64 bookworm /mnt http://mirror.hyperdedic.ru/debian      stable
+sudo debootstrap --arch amd64 trixie /mnt http://mirror.hyperdedic.ru/debian        testing
+
+// Kali
+sudo debootstrap --arch amd64 kali-rolling /mnt https://http.kali.org/kali
+
+// Монтирование устройств
+sudo mount --bind /dev /mnt/dev
+sudo mount --bind /proc /mnt/proc
+sudo mount --bind /sys /mnt/sys
+sudo mount --rbind /dev/pts /mnt/dev/pts
+
+---------------------------------------------------СОЗДАЁМ ФАЙЛ FSTAB------------------------------------------
+
+sudo blkid /dev/sda2
+sudo blkid /dev/sda1
+
+sudo nano /mnt/etc/fstab
+# /dev/sda2
+UUID=7847d165-e71c-4299-a6d1-6381fb234499       /               ext4            rw,relatime     0 1
+
+# /dev/sda1
+UUID=dde79799-fcc6-47c2-ab2a-095ee397bb94       none            swap            defaults        0 0
+
+-------------------------------------------------------НАСТРОЙКА СЕТИ------------------------------------------
+
+// Настройка сети
+// Укажите ваши серверы имён и директивы поиска в /etc/resolv.conf
+
+sudo nano /mnt/etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+sudo nano /mnt/etc/hostname
+debian
+
+sudo nano /mnt/etc/hosts
+127.0.0.1       localhost
+:1              localhost
+127.0.1.1       debian
+
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+-----------------------------------------------------НАСТРОЙКА APT РЕПЫ--------------------------------------
+
+main                                      Свободное ПО
+contrib                                   Полусвободное ПО
+non-free                                  Не свободное ПО
+non-free-firmware                         Не свободные прошивки
+
+security                                  Безопасность
+updates                                   Обновления
+proposed-updates                          Предложенные обновления
+backports                                 Патчи
+
+stable            bookworm                Стабильный
+testing           trixie                  Тестовый
+sid               forky                   Не стабильный
+
+sudo nano /mnt/etc/apt/sources.list
+
+------------------------------------------sources.list-------------------------------------------------------
+
+deb http://mirror.hyperdedic.ru/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://mirror.hyperdedic.ru/debian bookworm-updates contrib main non-free non-free-firmware
+#deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
+#deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
+deb https://www.deb-multimedia.org bookworm main non-free
+deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /
+
+-----------------------------------------sources.list--------------------------------------------------------
+
+// Стабильная репа bookworm----------------------------------------------------------------------------------
+#deb http://mirror.hyperdedic.ru/debian      Россия
+#deb http://ftp.psn.ru/debian                Россия
+#deb http://mirror.docker.ru/debian          Россия
+#deb http://ftp.ru.debian.org/debian         Россия
+#deb http://mirror.yandex.ru/debian          Россия
+
+#deb http://deb.debian.org/debian            Основной
+#deb ftp.se.debian.org/debian                Швеция
+#deb ftp.de.debian.org/debian                Германия
+
+deb http://mirror.hyperdedic.ru/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://mirror.hyperdedic.ru/debian bookworm-updates contrib main non-free non-free-firmware
+#deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
+#deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
+
+# Multimedia #
+deb https://www.deb-multimedia.org bookworm main non-free
+#deb https://mirror.yandex.ru/debian-multimedia bookworm main non-free
+#deb http://mirror.mephi.ru/debian-multimedia bookworm main non-free
+#deb ftp://mirror.mephi.ru/debian-multimedia bookworm main non-free
+sudo apt install deb-multimedia-keyring
+wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb
+sudo dpkg -i deb-multimedia-keyring_2016.8.1_all.deb
+
+# Репозиторий с руссифицированными man-страницами #
+#deb https://manpages.stupin.su/repo/ bookworm main
+
+# Google #
+deb http://dl.google.com/linux/chrome/deb/ stable main
+deb http://dl.google.com/linux/earth/deb/ stable main
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+# MediaInfo #
+wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-24_all.deb
+sudo dpkg -i repo-mediaarea_1.0-24_all.deb
+
+# Double Commander #
+sudo nano /etc/apt/sources.list
+deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /
+curl -fsSL https://download.opensuse.org/repositories/home:Alexx2000/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_Alexx2000.gpg > /dev/null
+sudo apt update
+sudo apt install doublecmd-gtk
+
+# freeLib #
+sudo nano /etc/apt/sources.list
+deb https://notesalexp.org/freelib/bookworm/ bookworm main
+wget -O - https://notesalexp.org/debian/alexp_key.asc | sudo apt-key add -
+sudo apt update
+sudo apt install freelib
+
+------------------------------------------------------------------------------------------------------------
+
+// Тестовая репа trixie
+deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian trixie-updates contrib main non-free non-free-firmware
+deb http://deb.debian.org/debian trixie-proposed-updates main contrib non-free non-free-firmware
+#deb http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware
+
+// Репа kali-rolling
+deb https://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware
+
+---------------------------------------------------------ЧЕРУТИМСЯ---------------------------------------------
+
+sudo chroot /mnt
+
+--------------------------------------------------------ЛОКАЛИЗАЦИЯ--------------------------------------------
+
+https://vmblog.ru/izmenit-regionalnye-nastrojki-lokal-linux/
+https://interface31.ru/tech_it/2014/12/nastroyka-yazyka-i-regionalnyh-standartov-v-ubuntu-server-debian.html
+
+apt update
+
+// Установка и настройка локализации
+apt install locales
+dpkg-reconfigure locales
+en_US.UTF-8 UTF-8
+ru_RU.UTF-8 UTF-8
+ru_RU.UTF-8                                         выбор локали по умолчанию
+
+// Консоль
+apt install console-setup
+dpkg-reconfigure console-setup
+UTF-8                                               зададим кодировку консоли
+. Combinet - Latin; Slavic Cyrillic; Greek          используемые наборы символов
+Terminus                                            используемый шрифт
+14                                                  размер
+
+dpkg-reconfigure keyboard-configuration
+105-клавишная международная                         тип клавиатуры
+Другая
+Страна - Русская и Раскладка - Русская
+нет временного переключателя
+
+// Активация сглаживания шрифтов
+https://wiki.debian.org/ru/PatchCairo
+dpkg-reconfigure fontconfig-config
+
+-----------------------------------------------------УСТАНОВКА СОФТА ЧЕРУТ-------------------------------------
+
+// Ядро
+apt install linux-image-amd64 linux-headers-amd64
+
+// Прошивки
+apt install intel-microcode gpm build-essential
+
+// Wi-Fi
+apt install iw network-manager iproute2
+
+// Утилиты
+apt install grub-pc sudo mc bash-completion
+
+// Xorg
+apt install xserver-xorg-core x11-xserver-utils x11-xkb-utils xinit
+
+// Ставим иксы
+apt install lxdm fluxbox xfce4-terminal geany network-manager-gnome
+
+nano /home/vyga/.bashrc
+PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;33m\]\u\[\e[0m\]@\[\e[1;35m\]\H\[\e[0m\]:\[\e[1;32m\]\w\[\e[0m\]\n\[\e[1;32m\]\$\[\e[0m\] '
+
+.bash_aliases
+
+----------------------------------------------------------НАСТРОЙКА---------------------------------------------
+
+// Настройка часового пояса
+nano /etc/adjtime
+0.0 0 0.0
+0
+LOCAL
+
+dpkg-reconfigure tzdata
+
+// установить время
+date -s 09:17
+
+// Установка системных часов
+timedatectl
+// Отключить utc
+timedatectl set-local-rtc 1
+trace_clock=local
+
+timedatectl set-time "гггг-мм-дд чч:мм:сс"
+timedatectl set-time "2023-04-12 14:59:00"
+timedatectl set-time "08:01:36"
+
+// Аппаратные часы биос
+hwclock -r           отобразить часы реального времени
+hwclock -s           копирования часов биос в системные
+hwclock -W           копирования системных часов в биос
+hwclock -l           localtime
+hwclock --set --date="2011-01-25 08:55:01"
+
+-------------------------------------------------------НОВЫЙ ПОЛЬЗОВАТЕЛЬ----------------------------------------
+
+// Добавим нового пользователя
+useradd -m -G sudo -s /bin/bash -U vyga
+groups vyga
+
+-m создавать домашний каталог пользователя в home
+-G Список дополнительных групп
+-s командная оболочка для пользователя
+-U Создайте группу с тем же именем что и у пользователя и добавьте
+
+nano /etc/group
+groupadd группа                                 создать новую группу
+usermod -aG доп_группы пользователь             добавить в группы
+
+------------------------------------------------------------ПАРОЛЬ------------------------------------------------
+
+// Задать пароль
+passwd vyga
+
+// visudo
+EDITOR=nano visudo
+// показывать звёздочки во время ввода пароля sudo
+Defaults    env_reset,pwfeedback
+// права root для группы wheel
+%sudo ALL=(ALL:ALL) ALL
+
+--------------------------------------------------------УСТАНОВКА GRUB-------------------------------------------
+
+nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_BACKGROUND=0
+
+nano /etc/grub.d/05_debian_theme
+# Set the traditional Debian blue theme.
+echo "${1}set menu_color_normal=white/black"
+echo "${1}set menu_color_highlight=black/light-gray"
+
+grub-install /dev/sda
+update-grub
+
+// Заставка
+/usr/share/plymouth/themes/emerald/Emerald_plymouth.svg
+/usr/share/desktop-base/lines-theme/grub/grub-4x3.png
+/usr/share/desktop-base/emerald-theme/grub/grub-4x3.png
+
+------------------------------------------------------------PATH-------------------------------------------------
+nano /etc/profile
+
+PATH="/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/games"
+
+------------------------------------------------------------LXDM----------------------------------------------------
+
+// Включить менеджер входа
+systemctl enable lxdm.service
+// Включить авто вход в систему
+nano /etc/lxdm/lxdm.conf
+autologin=vyga
+session=/usr/bin/startfluxbox
+gtk_theme=Minwaita-Vanilla-Dark
+#theme=Industrial
+
+// Графический конфигуратор
+lxdm-config
+// Темы
+/usr/share/lxdm/themes
+// Тема Arch-Dark
+wget https://www.dropbox.com/s/a8inrdfys3a71c1/lxdm-themes.tar.gz
+theme=Arch-Dark
+
+----------------------------------------------------------ЗАВЕРШЕНИЕ----------------------------------------------
+
+systemctl status NetworkManager
+systemctl enable NetworkManager.service                                 Включить NetworkManager
+
+exit
+sudo umount -R /mnt
+sudo umount /mnt/dev
+sudo umount /mnt/proc
+sudo umount /mnt/sys
+sudo umount /mnt
+
+systemctl poweroff
+shutdown -h now
+
+-------------------------------------------------------ДРАЙВЕР WI-FI USB---------------------------------------------
+
+// Wi-Fi USB Adapter Wireless N300 D-Link DWA-137 Realtek RTL8192EU
+
+sudo nano /etc/modprobe.d/blacklist-rtl8xxxu.conf
+blacklist rtl8xxxu
+
+sudo mount /dev/sda3 /mnt
+cd /mnt/debian/rtl8192eu-linux
+make
+uname -r
+modinfo ./8192eu.ko | grep vermagic:
+sudo mkdir -v /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+sudo cp -v 8192eu.ko /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+modinfo /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu/8192eu.ko | grep vermagic:
+
+// Обновим список зависимостей
+sudo depmod -a
+modinfo 8192eu | grep vermagic:
+reboot
+
+--------------------------------------------------------------WI-FI------------------------------------------------------------
+
+nmcli general status
+nmcli device wifi list
+nmcli device status
+nmcli connection show
+nmcli radio wifi
+nmcli radio wifi on
+nmcli radio wifi off
+iw dev
+
+nmcli device wifi connect точка  password пароль name точка
+nmcli device wifi connect "точка с пробелом" password пароль name "точка с пробелом"
+iw dev wlxa0a3f0d1e106 link
+
+-----------------------------------------------------------FLUXBOX----------------------------------------------------
+
+// Иксовый софт
+sudo apt install gnote evince xchm cherrytree galculator gpicview geany-plugin-spellcheck
+sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2
+sudo apt install xarchiver unrar pkexec zenity handbrake-gtk pavucontrol audacity simplescreenrecorder
+
+// Шахматы
+sudo apt install gnome-chess gnuchess
+
+// Шашки
+sudo apt install kcheckers
+
+// ГО
+sudo apt install gnugo kigo
+
+// Шрифты
+sudo apt install fonts-terminus fonts-cantarell fonts-noto-color-emoji
+adobe-source-code-pro-fonts    git clone https://github.com/adobe-fonts/source-code-pro
+
+// Inet
+sudo apt install transmission-gtk transmission-cli thunderbird thunderbird-l10n-ru network-manager-gnome
+sudo apt install chromium chromium-l10n gnome-maps netsurf-gtk
+sudo apt install git curl wget links aria2
+
+// Office
+sudo apt install libreoffice-writer libreoffice-calc libreoffice-l10n-ru libreoffice-help-ru
+sudo apt install abiword gnumeric homebank mtpaint gimp
+
+// Утилиты
+sudo apt install alsa-utils usbutils pciutils lm-sensors lxappearance qt5ct manpages-ru ncal
+sudo apt install pulseaudio gnome-disk-utility volumeicon-alsa
+
+// Консольный софт
+sudo apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo mediainfo-gui id3v2
+sudo apt install rhvoice rhvoice-russian zathura zathura-djvu fbless recordmydesktop zbar-tools
+ 
+// dvd
+sudo apt install growisofs dvd+rw-tools k3b
+
+// hack
+sudo apt install wireshark-gtk tshark aircrack-ng nmap pixiewps traceroute john winbind xterm
+
+// Установка Fluxbox со всеми обновами
+git clone https://github.com/fluxbox/fluxbox             Version 1.3.7 is a bug fix releas
+./configure
+make
+sudo make install
+
+// Установка yt-dlp
+yt-dlp --version 2023.07.06
+sudo rm -v /usr/bin/yt-dlp
+sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/bin/yt-dlp
+sudo chmod a+rx /usr/bin/yt-dlp
+yt-dlp --version 2023.11.16
+
+// Ставим wine
+https://wiki.winehq.org/Debian
+sudo dpkg --add-architecture i386
+sudo mkdir -pm755 /etc/apt/keyrings
+sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
+sudo apt update
+sudo apt install --install-recommends winehq-stable
+
+// Установка Firefox
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list
+
+echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+
+sudo apt update
+sudo apt install firefox firefox-l10n-ru
+
+// Проверка орфографии в Geany
+sudo apt install hunspell-ru geany-plugin-spellcheck  ?hunspell?
+Правка - Настройки - Общее - Запуск - Включить поддержку модулей
+Правка - Настройки - Общее - Запуск - Дополнительный путь для модулей ?
+Инструменты - Менеджер модулей - Проверка орфографии 
+Правка - Настройки модулей
+// Только если будут ошибки
+~/.config/geany/geany.conf
+active_plugins=/usr/lib/x86_64-linux-gnu/geany/spellcheck.so
+
+// Монтирование thunar в media
+sudo mkdir /media
+sudo nano /etc/udev/rules.d/99-udisks2.rules
+# UDISKS_FILESYSTEM_SHARED
+# ==1: mount filesystem to a shared directory (/media/VolumeName)
+# ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
+# See udisks(8)
+ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
+
+// Настройка политики монтирования
+sudo nano /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
+<action id="org.freedesktop.udisks2.filesystem-mount-system">
+    <defaults>
+      <allow_any>yes</allow_any>
+      <allow_inactive>yes</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+    
+    org.freedesktop.udisks2.power-off-drive-system
+    
+// Запустить Geany от суперпользователя
+sudo nano /usr/share/polkit-1/actions/org.geany.policy
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+ <vendor>geany</vendor>
+ <vendor_url>https://geany.org/</vendor_url>
+ <icon_name>geany</icon_name>
+
+ <action id="org.geany">
+ 
+ <description>Run Geany as root</description>
+ <description xml:lang="ru">Запустить Geany от суперпользователя</description>
+ <message>Authentication is required to run Geany as root.</message>
+ <message xml:lang="ru">Требуется аутентификация для запуска Geany от суперпользователя</message>
+
+ <defaults>
+ <allow_any>yes</allow_any>
+ <allow_inactive>yes</allow_inactive>
+ <allow_active>yes</allow_active>
+ </defaults>
+ <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/geany</annotate>
+ <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+ </action>
+
+</policyconfig>
+
+// Открыть папку от sudo
+sudo nano /usr/share/polkit-1/actions/org.xfce.thunar.policy
+
+--------------------------------------------ИНТЕРЕСНЫЙ СОФТ----------------------------------------------- 
+
+pipewire pipewire-alsa pipewire-pulse  ?pipewire-audio?
+jdupes
+volumeicon-alsa
+parcellite xfce4-clipman-plugin
+rtorrent
+gparted gnome-disk-utility
+eyed3 exfalso
+picom xcompmgr
+xfburn brasero
+dmenu rofi xfce4-appfinder tint2 i3status
+dunst
+gsimplecal
+lightdm slim
+catfish recoll
+onboard
+
+---------------------------------------------------------------------------------------------------------
+
+// Реакции на закрывание-открывание крышки.
+sudo nano /etc/systemd/logind.conf
+IdleAction=ignore                  действие при бездействии системы
+HandlePowerKey=poweroff            действие после нажатия клавиши питания
+
+--------------------------------------------КАТАЛОГИ И ФАЙЛЫ НАСТРОЕК------------------------------------
+
+// Каталоги
+doc cfg inf man
+down
+foto
+hack
+torrent
+prg
+
+// Сменить владельца каталога файла
+sudo chown -R vyga:vyga /home/vyga/.config
+
+// Копирование файлов настройки и каталогов
+/home/vyga/.thunderbird/
+/home/vyga/.local/share/gnote
+/home/vyga/.config/Thunar/uca.xml
+/home/vyga/.config/geany/colorschemes/blk-pgb.conf
+/home/vyga/.config/geany/geany.conf
+/home/vyga/.config/geany/keybindings.conf
+/home/vyga/.config/geany/ui_toolbar.xml
+/home/vyga/.config/mpv/input.conf
+~/.config/pulse/
+/usr/share/pulseaudio/
+/usr/share/stardict/dic/magus
+/usr/share/themes/Minwaita-Vanilla-Dark/gtk-3.0/gtk.css
+
+# Установка sdcv stardict
+sudo mkdir -p /usr/share/stardict/dic
+sudo cp -r /media/hdd/archome/magus /usr/share/stardict/dic
+
+tts
+аудиокниги
+видео
+документы
+загрузки
+инфа
+книги
+музыка
+разное
+софт
+фото
+
+// Установка датчиков yes на все вопросы
+sudo sensors-detect
+
+------------------------------------------------------GTK-QT--------------------------------------------------------
+
+ // Темы GTK
+Minwaita-Vanilla-Dark
+Numix
+Шрифты system-ui, sans, cantarell, liberation mono, source-code-pro, terminus
+gtk2 gtk3 gtk4
+// Тёмная тема для Gtk4
+GTK_THEME=Minwaita-Vanilla-Dark:dark transmission-gtk
+
+sudo apt install numix-icon-theme      git clone https://github.com/numixproject/numix-icon-theme
+sudo apt install papirus-icon-theme    git clone https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
+
+// Темы QT
+sudo apt install adwaita-qt
+breeze-icon-theme
+
+-----------------------------------------------------gtk-2.0---------------------------------------------
+nano /usr/share/gtk-2.0/gtkrc
+gtk-icon-theme-name = "Numix"
+gtk-theme-name = "Minwaita-Vanilla-Dark"
+gtk-font-name = "Sans 10"
+
+GTK2_RC_FILES=/usr/share/themes/Raleigh/gtk-2.0/gtkrc
+
+/home/vyga/.gtkrc-2.0
+include "/home/vyga/.gtkrc-2.0.mine"
+gtk-theme-name="Minwaita-Vanilla-Dark"
+gtk-icon-theme-name="Numix"
+gtk-font-name="Sans 10"
+gtk-cursor-theme-name="Adwaita"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+
+/home/vyga/.config/gtk-2.0/gtkfilechooser.ini
+[Filechooser Settings]
+LocationMode=path-bar
+ShowHidden=false
+ShowSizeColumn=true
+GeometryX=570
+GeometryY=247
+GeometryWidth=780
+GeometryHeight=585
+SortColumn=name
+SortOrder=ascending
+StartupMode=recent
+
+----------------------------------------------------gtk-3.0--------------------------------------------------
+nano /usr/share/gtk-3.0/
+/home/vyga/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-theme-name=Minwaita-Vanilla-Dark
+gtk-icon-theme-name=Numix
+gtk-font-name=Sans 10
+gtk-cursor-theme-name=Adwaita
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintfull
+
+// Настройка темы gtk
+sudo nano /usr/share/themes/Minwaita-Vanilla-Dark/gtk-3.0/gtk.css
+scale highlight, progressbar progress {
+  min-height: 3px;
+  border-radius: 3px;
+  background-color: #215d9c; светлосиний (выделение)  поменять на зелёный 7bfc03
+
+menu menuitem:hover,
+.menu menuitem:hover,
+.context-menu menuitem:hover, .gtk-combobox-popup-menu menuitem:hover {
+  color: #ffffff;
+  background-color: #215d9c;      поменять на коричневый 804030
+  
+treeview.view.progressbar {
+  border: 1px solid #0f2b48;
+  border-radius: 4px;
+  background-color: #215d9c;
+  background-image: linear-gradient(to bottom, #52fc03, #52fc03);                   184472  светлосиний (выделение) - 52fc03  зеленый
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.15), 0 1px rgba(0, 0, 0, 0.1);
+}
+
+-----------------------------------------------------gtk-4.0--------------------------------------------------
+nano /usr/share/gtk-4.0/
+/home/vyga/.config/gtk-4.0/settings.ini
+[Settings]
+gtk-icon-theme-name = Numix
+gtk-theme-name = Minwaita-Vanilla-Dark
+gtk-font-name = Sans 10
+gtk-hint-font-metrics=1
+
+---------------------------------------------------------------------------------------------------------------------
+
+// Wi-Fi USB Adapter Wireless N300 D-Link DWA-137 Realtek RTL8192EU
+1. cd prg
+git clone https://github.com/clnhub/rtl8192eu-linux
+Режим монитора можно включить, установив CONFIG_WIFI_MONITOR = y  /rtl8192eu-linux/Makefile
+
+2. sudo modprobe -r 8192eu
+reboot
+
+3. uname -r
+cd prg/rtl8192eu-linux
+make
+modinfo ./8192eu.ko | grep vermagic:
+sudo mkdir -v /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+sudo cp -v 8192eu.ko /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+sudo depmod -a
+modinfo 8192eu | grep vermagic:
+reboot
+
+
+https://habr.com/ru/articles/673488/
+https://flatpak.org/
+https://wiki.archlinux.org/title/Flatpak
+https://www.linux.org.ru/articles/desktop/17725234
+https://pingvinus.ru/note/snap-flatpak-appimage-highlights
+https://pingvinus.ru/note/snap
+https://www.comss.ru/page.php?id=12773
+https://flathub.org/ru/setup/Debian
+https://wiki.debian.org/Flatpak
+https://flathub.org/
+https://pingvinus.ru/note/install-flatpak-ubuntu
+https://pingvinus.ru/note/appimage
+https://pingvinus.ru/note/snap
+
+
+Установка Flatpak в Debian 12: 14
+sudo apt install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak --user update Перезапустите службу
+flatpak --version
+
+flatpak install flathub app.drey.EarTag
+flatpak run app.drey.EarTag
+
+
+flatpak remove --unused        Для удаления неиспользуемых сред
+flatpak remove --delete-data   Для очистки данных уже удалённых приложений
+
+Обратите внимание, что каталоги 
+
+'/var/lib/flatpak/exports/share'
+'/home/vyga/.local/share/flatpak/exports/share'
+
+не находятся по пути поиска, заданном переменной окружения XDG_DATA_DIRS,
+

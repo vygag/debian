@@ -1,0 +1,84 @@
+# Опция -r предотвращает удаление пустых пунктов меню и строк, что делает вещи намного более удобочитаемыми.
+#
+[begin] (Fluxbox)
+[encoding] {UTF-8}
+     [submenu] (Приложения) </home/vyga/.fluxbox/icon/app-launcher.png>
+     [submenu] (Wine) </home/vyga/.fluxbox/icon/wine.png>
+    [exec] (AIMP) {wine "c:\Program Files (x86)/AIMP/AIMPate.exe"} </home/vyga/.fluxbox/icon/aimp.png>
+    [exec] (DoubleCMD) {wine "c:\Program Files (x86)/doublecmd/doublecmd.exe"} </home/vyga/.fluxbox/icon/doublecmd.png>
+    [exec] (Балаболка) {wine "c:\Program Files (x86)/Balabolka/balabolka.exe"} </home/vyga/.fluxbox/icon/balabolka.png>
+    [exec] (Demagog) {wine "c:\Program Files (x86)/Demagog/Demagog.exe"} </home/vyga/.fluxbox/icon/demagog.png>
+    [exec] (MyHomeLib) {wine "c:\Program Files (x86)/MyHomeLib/MyHomeLib.exe"} </home/vyga/.fluxbox/icon/MyhomeLib.png>
+    [exec] (RouterScan) {wine "c:\Program Files (x86)/RouterScan/RouterScan.exe"} </home/vyga/.fluxbox/icon/routerscan.png>
+    [exec] (Телефоны) {wine /home/vyga/.wine/drive_c/"Program Files (x86)"/Vozersk/gp.exe} </home/vyga/.fluxbox/icon/whatsapp.png>
+    [exec] (AkelPad) {wine "c:\Program Files (x86)/AkelPad/AkelPad.exe"} </home/vyga/.fluxbox/icon/AkelPad.png>
+     [end]
+     [submenu] (Офис) </home/vyga/.fluxbox/icon/libreoffice.png>
+    [exec] (Документ) {libreoffice --writer} </home/vyga/.fluxbox/icon/writer.png>
+    [exec] (Таблицы) {libreoffice --calc} </home/vyga/.fluxbox/icon/localc.png>
+    [exec] (AbiWord) {abiword} </home/vyga/.fluxbox/icon/abiword.png>
+    [exec] (Gnumeric) {gnumeric} </home/vyga/.fluxbox/icon/gnumeric.png>
+    [exec] (HomeBank) {homebank} </home/vyga/.fluxbox/icon/homebank.png>
+    [exec] (MtPaint) {mtpaint} </home/vyga/.fluxbox/icon/mtpaint.png>
+    [exec] (Gimp) {gimp} </home/vyga/.fluxbox/icon/gimp.png>
+     [end]
+    [submenu] (Медиа) </home/vyga/.fluxbox/icon/LosslessCut.png>
+    [exec] (LosslessCut) {/home/vyga/prg/LosslessCut-linux-x86_64.AppImage} </home/vyga/.fluxbox/icon/LosslessCut.png>
+    [exec] (HandBrake) {handbrake-gtk} </home/vyga/.fluxbox/icon/handbrake.png>
+    [exec] (Запись CD DVD) {k3b} </home/vyga/.fluxbox/icon/disk-burner.png>
+    [exec] (AudaCity) {audacity} </home/vyga/.fluxbox/icon/audacity.png>
+    [exec] (SimpleScreen) {simplescreenrecorder} </home/vyga/.fluxbox/icon/simplescreenrecorder.png>
+    [exec] (Pavucontrol) {pavucontrol} </home/vyga/.fluxbox/icon/pavucontrol.png>
+     [end]
+    [submenu] (Инет) </home/vyga/.fluxbox/icon/firefox.png>
+    [exec] (Telegram) {/home/vyga/prg/Telegram/Telegram} </home/vyga/.fluxbox/icon/telegram.png>
+    [exec] (Chromium) {chromium} </home/vyga/.fluxbox/icon/chromium.png>
+    [exec] (Tor) {/home/vyga/prg/tor-browser/Browser/start-tor-browser.desktop} </home/vyga/.fluxbox/icon/tor.png>
+    [exec] (Карта) {GTK_THEME=Minwaita-Vanilla-Dark:dark gnome-maps} </home/vyga/.fluxbox/icon/maps.png>
+    [exec] (Palemoon) {/home/vyga/prg/palemoon/palemoon} </home/vyga/.fluxbox/icon/palemoon.png>
+	[exec] (Netsurf) {netsurf-gtk} </home/vyga/.fluxbox/icon/netsurf.png>
+    [exec] (Wireshark) {wireshark} </home/vyga/.fluxbox/icon/wireshark.png>
+     [end]
+    [submenu] (Игры) </home/vyga/.fluxbox/icon/games.png>
+    [exec] (Шахматы) {GTK_THEME=Minwaita-Vanilla-Dark:dark gnome-chess} </home/vyga/.fluxbox/icon/chess.png>
+    [exec] (Шашки) {kcheckers} </home/vyga/.fluxbox/icon/shashki.png>
+    [exec] (KiGoban) {kigo} </home/vyga/.fluxbox/icon/go.png>
+     [end]
+    [submenu] (Утилиты) </home/vyga/.fluxbox/icon/util.png>
+    [exec] (Gnome-Disks) {gnome-disks} </home/vyga/.fluxbox/icon/disk-utility.png>
+    [exec] (Архиватор) {xarchiver} </home/vyga/.fluxbox/icon/xarchiver.png>
+    [exec] (MidnightCom) {xfce4-terminal -e mc} </home/vyga/.fluxbox/icon/MidnightCommander.png>
+    [exec] (Htop) {xfce4-terminal -e htop} </home/vyga/.fluxbox/icon/htop.png>
+     [end]
+        [end]
+    [exec] (Выполнить) {fbrun} </home/vyga/.fluxbox/icon/gtkhash.png>
+      [separator]
+	[exec] (Календарь) {zenity --calendar} </home/vyga/.fluxbox/icon/calendar.png>
+	[exec] (Калькулятор) {galculator} </home/vyga/.fluxbox/icon/calc.png>
+	  [separator]
+	[exec] (Терминал) {xfce4-terminal} </home/vyga/.fluxbox/icon/terminal.png>
+	[exec] (Geany) {geany} </home/vyga/.fluxbox/icon/geany.png>
+	[exec] (Gnote) {gnote} </home/vyga/.fluxbox/icon/gnote.png>
+	[exec] (Thunar) {thunar} </home/vyga/.fluxbox/icon/thunar.png>
+    [exec] (Firefox) {firefox} </home/vyga/.fluxbox/icon/firefox.png>
+	[exec] (Торрент) {transmission-gtk} </home/vyga/.fluxbox/icon/transmission.png>
+	[exec] (Почта) {thunderbird} </home/vyga/.fluxbox/icon/thunderbird.png>
+    [exec] (CherryTree) {cherrytree} </home/vyga/.fluxbox/icon/cherrytree.png>
+    [exec] (DoubleCMD) {doublecmd} </home/vyga/.fluxbox/icon/doublecmd.png>
+      [separator]
+     [submenu] (Настройки) </home/vyga/.fluxbox/icon/system.png>
+    [config] (Конфигурация)
+    [reconfig] (Перечитать файлы кофигурации)
+    [restart] (Перезапуск Fluxbox)
+    [commanddialog] (Fluxbox Команды)
+    [exec] (Настройка GTK) {lxappearance} </home/vyga/.fluxbox/icon/gtk3-demo.png>
+    [exec] (Настройка QT5) {qt5ct} </home/vyga/.fluxbox/icon/qt5ct.png>
+     [end]
+    [separator]
+     [submenu] (Выйти)
+        [exit] (Выход) </home/vyga/.fluxbox/icon/logout.png>
+        [exec] (Перезагрузить) {systemctl reboot} </home/vyga/.fluxbox/icon/reboot.png>
+        [exec] (Выключение) {systemctl poweroff} </home/vyga/.fluxbox/icon/shutdown.png>
+         [end]
+[endencoding]
+[end]

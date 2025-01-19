@@ -1,0 +1,125 @@
+background:                             fullscreen
+background.color:                       #000000
+
+toolbar:                                Flat
+toolbar.shaped:                         false
+toolbar.justify:                        center
+toolbar.bevelWidth:                     1
+toolbar.height:                         13
+toolbar.color:                          #ffffff
+toolbar.font:                           terminus-6
+
+toolbar.borderWidth:                    1
+toolbar.borderColor:                    #000000
+
+toolbar.clock:                          Flat
+toolbar.clock.justify:                  center
+toolbar.clock.borderColor:              #000000
+toolbar.clock.borderWidth:              1
+toolbar.clock.color:                    #000000
+toolbar.clock.textColor:                #ffffff
+toolbar.clock.font:                     terminus-10
+
+toolbar.iconbar.empty:                  Flat
+toolbar.iconbar.borderWidth:            1
+toolbar.iconbar.empty.color:            #000000
+toolbar.iconbar.borderColor:            #000000
+toolbar.iconbar.focused.borderWidth:    1
+toolbar.iconbar.focused.borderColor:    #ffffff
+toolbar.iconbar.focused:                Flat
+toolbar.iconbar.focused.color:          #000000
+toolbar.iconbar.focused.textColor:      #00FF00
+toolbar.iconbar.focused.font:           sans-8
+toolbar.iconbar.focused.justify:        center
+toolbar.iconbar.unfocused.borderWidth:  1
+toolbar.iconbar.unfocused.borderColor:  #ffffff
+toolbar.iconbar.unfocused:              Flat
+toolbar.iconbar.unfocused.color:        #000000
+toolbar.iconbar.unfocused.textColor:    #ffffff
+toolbar.iconbar.unfocused.font:         sans-8
+toolbar.iconbar.unfocused.justify:      center
+
+toolbar.workspace:                      Flat
+toolbar.workspace.borderWidth:          1
+toolbar.workspace.justify:              center
+toolbar.workspace.borderColor:          #000000
+toolbar.workspace.color:                #000000
+toolbar.workspace.textColor:            #ffffff
+toolbar.workspace.font:                 terminus-6
+
+menu.bevelWidth:                        0
+menu.itemHeight:                        14
+menu.titleHeight:                       14
+menu.roundCorners:                      TopRight TopLeft BottomRight BottomLeft
+menu.borderWidth:                       1
+menu.borderColor:                       #ffffff
+
+menu.bullet.position:                   Right
+menu.bullet:                            triangle
+
+menu.title:                             flat
+menu.titleHeight:                       14
+menu.title.justify:                     center
+menu.title.color:                       #804030
+menu.title.textColor:                   #000000
+menu.title.font:                        terminus-12
+
+menu.frame:                             flat
+menu.frame.justify:                     left
+menu.frame.color:                       #000000
+menu.frame.textColor:                   #ffffff
+menu.frame.disableColor:
+menu.frame.font:                        terminus-15
+
+menu.hilite:                            flat
+menu.hilite.justify:                    left
+menu.hilite.color:                      #6e4237
+menu.hilite.textColor:                  #ffffff
+menu.hilite.font:                       terminus-15
+
+window.bevelWidth:                      1
+window.borderWidth:                     1
+window.focus.borderColor:               #6298e0
+window.unfocus.borderColor:             #515151
+
+window.roundCorners:                    Top
+window.justify:                         center
+window.font:                            terminus-9
+
+window.button.focus:                    flat
+window.button.focus.color:              #000000
+window.button.focus.picColor:           #ffffff
+window.button.unfocus:                  flat
+window.button.unfocus.Color:            #515152
+window.button.unfocus.picColor:         #828385
+window.button.pressed:                  flat
+window.button.pressed.color:            #4C4C4C
+window.button.pressed.picColor:         #000000
+
+window.title.height:                    16
+window.title.focus:                     flat
+window.title.focus.color:               #000000
+window.title.unfocus:                   flat
+window.title.unfocus.color:             #515152
+
+window.label.active:                    flat
+window.label.active.textColor:          #ffffff
+window.label.focus:                     flat
+window.label.focus.color:               #000000
+window.label.focus.textColor:           #ffffff
+window.label.focus.font:                terminus-9
+window.label.unfocus:                   flat
+window.label.unfocus.color:             #515152
+window.label.unfocus.textColor:         #828385
+window.label.unfocus.font:              sans-9
+
+window.handle.focus:                    flat
+window.handle.focus.color:              #000000
+window.handle.unfocus:                  flat
+window.handle.unfocus.color:            #515152
+window.handleWidth:                     1
+
+window.grip.focus:                      flat
+window.grip.focus.color:                #6298e0
+window.grip.unfocus:                    flat
+window.grip.unfocus.color:              #515152

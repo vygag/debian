@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# fluxbox startup-script:
+#
+# Индикатор network manager
+nm-applet &
+# Не отключать монитор
+xset s off
+xset -dpms
+# Установка раскладки клавиатуры
+#setxkbmap -layout 'us,ru' -option 'grp:menu_toggle,grp_led:scrol'
+#setxkbmap -layout 'us,ru' -option 'grp:ctrl_shift_toggle,grp_led:scrol'
+# Индикатор звука ALSA
+volumeicon &
+# Буфер обмена
+#parcellite &
+# Яркость экрана xrandr монитор ViewSonic
+#xrandr --output VGA1 --brightness 0.4
+# Polkit-gnome add root access
+# /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+exec fluxbox

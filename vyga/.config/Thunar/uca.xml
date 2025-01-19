@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Открыть терминал</name>
+	<submenu></submenu>
+	<unique-id>1664854023951780-1</unique-id>
+	<command>xfce4-terminal</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>document-open</icon>
+	<name>Открыть от sudo</name>
+	<submenu></submenu>
+	<unique-id>1664927497797589-1</unique-id>
+	<command>pkexec thunar %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>geany</icon>
+	<name>Открыть Geany от sudo</name>
+	<submenu></submenu>
+	<unique-id>1698304472714085-1</unique-id>
+	<command>pkexec geany %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>preferences-system-privacy</icon>
+	<name>sha256</name>
+	<submenu></submenu>
+	<unique-id>1665211506444038-1</unique-id>
+	<command>sha256sum %f | zenity --text-info --width=600</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>preferences-system-privacy</icon>
+	<name>md5</name>
+	<submenu></submenu>
+	<unique-id>1665212493876092-2</unique-id>
+	<command>md5sum %f | zenity --text-info</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>audio-x-generic</icon>
+	<name>mediainfo</name>
+	<submenu></submenu>
+	<unique-id>1665212794371949-3</unique-id>
+	<command>xfce4-terminal -H -x mediainfo %f</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<other-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>applications-system</icon>
+	<name>file</name>
+	<submenu></submenu>
+	<unique-id>1665213157588585-4</unique-id>
+	<command>xfce4-terminal -H -x file %f</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>package-x-generic</icon>
+	<name>p7zip</name>
+	<submenu></submenu>
+	<unique-id>1665213421199690-5</unique-id>
+	<command>7z x %f</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>FBReader</icon>
+	<name>fbless</name>
+	<submenu></submenu>
+	<unique-id>1721792762354068-1</unique-id>
+	<command>xfce4-terminal -H -x fbless %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*.fb2</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+</actions>

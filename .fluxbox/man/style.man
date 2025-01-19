@@ -1,0 +1,572 @@
+                                                     Fluxbox Manual 
+
+NAME
+       fluxbox-style - Всесторонний обзор стилей/тем для fluxbox(1).
+
+SYNOPSIS
+       В этом документе описываются различные опции, доступные для стилей fluxbox.
+
+DESCRIPTION   описание
+       Что такое стиль?
+
+Стили, иногда называемые темами, представляют собой графическое наложение для оконного менеджера fluxbox(1).
+ Если бы вы хотели познакомиться с fluxbox поближе, стили соответствовали бы внешнему виду и ощущениям.
+
+Стили - это простые текстовые файлы ASCII, которые сообщают fluxbox(1), как создавать внешний вид различных компонентов оконного менеджера.
+Установка fluxbox(1) по умолчанию поставляется со многими классическими примерами, которые показывают многое из того, что можно было бы сделать.
+Чтобы использовать один из стандартных стилей, перейдите в меню системных стилей в главном меню fluxbox(1).
+
+fluxbox(1) использует свой собственный графический класс для рендеринга своих изображений на лету.
+Используя стили, вы можете с высокой степенью конфигурируемости определить, как будет выглядеть ваш рабочий стол.
+Поскольку fluxbox (1) был получен из blackbox, многие часто задаются вопросом, будут ли старые темы работать в последних версиях fluxbox (1).
+Ну, в принципе, они работают, но вам придется их настроить, так как код fluxbox(1) довольно сильно изменился с момента первоначального захвата.
+
+STRUCTURE   структура
+Стиль состоит из нескольких основных компонентов, которые затем имеют свои собственные подчиненные директивы. 
+Основными компонентами являются следующие:
+
+window.* Окно.* директивы управляют внешним видом оконных рамок, window.tab.* управляет внешним видом вкладок окна, menu.* 
+управляет внешним видом всплывающего меню, которое вы видите при щелчке правой кнопкой мыши на рабочем столе. toolbar.* панель инструментов.* 
+- это панель, которую вы увидите в верхней или нижней части экрана. Наконец, slit.* разрез. * (щель) имеет опции, которые вы можете использовать 
+для настройки внешнего вида разреза (щели). Однако, если вы не задаете директивы slit специально, внешний вид slit вместо этого 
+контролируется директивами панели инструментов.
+         
+Чтобы понять, как работает механизм стилей, неплохо бы немного узнать о том, как работают ресурсы X11.
+Ресурсы X11 состоят из ключа и значения. Ключи также могут содержать ключ, состоящий из нескольких меньших ключей 
+(иногда называемых дочерними), разделенных точкой (.). Звездочка (*) служит в качестве подстановочного знака, что означает, 
+что одна строка текста будет соответствовать нескольким ключам. Это полезно для стилей, основанных на одном или двух цветах.
+ 
+Более полную ссылку на это можно найти в X(7), раздел RESOURCES РЕСУРСЫ.
+
+LOCATION   местоположение
+Существует множество мест для хранения ваших стилей, наиболее распространенное из которых находится в вашем каталоге ~/.fluxbox/styles.
+Первоначальная установка поместит стили по умолчанию в /usr/share/fluxbox/styles, обеспечивая базовую удобную конфигурацию.
+
+При создании собственного стиля создайте каталог (обычно это имя вашего стиля) в ~/.fluxbox/styles/ 
+(если каталог styles не существует, создайте его также). Хотя официальной структуры не существует, обычно создается каталог, названный в 
+честь вашего стиля, и в него помещается каталог pixmaps (если требуется) вместе с файлом theme.cfg (также может называться style.cfg).
+В этом файле вы создадите свой стиль, используя компоненты, описанные далее на этой странице руководства.
+Пример шагов, предпринятых при начале вашего собственного проекта по стилю, может выглядеть следующим образом:
+
+           $ cd
+           $ mkdir -p ~/.fluxbox/styles/YourStyle/pixmaps
+           $ cd ~/.fluxbox/styles/YourStyle
+           $ nano theme.cfg
+
+       Выходные данные упакованного стиля должны выглядеть следующим образом:
+
+           $ cd
+           $ tar -tjvf YourStyle.tar.bz2
+            .fluxbox/styles/YourStyle/theme.cfg
+            .fluxbox/styles/YourStyle/pixmaps
+            .fluxbox/styles/YourStyle/pixmaps/stick.xpm
+            ...
+
+Конечно, все это всего лишь настройки, fluxbox(1) позволяет настраивать многие вещи, в том числе то, как вы обрабатываете свои стили.
+Однако просто помните, что если вы планируете распространять свой стиль, вы можете столкнуться с некоторыми разногласиями в сообществе, 
+если не будете следовать практике. :)
+
+CREATING YOUR STYLE       СОЗДАЕМ СВОЙ СТИЛЬ
+Как обсуждалось выше, fluxbox(1) позволяет настраивать его четыре основных компонента: панель инструментов, меню, панель инструментов 
+и оформление окон. Помните, что вы можете настроить разрез (щель) с помощью его собственных директив, в противном случае разрез примет вид 
+панели инструментов.
+
+       Вот несколько кратких примеров, иллюстрирующих базовый синтаксис:
+
+toolbar.clock.color: green                    Это устанавливает цветовой ресурс часов панели инструментов на зеленый.
+
+       Другой пример:
+
+menu*color:     rgb:3/4/5           Это устанавливает цветовой ресурс меню и всех его дочерних элементов на ‘rgb:3/4/5’.
+
+         Описание названий цветов см. в разделе X(1).) 
+Таким образом, это также относится к menu.title.color и menu.frame.color. И с
+       
+
+*font:  -b&h-lucida-medium-r-normal-*-*-140-*    вы устанавливаете ресурс шрифта для всех ключей к этому имени шрифта сразу
+
+Для получения информации о шрифтах, установленных в вашей системе, вы можете использовать такую программу, как xfontsel(1), 
+gtkfontsel или xlsfonts(1).)
+
+В последнем примере вы заметите подстановочный знак (*) перед шрифтом. 
+В стиле Fluxbox вы можете задать значение с помощью подстановочного знака.
+Пример означает, что каждый шрифт в стиле будет таким, как указано.
+Вы можете сделать это с любым component/value компонентом / значением.
+Например, если бы вы хотели, чтобы весь текст был одного цвета, вы бы сделали:
+
+           *textColor:  rgb:3/4/5
+
+Это означает, что вы можете настроить очень простой стиль с очень небольшим количеством свойств. 
+Смотрите примеры ниже, чтобы убедиться в этом на практике.
+fluxbox(1) также позволяет переопределять подстановочные знаки в вашем стиле. Давайте возьмем наш пример выше и добавим переопределение для
+       toolbar.clock.textColor component:
+
+           *textColor: rgb:3/4/5
+           toolbar.clock.textColor: rgb:255/0/0
+
+       При этом весь текст будет rgb: 3/4/5, за исключением текста часов панели инструментов, который будет rgb: 255/0/0.
+
+Теперь, что делает fluxbox (1) таким впечатляющим, так это его способность визуализировать текстуры на лету.
+Текстура - это шаблон заливки, который вы видите в некоторых стилях. 
+Описания текстур задаются непосредственно для ключа, к которому они должны применяться, например:
+
+           toolbar.clock:  Raised-Рельефный Gradient-Градиент Diagonal-Диагональный Bevel1-Скос1     
+           toolbar.clock.color:    rgb:8/6/4
+           toolbar.clock.colorTo:  rgb:4/3/2
+
+Не волнуйтесь, мы объясним, что это значит. Описание текстуры состоит максимум из пяти полей, которые являются следующими:
+
+Плоский | Рельефный   | Впалый            Придает компоненту Плоский, Рельефный или утопленный вид.
+Flat    | Raised      | Sunken
+
+       Gradient       | Solid     tells указывает fluxbox(1) нарисовать либо сплошной цвет, либо градиентную текстуру.
+       Градиент-уклон | сплошной. 
+
+    Horizontal | Vertical     | Diagonal     | Crossdiagonal        | Pipecross           | Elliptic      | Rectangle     | Pyramid.
+Горизонтальная | Вертикальная | Диагональная | Поперечная диагональ | Перекрещивание труб | Эллиптическая | Прямоугольная | Пирамидальная.
+   
+        Выберите один из этих типов текстур. Они работают только тогда, когда задан Gradient Градиент.
+       
+Interlaced. Переплетенный. указывает fluxbox(1) чередовать текстуру (затемнять все остальные линии). Этот параметр чаще всего используется с 
+градиентными текстурами, но он также работает с однотонными текстурами.
+
+Bevel1 | Bevel2. Скос-угол 1 | Скос-угол 2. указывает fluxbox(1), какой тип скоса-угла использовать. Скос1 - это скос по умолчанию. 
+Затенение помещается по краю изображения. Bevel2 Уровень 2 - это альтернатива. Затенение помещается на один пиксель от края изображения.
+
+Вместо описания текстуры также доступна опция Parent Relative (Родительское положение), которая позволяет компоненту выглядеть как часть его 
+родительского элемента, например, полностью прозрачным.
+
+Или для еще большего количества возможностей Pixmap. Если указана текстура pixmap (это может быть необязательно в каждом случае), 
+файл pixmap указывается в отдельном ресурсе pixmap.
+
+           toolbar.clock: pixmap
+           toolbar.clock.pixmap: clock_background.xpm
+
+Эта функция может потребовать некоторого изучения, в отчетах говорится, что иногда необходимо установить цвет ресурсов и цвет для, 
+а затем они могут не быть установлены.
+
+Все градиентные текстуры состоят из двух цветовых значений: ресурсов color и colorTo. Когда чересстрочная развертка используется в 
+сплошном режиме, ресурс colorTo используется для поиска цвета чересстрочной развертки.
+
+FONT EFFECTS           ЭФФЕКТЫ ШРИФТА
+В дополнение к указанию семейства шрифтов и веса шрифта с помощью поддерживаемого механизма рендеринга шрифтов (например, Xft), 
+fluxbox (1) поддерживает некоторые эффекты: halo ореол-сияние и shadow тень. Чтобы установить эффект тени:
+
+           menu.title.font:         sans-8:bold
+           menu.title.effect:       shadow        тень
+           menu.title.shadow.color: green
+           menu.title.shadow.x:     3
+           menu.title.shadow.y:     3
+
+       Чтобы установить эффект ореола-сияния:
+
+           menu.title.font:        sans-8:bold
+           menu.title.effect:      halo          ореол-сияние
+           menu.title.halo.color:  green
+
+   FONT PROBLEMS        ПРОБЛЕМЫ СО ШРИФТОМ
+Если у вас возникли проблемы с установкой шрифтов или их запуском, вам следует ознакомиться со страницей документов по адресу xfree.org
+Вот ссылка на один из них:
+       http://xfree.org/4.3.0/fonts2.html#3
+
+FULL COMPONENT LIST     ПОЛНЫЙ СПИСОК КОМПОНЕНТОВ
+Вот исчерпывающий список компонентов для styles стилей fluxbox(1). Каждый из них указан с указанием требуемого type типа значения.
+Комментариям в файле стиля предшествует восклицательный знак (!), который мы также используем здесь, 
+чтобы их можно было вставить в новый файл theme.cfg для соответствующей настройки.
+Пожалуйста, обратите внимание, что для обеспечения согласованности стилей стилисты часто используют практику предоставления всех элементов 
+темы в своем файле стилей, даже если они не используются. Это позволяет пользователю легко менять различные компоненты.
+
+BACKGROUND             Фон
+
+В каждом стиле должен быть указан параметр фона. Если вы не хотите, чтобы ваш стиль менял фон пользователя, тогда используйте ‘background: none’.
+Для параметров "по центру" centered, "аспект-вид" aspect, "плитка" tiled и "полноэкранный режим" fullscreen требуется, чтобы ресурс 
+"background.pixmap" содержал допустимое имя файла. Опция ‘random’ случайное требует, чтобы ‘background.pixmap’ содержал допустимое имя каталога.
+Для этих параметров fluxbox(1) вызовет fbsetbg(1) для установки фона.
+Для всех параметров ‘gradient’, ‘solid’ твердый и ‘mod’ модификация требуется установить ‘background.color’. Для ‘gradient’ и ‘mod’ 
+требуется ‘background.colorTo’. ‘mod’ также требует установки ‘background.modX’ и ‘background.modY’.    
+Эти параметры будут переданы в fbsetroot(1) для установки фона. Специальная опция ‘unset’ предназначена только для использования в 
+пользовательских файлах наложения. В нем указывается, что fbsetbg никогда не следует запускать (по умолчанию, даже если в оверлее установлено 
+значение “нет”, fluxbox попытается запустить "fbsetbg -z", чтобы восстановить последние обои).
+
+           background: centered|aspect|tiled|fullscreen|random|solid|gradient <texture>|mod|none|unset   Заполнение фона
+           background.pixmap:             <file or directory>
+           background.color:              <color>                                            Цвет фона
+           background.colorTo:            <color>
+           background.modX:               <integer> <целое число>                            Обои
+           background.modY:               <integer> <целое число> 
+
+SLIT        Разрез щель Выподающие окна
+
+       Вот все варианты разреза.
+
+           -----------------------------------------
+           slit:                           <texture type>                                    Выподающие окна
+           slit.bevelWidth:                <integer> <целое число>                           Ширина скоса-наклона
+           slit.borderColor:               <color>                                           Цвет границы рамки
+           slit.borderWidth:               <integer> <целое число>                           Толщина границы
+           slit.color:                     <color>
+           slit.colorTo:                   <color>
+           slit.pixmap:                    <filename>
+           -----------------------------------------
+
+WINDOW OPTIONS        Настройка Окон
+
+       Многое, очень многое вы можете сделать с дизайном окон в fluxbox(1), ниже приведены ваши варианты.
+
+           -----------------------------------------
+           window.bevelWidth:              <integer> <целое число>                            Ширина скоса-наклона рамки
+           window.borderColor:             <color> <цвет>                                     Цвет границы рамки окна 
+           window.borderWidth:             <integer> <целое число>                            Толщина границы рамки
+           window.justify:                 <{Left|Right|Center}> <{Влево|Вправо|По центру}>   Выравнивание позиция
+           window.roundCorners:            <{Top|Bottom}{Left|Right}>                         Закругленные углы окон
+           
+           window.button.focus:            <texture type> <тип текстуры>                      Кнопки свернуть развернуть закрыть
+           window.button.focus.color:      <color>                                            Цвет фона кнопок
+           window.button.focus.colorTo:    <color>
+           window.button.focus.picColor:   <color>                                            Цвет кнопок
+           window.button.focus.pixmap:     <filename>
+           window.button.pressed:          <texture type> <тип текстуры>                      Нажатая кнопка
+           window.button.pressed.color:    <color>                                            Нажатая кнопка цвет
+           window.button.pressed.colorTo:  <color>
+           window.button.pressed.pixmap:   <filename>
+           window.button.unfocus:          <texture type> <тип текстуры>
+           window.button.unfocus.color:    <color>                                            Цвет фона кнопок
+           window.button.unfocus.colorTo:  <color>
+           window.button.unfocus.picColor: <color>                                            Цвет кнопок
+           window.button.unfocus.pixmap:   <filename>
+           
+           window.frame.focusColor:        <color>                                            Оконная рама каркас
+           window.frame.unfocusColor:      <color>                                            Оконная рама каркас
+           
+           window.grip.focus:              <texture type> <тип текстуры>                      Нижний уголок окна-изменить размер
+           window.grip.focus.color:        <color>                                            Цвет нижнего уголка изменить размер
+           window.grip.focus.colorTo:      <color>
+           window.grip.focus.pixmap:       <filename>
+           window.grip.unfocus:            <texture type> <тип текстуры>
+           window.grip.unfocus.color:      <color>                                            Цвет нижнего уголка изменить размер
+           window.grip.unfocus.colorTo:    <color>
+           window.grip.unfocus.pixmap:     <filename>
+           
+           window.handle.focus:            <texture type> <тип текстуры>                      Нижний заголовок окна рукоятка
+           window.handle.focus.color:      <color>                                            Фон нижнего заголовка окна
+           window.handle.focus.colorTo:    <color>
+           window.handle.focus.pixmap:     <filename>
+           window.handle.unfocus:          <texture type> <тип текстуры>                      
+           window.handle.unfocus.color:    <color>                                            Фон нижнего заголовка окна
+           window.handle.unfocus.colorTo:  <color>
+           window.handle.unfocus.pixmap:   <filename>
+           window.handleWidth:             <integer> <целое число>                            Размер ширина нижнего заголовка окна
+           
+           window.label.active:            <texture type> <тип текстуры>                      Заголовок окна этикетка
+           window.label.active.textColor:  <color>
+           window.label.focus:             <texture type> <тип текстуры>
+           window.label.focus.color:       <color>                                            Цвет фона заголовка
+           window.label.focus.colorTo:     <color>
+           window.label.focus.font:        <font>
+           window.label.focus.pixmap:      <filename>
+           window.label.unfocus:           <texture type> <тип текстуры>
+           window.label.unfocus.color:     <color>                                            Цвет фона заголовка
+           window.label.unfocus.colorTo:   <color>
+           window.label.unfocus.font:      <font>
+           window.label.unfocus.pixmap:    <filename>
+           window.label.focus.textColor:   <color>                                            Цвет текста заголовка
+           window.label.unfocus.textColor: <color>                                            Цвет текста заголовка
+           
+           window.title.focus:             <texture type> <тип текстуры>                      Рамка заголовка и кнопок
+           window.title.focus.color:       <color>                                            Цвет рамки заголовка и кнопок
+           window.title.focus.colorTo:     <color>
+           window.title.focus.pixmap:      <filename>
+           window.title.height:            <integer> <целое число> 
+           window.title.unfocus:           <texture type> <тип текстуры>
+           window.title.unfocus.color:     <color>                                            Цвет рамки заголовка и кнопок
+           window.title.unfocus.colorTo:   <color>
+           window.title.unfocus.pixmap:    <filename>
+           
+           window.close.pixmap:            <filename>
+           window.close.pressed.pixmap:    <filename>
+           window.close.unfocus.pixmap:    <filename>
+           window.iconify.pixmap:          <filename>
+           window.iconify.pressed.pixmap:  <filename>
+           window.iconify.unfocus.pixmap:  <filename>
+           window.maximize.pixmap:         <filename>
+           window.maximize.pressed.pixmap: <filename>
+           window.maximize.unfocus.pixmap: <filename>
+           window.shade.pixmap:            <filename>
+           window.shade.pressed.pixmap:    <filename>
+           window.shade.unfocus.pixmap:    <filename>
+           window.stick.pixmap:            <filename>
+           window.stick.pressed.pixmap:    <filename>
+           window.stick.unfocus.pixmap:    <filename>
+           window.stuck.pixmap:            <filename>
+           window.stuck.unfocus.pixmap:    <filename>
+           window.lhalf.pixmap:            <filename>
+           window.lhalf.unfocus.pixmap:    <filename>
+           window.rhalf.pixmap:            <filename>
+           window.rhalf.unfocus.pixmap:    <filename>
+
+           -----------------------------------------
+
+MENU OPTIONS                Настройка меню
+       Все, что вам нужно, чтобы ваше меню выглядело красиво.
+
+           -----------------------------------------
+           menu.bevelWidth:                <integer> <целое число>                           Ширина скоса наклона
+           menu.borderColor:               <color>                                           Цвет рамки меню
+           menu.borderWidth:               <integer>                                         Ширина границы
+           menu.bullet:                    <{empty|square|triangle|diamond}>  <{пустой|квадрат|треугольник|ромб}>  Стрелка меню
+           menu.bullet.position:           <{left|right}>  <{влево|вправо}>                  Позиция стрелки меню
+           menu.itemHeight:                <integer> <целое число>                           Пункт высота
+           menu.roundCorners:              <{Top|Bottom}{Left|Right}>                        Закругление углов меню
+           
+           menu.frame:                     <texture type> <тип текстуры>                     Рамка каркас окна
+           menu.frame.color:               <color>                                           Цвет меню
+           menu.frame.colorTo:             <color>
+           menu.frame.disableColor:        <color>                                           Отключенный цвет
+           menu.frame.font:                <font>
+           menu.frame.justify:             <{Left|Right|Center}> <{Слева|справа|по центру}>  Шрифт меню Выравнивание позиция
+           menu.frame.pixmap:              <filename>
+           menu.frame.textColor:           <color>                                           Цвет текста меню
+           
+           menu.hilite:                    <texture type> <тип текстуры>                     Выделение пункта меню
+           menu.hilite.color:              <color>                                           Цвет выделения
+           menu.hilite.colorTo:            <color>
+           menu.hilite.font:               <font>                                            Шрифт выделения            
+           menu.hilite.justify:            <{left|center|right}>                             Выравнивание позиция
+           menu.hilite.pixmap:             <filename>
+           menu.hilite.textColor:          <color>                                           Цвет текста выделенного меню
+           
+           menu.title:                     <texture type>                                    Заголовок меню
+           menu.title.color:               <color>                                           Цвет заголовка
+           menu.title.colorTo:             <color>
+           menu.title.font:                <font>                                            Шрифт заголовка
+           menu.title.pixmap:              <filename>
+           menu.title.textColor:           <color>                                           Цвет текста загововка
+           menu.title.justify:             <{Left|Right|Center}> <{Влево|Вправо|По центру}>  Вырывнивание текста заголовка
+           menu.titleHeight:               <integer> <целое число>                           Высота вышина заголовка
+           
+           menu.selected.pixmap:           <filename>
+           menu.submenu.pixmap:            <filename>
+           menu.unselected.pixmap:         <filename>
+           -----------------------------------------
+
+TOOLBAR OPTIONS        Параметры панели инструментов
+
+Ниже вы найдете все возможности настройки панели инструментов. Список довольно обширный и предлагает вам множество вариантов, 
+чтобы ваша панель инструментов выглядела именно так, как вы хотите.
+
+           -----------------------------------------
+           toolbar:                        <texture type> <тип текстуры>                    Панель инструментов
+           toolbar.bevelWidth:             <integer (0-255)> <целое число>                  Ширина скоса наклона
+           toolbar.borderColor:            <color>                                          Цвет рамки панели 
+           toolbar.borderWidth:            <integer> <целое число>                          Толщина рамки панели
+           toolbar.color:                  <color>                                          Цвет рамки панели
+           toolbar.colorTo:                <color>
+           toolbar.height:                 <integer> <целое число>                          Высота вышина
+           toolbar.pixmap:                 <filename>
+           toolbar.shaped:                 <boolean> <логический> false                     Имеющий определенную форму
+           
+           toolbar.clock:                  <texture type> <тип текстуры>                    Часы панели
+           toolbar.clock.borderColor:      <color>                                          Цвет рамки часов
+           toolbar.clock.borderWidth:      <integer> <целое число>                          Толщина рамки часов
+           toolbar.clock.font:             <font>                                           Шрифт часов
+           toolbar.clock.justify:          <{Left|Right|Center}>                            Выравнивание шрифта часов
+           toolbar.clock.pixmap:           <filename>
+           toolbar.clock.color:            <color>                                          Цвет фона рамки часов
+           toolbar.clock.colorTo:          <color>
+           toolbar.clock.textColor:        <color>                                          Цвет текста часов
+           
+           toolbar.iconbar.focused:        <texture type> <тип текстуры>                    Панель окон
+           toolbar.iconbar.focused.color:  <color>                                          Фон активного окна
+           toolbar.iconbar.focused.colorTo:<color>
+           toolbar.iconbar.focused.pixmap: <filename>
+           toolbar.iconbar.unfocused:      <texture type> <тип текстуры> 
+           toolbar.iconbar.unfocused.color:  <color>                                        Фон неактивного окна
+           toolbar.iconbar.unfocused.colorTo: <color>
+           toolbar.iconbar.unfocused.pixmap: <filename>
+           toolbar.iconbar.empty:          <texture type> <тип текстуры>                    Панель инструментов
+           toolbar.iconbar.empty.color:    <color>                                          Фон панели инструментов
+           toolbar.iconbar.empty.colorTo:  <color>
+           toolbar.iconbar.empty.pixmap:   <filename>
+           toolbar.iconbar.focused.borderColor: <color>                                     Цвет боковой перегородки перед треем |
+           toolbar.iconbar.focused.borderWidth:    <integer> <целое число>                  Толщина рамки
+           toolbar.iconbar.unfocused.borderColor: <color>                                   Цвет боковой перегородки перед треем |
+           toolbar.iconbar.unfocused.borderWidth:  <integer> <целое число>                  Толщина рамки
+           toolbar.iconbar.borderColor:    <color>                                          Цвет рамки
+           toolbar.iconbar.borderWidth:    <integer> <целое число>                          Толщина рамки
+           toolbar.iconbar.focused.font:   <font>                                
+           toolbar.iconbar.focused.justify:        <{Left|Right|Center}>                    Выравнивание позиция
+           toolbar.iconbar.focused.textColor: <color>                                       Цвет текста активного окна
+           toolbar.iconbar.unfocused.font: <font>
+           toolbar.iconbar.unfocused.justify:      <{Left|Right|Center}>                    Выравнивание позиция
+           toolbar.iconbar.unfocused.textColor: <color>                                     Цвет текста неактивного окна
+                              
+           toolbar.workspace:              <texture type> <тип текстуры>                    Рабочие столы
+           toolbar.workspace.borderWidth:  <integer> <целое число>                          Толщина рамки
+           toolbar.workspace.font:         <font>
+           toolbar.workspace.justify:      <{Left|Right|Center}>                            Выравнивание позиция
+           toolbar.workspace.textColor:    <color>                                          Цвет текста названия рабочего стола
+           toolbar.workspace.borderColor:  <color>                                          Цвет рамки названия рабочего стола
+           toolbar.workspace.color:        <color>                                          Цвет фона названия рабочего стола
+           toolbar.workspace.colorTo:      <color>
+           toolbar.workspace.pixmap:       <filename>
+           
+           toolbar.button.color:			         #000000			                    фон кнопки	
+           toolbar.button.picColor:				     #ffffff                                цвет кнопки
+           toolbar.button.pressed.color:			 #6298e0			                    нажатие кнопки
+           toolbar.button.pressed.picColor:          #857280
+           toolbar.button.scale:                    <integer> <целое число>                 Толщина кнопок панели
+           -----------------------------------------
+
+EXAMPLES                    Примеры
+
+Этот список может показаться пугающим, но помните, что когда вы создаете свой собственный стиль, вы можете легко установить 
+большинство этих клавиш с помощью одного компонента. Для примера этого:
+
+           -----------------------------------------
+           *color: slategrey
+           *colorTo:       darkslategrey
+           *unfocus.color: darkslategrey
+           *unfocus.colorTo:       black
+           *textColor:     white
+           *unfocus.textColor:     lightgrey
+           *font:  lucidasans-10
+           -----------------------------------------
+
+       Это устанавливает хорошие значения по умолчанию для многих компонентов.
+
+COLOR FORMATS
+       Это цветовые форматы для стилей:
+
+           #000000 (Hexadecimal)
+           rgb:<0-255>/<0-255>/<0-255>
+
+       See /usr/share/X11/rgb.txt for an explanation.
+       
+background:                     fullscreen
+background.color:               #000000
+
+window.bevelWidth:              1                                                 ширина скоса-наклона
+window.borderColor:             #ffffff                                           цвет всех рамок окна 
+window.focus.borderColor:       #6298e0                                           цвет рамки активного окна
+window.unfocus.borderColor:     #515151                                           цвет рамки неактивного окна
+window.borderWidth:             1                                                 толщина рамки
+window.justify:                 Center                                           выключать-подтверждать
+window.roundCorners:            TopRight TopLeft BottomRight BottomLeft          закругление окон
+
+window.button.focus:            Flat
+window.button.focus.color:      #004dff                                           цвет фона кнопок
+window.button.focus.picColor:   #804030                                           цвет кнопок
+window.button.pressed:          Flat
+window.button.pressed.color:    #bebebe
+window.button.unfocus:          Flat
+window.button.unfocus.color:    #ff0000                                           цвет фона кнопок
+window.button.unfocus.picColor: #ffff00                                           цвет кнопок
+
+window.title.focus:             Flat
+window.title.focus.color:       #004dff                                         цвет рамки заголовка и кнопок
+window.title.height:            16
+window.title.unfocus:           Flat
+window.title.unfocus.color:     #ffffff                                         цвет рамки заголовка и кнопок
+
+window.frame.focusColor:        #00ff00
+window.frame.unfocusColor:      #00bfff    
+                                       
+window.grip.focus:              Flat
+window.grip.focus.color:        #ffc0cb                                           цвет нижнего уголка изменить размер
+window.grip.unfocus:            Flat
+window.grip.unfocus.color:      #30d5c8                                           цвет нижнего уголка изменить размер
+
+window.handle.focus:            Flat
+window.handle.focus.color:      #6900c6                                           фон нижнего заголовка окна
+window.handle.unfocus:          Flat
+window.handle.unfocus.color:    #ff6600                                           фон нижнего заголовка окна
+window.handleWidth:             1                                                 размер нижнего заголовка окна
+
+window.label.active:            Flat
+window.label.active.textColor:  #808000
+window.label.focus:             Flat
+window.label.focus.color:       #c400ab                                          цвет фона заголовка
+window.label.focus.font:        liberation mono-8
+window.label.unfocus:           Flat
+window.label.unfocus.color:     #ff0000
+window.label.unfocus.font:      liberation mono-8
+window.label.focus.textColor:   #bebebe                                         цвет текста заголовка
+window.label.unfocus.textColor: #804030
+
+menu.bevelWidth:                0
+menu.borderColor:               #004dff                                     цвет рамки меню
+menu.borderWidth:               1                                           толщина рамки
+menu.bullet:                    triangle                                    стрелка меню
+menu.bullet.position:           right                                       стрелка меню позиция
+menu.itemHeight:                14
+
+menu.frame:                     Flat                                        меню плоское
+menu.frame.color:               #ffffff                                     цвет меню
+menu.frame.disableColor:        #c400ab                                     Отключенный цвет
+menu.frame.font:                liberation mono-8                           шрифт меню
+menu.frame.justify:             Center                                      шрифт меню по центру
+menu.frame.textColor:           #804030                                     цвет текста меню
+
+menu.hilite:                    Flat                                        выделение плоское
+menu.hilite.color:              #bebebe                                     цвет выделения
+menu.hilite.font:               liberation mono-8                           шрифт выделения
+menu.hilite.justify:            center
+menu.hilite.textColor:          #ff0000                                     цвет текста выделенного меню
+
+menu.title:                     Flat
+menu.title.color:               #ffff00                                     цвет фона заголовка
+menu.title.font:                liberation mono-8                           шрифт заголовка
+menu.title.textColor:           #00ff00                                     цвет текста загововка
+menu.title.justify:             Center                                      заголовок по центру
+menu.titleHeight:               14
+menu.roundCorners:              TopRight TopLeft BottomRight BottomLeft     закругление меню
+
+toolbar:                                Flat
+toolbar.bevelWidth:                     1
+toolbar.borderColor:                    #ffffff                             цвет рамки панели    
+toolbar.borderWidth:                    1                                   толщина рамки панели
+toolbar.button.scale:                   1                                   толщина кнопок панели
+toolbar.button.borderWidth:             1                                   Толщина границы кнопок
+toolbar.button.borderColor:             #222222                             Цвет рамки кнопок
+toolbar.button:                         Flat
+toolbar.color:                          #004dff                             цвет рамки панели
+toolbar.shaped:                         false
+toolbar.height:                         13
+
+toolbar.clock:                          Flat
+toolbar.clock.borderColor:              #804030                             цвет рамки часов
+toolbar.clock.borderWidth:              0                                   толщина рамки часов
+toolbar.clock.font:                     liberation mono-8                   шрифт часов
+toolbar.clock.justify:                  Center
+toolbar.clock.color:                    #bebebe                             цвет фона рамки часов
+toolbar.clock.textColor:                #ff0000                             цвет текста часов
+
+toolbar.iconbar.focused:                Flat
+toolbar.iconbar.focused.color:          #ffff00                             фон активного окна
+toolbar.iconbar.unfocused:              Flat
+toolbar.iconbar.unfocused.color:        #00ff00                             фон неактивного окна
+toolbar.iconbar.empty:                  Flat
+toolbar.iconbar.empty.color:            #00bfff                             фон названия рабочего стола
+toolbar.iconbar.focused.borderColor:    #ffc0cb                             фон перед треем боковая перегородка
+toolbar.iconbar.focused.borderWidth:    1                                   толщина рамки
+toolbar.iconbar.unfocused.borderColor:  #30d5c8                             боковая перегородка
+toolbar.iconbar.unfocused.borderWidth:  1                                   толщина рамки
+toolbar.iconbar.borderColor:            #6900c6                             цвет рамки
+toolbar.iconbar.borderWidth:            1                                   толщина рамки
+toolbar.iconbar.focused.font:           liberation mono-8
+toolbar.iconbar.focused.justify:        Center
+toolbar.iconbar.focused.textColor:      #ff6600                             цвет текста активного окна
+toolbar.iconbar.unfocused.font:         liberation mono-8
+toolbar.iconbar.unfocused.justify:      Center
+toolbar.iconbar.unfocused.textColor:    #808000                             цвет текста неактивного окна
+
+toolbar.workspace.font:                 liberation mono-8
+toolbar.workspace.justify:              Center
+toolbar.workspace.textColor:            #c400ab                              цвет текста названия рабочего стола
+toolbar.workspace:                      Flat
+toolbar.workspace.borderColor:          #ffffff                              цвет рамки названия рабочего стола
+toolbar.workspace.borderWidth:          1                                    толщина рамки
+toolbar.workspace.color:                #004dff                              цвет фона азвания рабочего стола
+
+window.focus.backgroundColor: #63b4fb
+window.unfocus.backgroundColor: #ebebeb

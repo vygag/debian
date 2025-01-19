@@ -1,0 +1,76 @@
+init
+session.screen0.toolbar.tools: button.homenu, button.togshowdesk, button.filemanager, button.webbrowser, workspacename, iconbar, systemtray, clock
+session.screen0.toolbar.tools: button.homenu, button.togshowdesk, button.zzzfm button.firefox
+
+session.screen0.toolbar.button.togshowdesk.commands: ToggleCmd {ShowDesktop Matches (Title!=conky)} {DeIconify all}
+session.screen0.toolbar.button.togshowdesk.label: _
+session.screen0.toolbar.button.homenu.label: Menu
+session.screen0.toolbar.button.homenu.commands: RootMenu
+
+session.screen0.toolbar.button.zzzfm.commands: exec zzzfm
+session.screen0.toolbar.button.zzzfm.label: Zzz
+session.screen0.toolbar.button.firefox.commands: exec firefox
+session.screen0.toolbar.button.firefox.label: Ff
+
+session.screen0.toolbar.button.togshowdesk.commands: ToggleCmd {ShowDesktop (Title!=conky)} {DeIconify all}
+session.screen0.toolbar.button.togshowdesk.label: _
+session.screen0.toolbar.button.homenu.label: Menu
+session.screen0.toolbar.button.homenu.commands: RootMenu
+session.screen0.toolbar.button.webbrowser.label: Www
+session.screen0.toolbar.button.webbrowser.commands: exec desktop-defaults-run -b
+session.screen0.toolbar.button.filemanager.label: Files
+session.screen0.toolbar.button.filemanager.commands: exec desktop-defaults-run
+
+session.screen0.toolbar.button.homenu.label:	Menu
+session.screen0.toolbar.button.homenu.commands:	RootMenu
+session.screen0.toolbar.button.togshowdesk.commands:	ToggleCmd {ShowDesktop Matches (Title!=conky)} {DeIconify all}
+session.screen0.toolbar.button.togshowdesk.label:	\360\237\227\227
+session.screen0.toolbar.button.fm.commands:	exec desktop-defaults-run -fm
+session.screen0.toolbar.button.fm.label:	????
+session.screen0.toolbar.button.ff.commands:	exec seamonkey
+session.screen0.toolbar.button.ff.label:	\360\237\214\220
+session.screen0.toolbar.button.vol.commands:	exec yad-volume
+session.screen0.toolbar.button.vol.label:	\360\237\224\210
+session.screen0.toolbar.button.exit.commands:	exec desktop-session-exit
+session.screen0.toolbar.button.exit.label:	⏻
+session.screen0.toolbar.button.eject.commands:	exec unplugdrive.sh
+session.screen0.toolbar.button.eject.label:	⍙
+session.screen0.toolbar.button.installer.commands:	exec su-to-root -X -c packageinstaller
+session.screen0.toolbar.button.installer.label:	????
+session.screen0.toolbar.button.updater.commands:	exec yad-updater
+session.screen0.toolbar.button.updater.label:	⭯
+session.screen0.toolbar.button.wordprocessor.commands:	exec libreoffice --writer
+session.screen0.toolbar.button.wordprocessor.label:	????
+session.screen0.toolbar.button.networkmanager.commands:	exec cmst
+session.screen0.toolbar.button.networkmanager.label:⛖
+session.screen0.toolbar.button.calendar.commands:	exec yad-calendar
+session.screen0.toolbar.button.calendar.label: ????
+session.screen0.toolbar.button.weather.commands:	exec antix-weather.sh
+session.screen0.toolbar.button.weather.label: ????
+session.screen0.toolbar.tools:	button.homenu, button.togshowdesk, button.ejec
+
+session.screen0.toolbar.button.menu.label: \ Menu
+session.screen0.toolbar.button.menu.commands: :ToggleCmd {RootMenu}{HideMenus} :Click3 :rootmenu :Mouse4 :exec file=$(yad --center --title="Places" --no-buttons --file & sleep 1 && xdotool key Next && xdotool key Next && xdotool key KP_Enter) && xdg-open ${file} && return
+session.screen0.toolbar.button.pad.label: \ pad
+session.screen0.toolbar.button.pad.commands: exec leafpad :Mouse3 :rootmenu :Mouse4 :custommenu ~/.fluxbox/recent_files_menu
+session.screen0.toolbar.button.find.label: \ find
+session.screen0.toolbar.button.find.commands: exec wofi --normal-window --show=drun,run :Click3 :exec fbrun -autocomplete -center :Mouse4 :exec xman -bothshown
+session.screen0.toolbar.button.img.label: \ img
+session.screen0.toolbar.button.img.commands: exec gpick :Mouse3 :exec gthumb
+session.screen0.toolbar.button.termi.label: \ >$  
+session.screen0.toolbar.button.termi.commands: exec /usr/bin/x-terminal-emulator :Mouse3 :rootmenu :Mouse4 :exec su-to-root -X -c zzzfm
+session.screen0.toolbar.button.scr.label: \ scr
+session.screen0.toolbar.button.scr.commands: exec scrot -shole -d 2 -q 93 'scr%Y%j%R%S.jpg' :Click3 :exec scrot -p -q 80 -d 11
+session.screen0.toolbar.button.env.label: \ env 
+## Place begin and end tags into /fluxbox-wm-menu qualify custommenu. maintenance item. 
+session.screen0.toolbar.button.env.commands: custommenu /usr/share/desktop-session/wm-menus/fluxbox-wm-menu :Click3 :rootmenu :Mouse4 :exec /usr/local/lib/desktop-session/desktop-session-menu-window ignore-settings
+#surpriseus and Places, recentus and imageus and rootus and menuus and runus and desktopsessionus and terminalus bashus 
+#toolbar.button.pixmap: /usr/share/pixmaps/pstree16.xpm
+#toolbar.button.pixmap: /usr/share/pixmaps/exo/exo-thumbnail-frame.png
+toolbar.button.font: Infini Picto-14
+## picColor font 
+toolbar.button.picColor:  moccasin
+#toolbar.button.font: Symbola-12
+toolbar.button.pressed.color:  aqua
+
+style
