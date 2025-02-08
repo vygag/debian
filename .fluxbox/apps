@@ -35,6 +35,10 @@
 [Position] (UPPERLEFT) {1213 784}
 [end]
 
+[app] (name=gsimplecal)
+[Position] (UPPERLEFT) {1230 904}
+[end]
+
 [app] (name=xfce4-terminal)
 [Dimensions] {1210 650}
 [Position] (BottomLeft) {0 0}
@@ -325,4 +329,12 @@
 [app] (name=White \(W\) vs. Black \(B\)) (class=CGoban)
   [Dimensions]	{55% 65%}
   [Position]	(UPPERLEFT)	{0% 35%}
+[end]
+
+[app] (name=org.gnome.clocks)
+[Position] (BottomRight) {0 0}
+[end]
+
+[transient] (name=org.gnome.clocks)
+[Position] (BottomRight) {0 0}
 [end]

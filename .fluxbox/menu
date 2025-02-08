@@ -4,14 +4,14 @@
 [encoding] {UTF-8}
      [submenu] (Приложения) </home/vyga/.fluxbox/icon/app-launcher.png>
      [submenu] (Wine) </home/vyga/.fluxbox/icon/wine.png>
-    [exec] (AIMP) {wine "c:\Program Files (x86)/AIMP/AIMPate.exe"} </home/vyga/.fluxbox/icon/aimp.png>
-    [exec] (DoubleCMD) {wine "c:\Program Files (x86)/doublecmd/doublecmd.exe"} </home/vyga/.fluxbox/icon/doublecmd.png>
-    [exec] (Балаболка) {wine "c:\Program Files (x86)/Balabolka/balabolka.exe"} </home/vyga/.fluxbox/icon/balabolka.png>
-    [exec] (Demagog) {wine "c:\Program Files (x86)/Demagog/Demagog.exe"} </home/vyga/.fluxbox/icon/demagog.png>
-    [exec] (MyHomeLib) {wine "c:\Program Files (x86)/MyHomeLib/MyHomeLib.exe"} </home/vyga/.fluxbox/icon/MyhomeLib.png>
-    [exec] (RouterScan) {wine "c:\Program Files (x86)/RouterScan/RouterScan.exe"} </home/vyga/.fluxbox/icon/routerscan.png>
-    [exec] (Телефоны) {wine /home/vyga/.wine/drive_c/"Program Files (x86)"/Vozersk/gp.exe} </home/vyga/.fluxbox/icon/whatsapp.png>
-    [exec] (AkelPad) {wine "c:\Program Files (x86)/AkelPad/AkelPad.exe"} </home/vyga/.fluxbox/icon/AkelPad.png>
+    [exec] (AIMP) {wine "c:\Program Files/AIMP/AIMPate.exe"} </home/vyga/.fluxbox/icon/aimp.png>
+    [exec] (DoubleCMD) {wine "c:\Program Files/doublecmd/doublecmd.exe"} </home/vyga/.fluxbox/icon/doublecmd.png>
+    [exec] (Балаболка) {wine "c:\Program Files/Balabolka/balabolka.exe"} </home/vyga/.fluxbox/icon/balabolka.png>
+    [exec] (Demagog) {wine "c:\Program Files/Demagog/Demagog.exe"} </home/vyga/.fluxbox/icon/demagog.png>
+    [exec] (MyHomeLib) {wine "c:\Program Files/MyHomeLib/MyHomeLib.exe"} </home/vyga/.fluxbox/icon/MyhomeLib.png>
+    [exec] (RouterScan) {wine "c:\Program Files/RouterScan/RouterScan.exe"} </home/vyga/.fluxbox/icon/routerscan.png>
+    [exec] (Телефоны) {wine /home/vyga/.wine/drive_c/"Program Files"/Vozersk/gp.exe} </home/vyga/.fluxbox/icon/whatsapp.png>
+    [exec] (AkelPad) {wine "c:\Program Files/AkelPad/AkelPad.exe"} </home/vyga/.fluxbox/icon/AkelPad.png>
      [end]
      [submenu] (Офис) </home/vyga/.fluxbox/icon/libreoffice.png>
     [exec] (Документ) {libreoffice --writer} </home/vyga/.fluxbox/icon/writer.png>
@@ -33,7 +33,7 @@
     [submenu] (Инет) </home/vyga/.fluxbox/icon/firefox.png>
     [exec] (Telegram) {/home/vyga/prg/Telegram/Telegram} </home/vyga/.fluxbox/icon/telegram.png>
     [exec] (Chromium) {chromium} </home/vyga/.fluxbox/icon/chromium.png>
-    [exec] (Tor) {/home/vyga/prg/tor-browser/Browser/start-tor-browser.desktop} </home/vyga/.fluxbox/icon/tor.png>
+    [exec] (Tor) {/home/vyga/prg/tor-browser/start-tor-browser.desktop} </home/vyga/.fluxbox/icon/tor.png>
     [exec] (Карта) {GTK_THEME=Minwaita-Vanilla-Dark:dark gnome-maps} </home/vyga/.fluxbox/icon/maps.png>
     [exec] (Palemoon) {/home/vyga/prg/palemoon/palemoon} </home/vyga/.fluxbox/icon/palemoon.png>
 	[exec] (Netsurf) {netsurf-gtk} </home/vyga/.fluxbox/icon/netsurf.png>
@@ -50,11 +50,12 @@
     [exec] (MidnightCom) {xfce4-terminal -e mc} </home/vyga/.fluxbox/icon/MidnightCommander.png>
     [exec] (Htop) {xfce4-terminal -e htop} </home/vyga/.fluxbox/icon/htop.png>
      [end]
-        [end]
+     [end]
     [exec] (Выполнить) {fbrun} </home/vyga/.fluxbox/icon/gtkhash.png>
       [separator]
-	[exec] (Календарь) {zenity --calendar} </home/vyga/.fluxbox/icon/calendar.png>
+	[exec] (Календарь) {gsimplecal} </home/vyga/.fluxbox/icon/calendar.png>
 	[exec] (Калькулятор) {galculator} </home/vyga/.fluxbox/icon/calc.png>
+    [exec] (Часы) {GTK_THEME=Minwaita-Vanilla-Dark:dark gnome-clocks} </home/vyga/.fluxbox/icon/clocks.png>
 	  [separator]
 	[exec] (Терминал) {xfce4-terminal} </home/vyga/.fluxbox/icon/terminal.png>
 	[exec] (Geany) {geany} </home/vyga/.fluxbox/icon/geany.png>

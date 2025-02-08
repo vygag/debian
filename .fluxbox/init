@@ -127,7 +127,7 @@ session.screen0.slit.onhead:	                    0
 session.screen0.slit.placement:	                    LeftCenter
 session.screen0.slit.layer:	                        Desktop
 
-session.styleFile:	                                ~/.fluxbox/black_theme
+session.styleFile:	                                ~/.fluxbox/style
 session.screen0.windowMenu:	                        ~/.fluxbox/windowmenu
 session.slitlistFile:	                            ~/.fluxbox/slitlist
 session.styleOverlay:	                            ~/.fluxbox/overlay

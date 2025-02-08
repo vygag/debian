@@ -1,5 +1,5 @@
 alias mouse='gpm -m /dev/input/mice -t exps2'
-alias wifi='iw dev wlxa0a3f0d1e106 link'
+alias wifi='sudo iw dev wlxa0a3f0d1e106 link'
 alias proz='sensors | grep temp3:'
 alias sd='udisksctl power-off -b /dev/sdc'
 alias hdd='udisksctl mount -b /dev/sda3'

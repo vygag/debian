@@ -114,14 +114,14 @@ apt search
 apt list 
 apt show 
 apt-cache search 
-apt-cache depends ПАКЕТ                     зависимости пакета
+apt-cache depends ПАКЕТ.deb                 зависимости пакета
 apt-file search 
 
 sudo apt install 
 apt download 
 sudo apt remove 
 sudo apt purge 
-sudo apt install ./firmware-realtek.deb     установить локальный .deb пакет
+sudo apt install ./ПАКЕТ.deb                установить локальный .deb пакет
 sudo apt install -f                         исправить отсутствующи зависимост 
 
 https://losst.pro/kak-polzovatsya-apt?liveurl=1
@@ -143,6 +143,7 @@ wget https://mirror.yandex.ru/debian-cd/current-live/amd64/iso-hybrid/debian-liv
 wget https://mirror.yandex.ru/debian-cd/current-live/amd64/iso-hybrid/SHA256SUMS
 
 4f507da37ebff4e3c5f9df83e3ac045f5bc6e8bd4a03c8e582a59046860ab6ff  debian-live-12.9.0-amd64-xfce.iso
+ea1590f2286a625ad5ead2eeaedcce0ab2a12e53a1d164e0a696b120ba113034  debian-live-12.9.0-amd64-xfce.iso.packages
 
 sha256sum debian-live-12.9.0-amd64-xfce.iso
 
@@ -233,26 +234,30 @@ australia
 sudo netselect-apt -c russia -t 4 -a amd64 -o netselect-apt.list.txt
 sudo netselect-apt -c russia -t 4 -a amd64 -n testing -o netselect-apt.list.txt
 
+------------------------------------------------------------------------------------------------------------------
+
 // Установка debootstrap
 sudo apt install debootstrap wget
 
 // Запуск debootstrap
+sudo debootstrap --arch amd64 bookworm /mnt http://mirror.hyperdedic.ru/debian      stable
+sudo debootstrap --arch amd64 trixie /mnt http://mirror.hyperdedic.ru/debian        testing
+
 sudo debootstrap --arch amd64 bookworm /mnt http://deb.debian.org/debian            stable
 sudo debootstrap --arch amd64 trixie /mnt http://deb.debian.org/debian              testing
 
-sudo debootstrap --arch amd64 bookworm /mnt http://mirror.hyperdedic.ru/debian      stable
-sudo debootstrap --arch amd64 trixie /mnt http://mirror.hyperdedic.ru/debian        testing
 
 // Kali
 sudo debootstrap --arch amd64 kali-rolling /mnt https://http.kali.org/kali
 
-// Монтирование устройств
+-------------------------------------------------МОНТИРОВАНИЕ УСТРОЙСТВ----------------------------------------------
+
 sudo mount --bind /dev /mnt/dev
 sudo mount --bind /proc /mnt/proc
 sudo mount --bind /sys /mnt/sys
 sudo mount --rbind /dev/pts /mnt/dev/pts
 
----------------------------------------------------СОЗДАЁМ ФАЙЛ FSTAB------------------------------------------
+---------------------------------------------------СОЗДАЁМ ФАЙЛ FSTAB------------------------------------------------
 
 sudo blkid /dev/sda2
 sudo blkid /dev/sda1
@@ -308,10 +313,11 @@ sudo nano /mnt/etc/apt/sources.list
 deb http://mirror.hyperdedic.ru/debian bookworm main contrib non-free non-free-firmware
 deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
 deb http://mirror.hyperdedic.ru/debian bookworm-updates contrib main non-free non-free-firmware
-#deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
-#deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
-deb https://www.deb-multimedia.org bookworm main non-free
-deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /
+deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
+deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
+#deb http://mirror.hyperdedic.ru/debian-multimedia bookworm main non-free
+#deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /
+#deb https://www.deb-multimedia.org bookworm main non-free
 
 -----------------------------------------sources.list--------------------------------------------------------
 
@@ -325,47 +331,6 @@ deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /
 #deb http://deb.debian.org/debian            Основной
 #deb ftp.se.debian.org/debian                Швеция
 #deb ftp.de.debian.org/debian                Германия
-
-deb http://mirror.hyperdedic.ru/debian bookworm main contrib non-free non-free-firmware
-deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
-deb http://mirror.hyperdedic.ru/debian bookworm-updates contrib main non-free non-free-firmware
-#deb http://mirror.hyperdedic.ru/debian bookworm-proposed-updates main contrib non-free non-free-firmware
-#deb http://mirror.hyperdedic.ru/debian bookworm-backports main contrib non-free non-free-firmware
-
-# Multimedia #
-deb https://www.deb-multimedia.org bookworm main non-free
-#deb https://mirror.yandex.ru/debian-multimedia bookworm main non-free
-#deb http://mirror.mephi.ru/debian-multimedia bookworm main non-free
-#deb ftp://mirror.mephi.ru/debian-multimedia bookworm main non-free
-sudo apt install deb-multimedia-keyring
-wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb
-sudo dpkg -i deb-multimedia-keyring_2016.8.1_all.deb
-
-# Репозиторий с руссифицированными man-страницами #
-#deb https://manpages.stupin.su/repo/ bookworm main
-
-# Google #
-deb http://dl.google.com/linux/chrome/deb/ stable main
-deb http://dl.google.com/linux/earth/deb/ stable main
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
-# MediaInfo #
-wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-24_all.deb
-sudo dpkg -i repo-mediaarea_1.0-24_all.deb
-
-# Double Commander #
-sudo nano /etc/apt/sources.list
-deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /
-curl -fsSL https://download.opensuse.org/repositories/home:Alexx2000/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_Alexx2000.gpg > /dev/null
-sudo apt update
-sudo apt install doublecmd-gtk
-
-# freeLib #
-sudo nano /etc/apt/sources.list
-deb https://notesalexp.org/freelib/bookworm/ bookworm main
-wget -O - https://notesalexp.org/debian/alexp_key.asc | sudo apt-key add -
-sudo apt update
-sudo apt install freelib
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -399,21 +364,25 @@ ru_RU.UTF-8                                         выбор локали по
 
 // Консоль
 apt install console-setup
+Other - Russian - Russian - Control+Shift - No temporary switch - The default for the keyboard layout - No compose key
 dpkg-reconfigure console-setup
 UTF-8                                               зададим кодировку консоли
 . Combinet - Latin; Slavic Cyrillic; Greek          используемые наборы символов
 Terminus                                            используемый шрифт
-14                                                  размер
+8x14                                                размер
 
 dpkg-reconfigure keyboard-configuration
-105-клавишная международная                         тип клавиатуры
+Generik 105-key PC                                  тип клавиатуры
 Другая
 Страна - Русская и Раскладка - Русская
 нет временного переключателя
 
 // Активация сглаживания шрифтов
 https://wiki.debian.org/ru/PatchCairo
+apt install fontconfig-config
 dpkg-reconfigure fontconfig-config
+Native - Full-Medium - (Always-newer) - no 
+Родной - Полное - Всегда - Нет
 
 -----------------------------------------------------УСТАНОВКА СОФТА ЧЕРУТ-------------------------------------
 
@@ -424,21 +393,10 @@ apt install linux-image-amd64 linux-headers-amd64
 apt install intel-microcode gpm build-essential
 
 // Wi-Fi
-apt install iw network-manager iproute2
+apt install iw network-manager
 
 // Утилиты
-apt install grub-pc sudo mc bash-completion
-
-// Xorg
-apt install xserver-xorg-core x11-xserver-utils x11-xkb-utils xinit
-
-// Ставим иксы
-apt install lxdm fluxbox xfce4-terminal geany network-manager-gnome
-
-nano /home/vyga/.bashrc
-PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;33m\]\u\[\e[0m\]@\[\e[1;35m\]\H\[\e[0m\]:\[\e[1;32m\]\w\[\e[0m\]\n\[\e[1;32m\]\$\[\e[0m\] '
-
-.bash_aliases
+apt install grub-pc sudo bash-completion mc
 
 ----------------------------------------------------------НАСТРОЙКА---------------------------------------------
 
@@ -449,6 +407,7 @@ nano /etc/adjtime
 LOCAL
 
 dpkg-reconfigure tzdata
+Asia - Yakaterinburg
 
 // установить время
 date -s 09:17
@@ -479,11 +438,11 @@ groups vyga
 -m создавать домашний каталог пользователя в home
 -G Список дополнительных групп
 -s командная оболочка для пользователя
--U Создайте группу с тем же именем что и у пользователя и добавьте
+-U Создайте группу с тем же именем что и у пользователя
 
 nano /etc/group
-groupadd группа                                 создать новую группу
-usermod -aG доп_группы пользователь             добавить в группы
+groupadd vyga                                 создать новую группу
+usermod -aG доп_группы пользователь           добавить в группы
 
 ------------------------------------------------------------ПАРОЛЬ------------------------------------------------
 
@@ -496,6 +455,13 @@ EDITOR=nano visudo
 Defaults    env_reset,pwfeedback
 // права root для группы wheel
 %sudo ALL=(ALL:ALL) ALL
+
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+------------------------------------------------------------PATH-------------------------------------------------
+nano /etc/profile
+
+PATH="/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/games"
 
 --------------------------------------------------------УСТАНОВКА GRUB-------------------------------------------
 
@@ -516,64 +482,82 @@ update-grub
 /usr/share/desktop-base/lines-theme/grub/grub-4x3.png
 /usr/share/desktop-base/emerald-theme/grub/grub-4x3.png
 
-------------------------------------------------------------PATH-------------------------------------------------
-nano /etc/profile
-
-PATH="/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/games"
-
-------------------------------------------------------------LXDM----------------------------------------------------
-
-// Включить менеджер входа
-systemctl enable lxdm.service
-// Включить авто вход в систему
-nano /etc/lxdm/lxdm.conf
-autologin=vyga
-session=/usr/bin/startfluxbox
-gtk_theme=Minwaita-Vanilla-Dark
-#theme=Industrial
-
-// Графический конфигуратор
-lxdm-config
-// Темы
-/usr/share/lxdm/themes
-// Тема Arch-Dark
-wget https://www.dropbox.com/s/a8inrdfys3a71c1/lxdm-themes.tar.gz
-theme=Arch-Dark
-
 ----------------------------------------------------------ЗАВЕРШЕНИЕ----------------------------------------------
 
 systemctl status NetworkManager
 systemctl enable NetworkManager.service                                 Включить NetworkManager
 
 exit
+
+------------------------------------------------------------------------------------------------------------------
+
+nano /home/vyga/.bashrc
+PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;33m\]\u\[\e[0m\]@\[\e[1;35m\]\H\[\e[0m\]:\[\e[1;32m\]\w\[\e[0m\]\n\[\e[1;32m\]\$\[\e[0m\] '
+
+nano /mnt/home/vyga/.bash_aliases
+
+alias mouse='gpm -m /dev/input/mice -t exps2'
+alias wifi='sudo iw dev wlxa0a3f0d1e106 link'
+alias proz='sensors | grep temp3:'
+alias sd='udisksctl power-off -b /dev/sdc'
+alias hdd='udisksctl mount -b /dev/sda3'
+alias dat='udisksctl mount -b /dev/sdb5'
+alias aimp='find -iname "*.mp3" -execdir id3v2 -D {} \;'
+alias wavmp3='for i in *.wav; do lame -b 128 $i; done'
+alias txtwav='for i in *.txt; do RHVoice-test -p anna -r 90 -i $i -o $i.wav; done'
+alias mp4mp3='for file in *.mp4; do ffmpeg -i "$file" "${file%.mp4}.mp3"; done'
+alias m4amp3='for file in *.m4a; do ffmpeg -i "$file" "${file%.m4a}.mp3"; done'
+alias tsmp3='for file in *.ts; do ffmpeg -i "$file" "${file%.ts}.mp3"; done'
+alias mkvmp3='for file in *.ts; do ffmpeg -i "$file" "${file%.mkv}.mp3"; done'
+alias avimp3='for file in *.ts; do ffmpeg -i "$file" "${file%.avi}.mp3"; done'
+alias opusmp3='for file in *.opus; do ffmpeg -i "$file" "${file%.opus}.mp3"; done'
+alias webmmp3='for file in *.webm; do ffmpeg -i "$file" "${file%.webm}.mp3"; done'
+alias nmu1='nmcli connection up "ASTRA 2.4G"'
+alias nmd1='nmcli connection down "ASTRA 2.4G"'
+alias nmu2='nmcli connection up is74_11'
+alias nmd2='nmcli connection down is74_11'
+alias ytb='yt-dlp -f 136+140'
+alias yta='yt-dlp -f 140'
+alias ytvk='yt-dlp -f url720'
+alias ytr='yt-dlp -f [height=720]'
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+
+-------------------------------------------------------------------------------------------------------------------------
+
 sudo umount -R /mnt
 sudo umount /mnt/dev
 sudo umount /mnt/proc
 sudo umount /mnt/sys
 sudo umount /mnt
 
-systemctl poweroff
-shutdown -h now
+------------------------------------------------------ ЗАПИСАТЬ В ТЕТРАДЬ-------------------------------------------------------
 
--------------------------------------------------------ДРАЙВЕР WI-FI USB---------------------------------------------
+gpm -m /dev/input/mice -t exps2
+sudo mount /dev/sda3 /mnt
+nano /mnt/debian/debian.new
+
+-------------------------------------------------------ДРАЙВЕР WI-FI USB--------------------------------------------------------
 
 // Wi-Fi USB Adapter Wireless N300 D-Link DWA-137 Realtek RTL8192EU
 
 sudo nano /etc/modprobe.d/blacklist-rtl8xxxu.conf
 blacklist rtl8xxxu
 
-sudo mount /dev/sda3 /mnt
 cd /mnt/debian/rtl8192eu-linux
 make
-uname -r
-modinfo ./8192eu.ko | grep vermagic:
-sudo mkdir -v /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
-sudo cp -v 8192eu.ko /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
-modinfo /usr/lib/modules/6.1.0-29-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu/8192eu.ko | grep vermagic:
+uname -r        6.1.0-30-amd64
+sudo modinfo ./8192eu.ko | grep vermagic:
+sudo mkdir -v /usr/lib/modules/6.1.0-30-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+sudo cp -v 8192eu.ko /usr/lib/modules/6.1.0-30-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu
+sudo modinfo /usr/lib/modules/6.1.0-30-amd64/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192eu/8192eu.ko | grep vermagic:
 
 // Обновим список зависимостей
 sudo depmod -a
-modinfo 8192eu | grep vermagic:
+sudo modinfo 8192eu | grep vermagic:
+
+cd ~
+sudo umount /mnt
 reboot
 
 --------------------------------------------------------------WI-FI------------------------------------------------------------
@@ -587,16 +571,154 @@ nmcli radio wifi on
 nmcli radio wifi off
 iw dev
 
-nmcli device wifi connect точка  password пароль name точка
+nmcli device wifi connect точка password пароль name точка
 nmcli device wifi connect "точка с пробелом" password пароль name "точка с пробелом"
 iw dev wlxa0a3f0d1e106 link
 
+------------------------------------------------------------XORG----------------------------------------------------
+
+// Xorg
+sudo apt install xserver-xorg-core x11-xserver-utils x11-xkb-utils xinit
+
+// Ставим иксы
+sudo apt install lxdm fluxbox xfce4-terminal geany network-manager-gnome wget
+
+cp -v /mnt/debian/home/vyga/.fluxbox /home/vyga/
+
+------------------------------------------------------------LXDM------------------------------------------------------
+
+// Включить авто вход в систему
+nano /etc/lxdm/lxdm.conf
+autologin=vyga
+session=/usr/bin/startfluxbox
+gtk_theme=Minwaita-Vanilla-Dark
+#theme=Industrial
+// Включить менеджер входа Lxdm
+systemctl enable lxdm.service
+
+// Графический конфигуратор
+lxdm-config
+// Темы
+/usr/share/lxdm/themes
+// Тема Arch-Dark
+wget https://www.dropbox.com/s/a8inrdfys3a71c1/lxdm-themes.tar.gz
+theme=Arch-Dark
+
+-----------------------------------------------------------SLIM----------------------------------------------------------
+slim
+
+// Включить авто вход в систему
+nano /etc/slim.conf
+default_user        vyga
+auto_login          yes
+current_theme       default
+/usr/share/slim/themes
+// Включить менеджер входа Slim
+systemctl enable slim.service
+
+reboot
+
 -----------------------------------------------------------FLUXBOX----------------------------------------------------
+# Установка Multimedia #
+sudo nano /etc/apt/sources.list
+deb http://mirror.hyperdedic.ru/debian-multimedia bookworm main non-free
+#deb https://www.deb-multimedia.org bookworm main non-free
+
+wget https://mirror.hyperdedic.ru/debian-multimedia/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb
+sudo apt install ./deb-multimedia-keyring_2024.9.1_all.deb
+sudo apt update
+sudo apt full-upgrade
 
 // Иксовый софт
-sudo apt install gnote evince xchm cherrytree galculator gpicview geany-plugin-spellcheck
+sudo apt install gnote evince cherrytree galculator gpicview geany-plugin-spellcheck gsimplecal
 sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2
-sudo apt install xarchiver unrar pkexec zenity handbrake-gtk pavucontrol audacity simplescreenrecorder
+sudo apt install xarchiver unrar pkexec zenity
+
+// Inet
+sudo apt install transmission-gtk transmission-cli thunderbird thunderbird-l10n-ru 
+sudo apt install git curl links yt-dlp gnome-maps
+
+// Шрифты
+sudo apt install fonts-cantarell fonts-noto-color-emoji             ??fonts-terminus??
+
+// Консольный софт
+sudo apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo mediainfo-gui id3v2
+sudo apt install rhvoice rhvoice-russian zathura zathura-djvu recordmydesktop zbar-tools
+
+// Утилиты
+sudo apt install alsa-utils usbutils pciutils lm-sensors lxappearance qt5ct manpages-ru ncal
+sudo apt install pulseaudio gnome-disk-utility volumeicon-alsa pavucontrol
+
+// Office
+sudo apt install libreoffice-writer libreoffice-calc libreoffice-l10n-ru libreoffice-help-ru fbless
+sudo apt install abiword gnumeric homebank mtpaint gimp
+
+--------------------------------------------------------------------------------------------------------
+
+// Установка Firefox
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list
+
+echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+
+sudo apt purge firefox-esr
+sudo apt update
+sudo apt install firefox firefox-l10n-ru
+
+// Установка Video DownloadHelper
+wget https://github.com/aclap-dev/vdhcoapp/releases/latest/download/vdhcoapp-linux-x86_64.deb
+sudo apt install ./vdhcoapp-linux-x86_64.deb
+/root/.mozilla/native-messaging-hosts/net.downloadhelper.coapp.json
+/root/.var/app/org.mozilla.firefox/.mozilla/native-messaging-hosts/net.downloadhelper.coapp.json
+sudo cp -v /root/.mozilla/native-messaging-hosts /home/vyga/.mozilla
+sudo cp -v /root/.var /home/vyga
+// или так
+curl -sSLf https://github.com/aclap-dev/vdhcoapp/releases/latest/download/
+install.sh | bash
+// Куда скачивается default      /home/vyga/dwhelper/
+
+// Ставим wine
+https://wiki.winehq.org/Debian
+// Включите 32-разрядную архитектуру
+sudo dpkg --add-architecture i386
+// Загрузите и добавьте ключ к репозиторию
+wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor -o /etc/apt/keyrings/winehq-archive.key -
+// Добавьте репозиторий
+sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
+sudo apt update
+sudo apt install --install-recommends winehq-stable
+
+// Установка sdcv stardict
+sudo mkdir -p /usr/share/stardict/dic
+sudo cp -r /media/hdd/archome/magus /usr/share/stardict/dic
+
+// Установка датчиков yes на все вопросы
+sudo sensors-detect
+
+// Проверка орфографии в Geany
+sudo apt install hunspell-ru geany-plugin-spellcheck
+Правка - Настройки - Общее - Запуск - Включить поддержку модулей
+Инструменты - Менеджер модулей - Проверка орфографии 
+Правка - Настройки модулей
+// Только если будут ошибки
+~/.config/geany/geany.conf
+active_plugins=/usr/lib/x86_64-linux-gnu/geany/spellcheck.so
+
+# Установка Double Commander #
+sudo nano /etc/apt/sources.list
+deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_12/ /
+curl -fsSL https://download.opensuse.org/repositories/home:Alexx2000/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_Alexx2000.gpg > /dev/null
+sudo apt update
+sudo apt install doublecmd-gtk
+
+-------------------------------------------------------------------------------------------------------------
+
+// Дополнительно
+sudo apt install handbrake-gtk netsurf-gtk simplescreenrecorder aria2 chromium chromium-l10n xchm gnome-clocks audacity
 
 // Шахматы
 sudo apt install gnome-chess gnuchess
@@ -606,27 +728,6 @@ sudo apt install kcheckers
 
 // ГО
 sudo apt install gnugo kigo
-
-// Шрифты
-sudo apt install fonts-terminus fonts-cantarell fonts-noto-color-emoji
-adobe-source-code-pro-fonts    git clone https://github.com/adobe-fonts/source-code-pro
-
-// Inet
-sudo apt install transmission-gtk transmission-cli thunderbird thunderbird-l10n-ru network-manager-gnome
-sudo apt install chromium chromium-l10n gnome-maps netsurf-gtk
-sudo apt install git curl wget links aria2
-
-// Office
-sudo apt install libreoffice-writer libreoffice-calc libreoffice-l10n-ru libreoffice-help-ru
-sudo apt install abiword gnumeric homebank mtpaint gimp
-
-// Утилиты
-sudo apt install alsa-utils usbutils pciutils lm-sensors lxappearance qt5ct manpages-ru ncal
-sudo apt install pulseaudio gnome-disk-utility volumeicon-alsa
-
-// Консольный софт
-sudo apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo mediainfo-gui id3v2
-sudo apt install rhvoice rhvoice-russian zathura zathura-djvu fbless recordmydesktop zbar-tools
  
 // dvd
 sudo apt install growisofs dvd+rw-tools k3b
@@ -647,37 +748,34 @@ sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /u
 sudo chmod a+rx /usr/bin/yt-dlp
 yt-dlp --version 2023.11.16
 
-// Ставим wine
-https://wiki.winehq.org/Debian
-sudo dpkg --add-architecture i386
-sudo mkdir -pm755 /etc/apt/keyrings
-sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
-sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
+// Установка Календарь
+https://www.rainlendar.net/
+wget https://www.rainlendar.net/download/2.21.3/rainlendar2-lite_2.21.3.b180-1_amd64.deb
+sudo apt install ./rainlendar2-lite_2.21.3.b180-1_amd64.deb
+wget https://www.rainlendar.net/download/2.21.3/Rainlendar-Lite-2.21.3-amd64.tar.bz2
+
+# Репозиторий с руссифицированными man-страницами #
+deb https://manpages.stupin.su/repo/ bookworm main
+
+# Google #
+deb http://dl.google.com/linux/chrome/deb/ stable main
+deb http://dl.google.com/linux/earth/deb/ stable main
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+# MediaInfo #
+wget https://mediaarea.net/repo/deb/repo-mediaarea_1.0-24_all.deb
+sudo dpkg -i repo-mediaarea_1.0-24_all.deb
+
+# freeLib #
+sudo nano /etc/apt/sources.list
+deb https://notesalexp.org/freelib/bookworm/ bookworm main
+wget -O - https://notesalexp.org/debian/alexp_key.asc | sudo apt-key add -
 sudo apt update
-sudo apt install --install-recommends winehq-stable
+sudo apt install freelib
 
-// Установка Firefox
-wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc
-echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list
+--------------------------------------------НАСТРОЙКА ПОЛИТИКИ POLKIT---------------------------------------------
 
-echo '
-Package: *
-Pin: origin packages.mozilla.org
-Pin-Priority: 1000
-' | sudo tee /etc/apt/preferences.d/mozilla
-
-sudo apt update
-sudo apt install firefox firefox-l10n-ru
-
-// Проверка орфографии в Geany
-sudo apt install hunspell-ru geany-plugin-spellcheck  ?hunspell?
-Правка - Настройки - Общее - Запуск - Включить поддержку модулей
-Правка - Настройки - Общее - Запуск - Дополнительный путь для модулей ?
-Инструменты - Менеджер модулей - Проверка орфографии 
-Правка - Настройки модулей
-// Только если будут ошибки
-~/.config/geany/geany.conf
-active_plugins=/usr/lib/x86_64-linux-gnu/geany/spellcheck.so
+// настройка политики монтирования
 
 // Монтирование thunar в media
 sudo mkdir /media
@@ -688,7 +786,6 @@ sudo nano /etc/udev/rules.d/99-udisks2.rules
 # See udisks(8)
 ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
 
-// Настройка политики монтирования
 sudo nano /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
 <action id="org.freedesktop.udisks2.filesystem-mount-system">
     <defaults>
@@ -697,7 +794,8 @@ sudo nano /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy
       <allow_active>yes</allow_active>
     </defaults>
     
-    org.freedesktop.udisks2.power-off-drive-system
+<action id="org.freedesktop.udisks2.power-off-drive-system">
+yes
     
 // Запустить Geany от суперпользователя
 sudo nano /usr/share/polkit-1/actions/org.geany.policy
@@ -732,24 +830,6 @@ sudo nano /usr/share/polkit-1/actions/org.geany.policy
 // Открыть папку от sudo
 sudo nano /usr/share/polkit-1/actions/org.xfce.thunar.policy
 
---------------------------------------------ИНТЕРЕСНЫЙ СОФТ----------------------------------------------- 
-
-pipewire pipewire-alsa pipewire-pulse  ?pipewire-audio?
-jdupes
-volumeicon-alsa
-parcellite xfce4-clipman-plugin
-rtorrent
-gparted gnome-disk-utility
-eyed3 exfalso
-picom xcompmgr
-xfburn brasero
-dmenu rofi xfce4-appfinder tint2 i3status
-dunst
-gsimplecal
-lightdm slim
-catfish recoll
-onboard
-
 ---------------------------------------------------------------------------------------------------------
 
 // Реакции на закрывание-открывание крышки.
@@ -768,9 +848,11 @@ torrent
 prg
 
 // Сменить владельца каталога файла
+sudo chown -R vyga:vyga /home/vyga/.fluxbox
 sudo chown -R vyga:vyga /home/vyga/.config
 
 // Копирование файлов настройки и каталогов
+/home/vyga/.fluxbox
 /home/vyga/.thunderbird/
 /home/vyga/.local/share/gnote
 /home/vyga/.config/Thunar/uca.xml
@@ -784,9 +866,7 @@ sudo chown -R vyga:vyga /home/vyga/.config
 /usr/share/stardict/dic/magus
 /usr/share/themes/Minwaita-Vanilla-Dark/gtk-3.0/gtk.css
 
-# Установка sdcv stardict
-sudo mkdir -p /usr/share/stardict/dic
-sudo cp -r /media/hdd/archome/magus /usr/share/stardict/dic
+------------------------------------------------------------------------------------------------------------------
 
 tts
 аудиокниги
@@ -800,15 +880,13 @@ tts
 софт
 фото
 
-// Установка датчиков yes на все вопросы
-sudo sensors-detect
-
 ------------------------------------------------------GTK-QT--------------------------------------------------------
 
  // Темы GTK
 Minwaita-Vanilla-Dark
 Numix
 Шрифты system-ui, sans, cantarell, liberation mono, source-code-pro, terminus
+git clone https://github.com/adobe-fonts/source-code-pro
 gtk2 gtk3 gtk4
 // Тёмная тема для Gtk4
 GTK_THEME=Minwaita-Vanilla-Dark:dark transmission-gtk
@@ -927,23 +1005,11 @@ sudo depmod -a
 modinfo 8192eu | grep vermagic:
 reboot
 
-
-https://habr.com/ru/articles/673488/
-https://flatpak.org/
-https://wiki.archlinux.org/title/Flatpak
-https://www.linux.org.ru/articles/desktop/17725234
-https://pingvinus.ru/note/snap-flatpak-appimage-highlights
-https://pingvinus.ru/note/snap
-https://www.comss.ru/page.php?id=12773
-https://flathub.org/ru/setup/Debian
+-----------------------------------------------------FLATPAK--------------------------------------------------------
 https://wiki.debian.org/Flatpak
 https://flathub.org/
-https://pingvinus.ru/note/install-flatpak-ubuntu
-https://pingvinus.ru/note/appimage
-https://pingvinus.ru/note/snap
 
-
-Установка Flatpak в Debian 12: 14
+// Установка Flatpak
 sudo apt install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak --user update Перезапустите службу
@@ -952,14 +1018,46 @@ flatpak --version
 flatpak install flathub app.drey.EarTag
 flatpak run app.drey.EarTag
 
-
 flatpak remove --unused        Для удаления неиспользуемых сред
 flatpak remove --delete-data   Для очистки данных уже удалённых приложений
 
 Обратите внимание, что каталоги 
-
 '/var/lib/flatpak/exports/share'
 '/home/vyga/.local/share/flatpak/exports/share'
-
 не находятся по пути поиска, заданном переменной окружения XDG_DATA_DIRS,
 
+-----------------------------------------------------SNAP--------------------------------------------------------
+https://pingvinus.ru/note/snap
+
+// Установка Snap
+sudo apt install snapd           установить среду управления Snapd
+sudo snap install snap-store     графический интерфейс
+sudo snap install gimp           Установка пакетов
+snap refresh                     Обновление всех установленных пакетов
+snap refresh gimp                Обновление одного пакет
+snap remove gimp                 Удаление пакетов
+snap list                        Просмотр установленных пакетов
+snap find gimp                   Поиск пакетов
+snap info gimp                   Информация о пакете
+snap revert gimp                 Откат обновления
+snap disable gimp                Временно отключить пакет
+snap enable gimp                 сделать пакет доступным
+snap run gimp                    Запуск Snap-пакетов
+
+--------------------------------------------ИНТЕРЕСНЫЙ СОФТ----------------------------------------------- 
+
+pipewire pipewire-alsa pipewire-pulse  ?pipewire-audio?
+jdupes
+parcellite xfce4-clipman-plugin
+rtorrent
+gparted
+eyed3 exfalso
+picom xcompmgr
+xfburn brasero
+dmenu rofi xfce4-appfinder tint2 i3status
+dunst
+lightdm slim
+catfish recoll
+onboard
+guvcview
+neofetch

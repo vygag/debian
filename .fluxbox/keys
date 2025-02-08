@@ -146,7 +146,8 @@ Mod4 p :Exec netsurf-gtk
 Mod4 t :Exec /home/vyga/prg/Telegram/Telegram
 Mod4 h :Exec homebank
 
-Mod4 c :Exec zenity --calendar
+Mod4 c :Exec gsimplecal
+#Mod4 c :Exec zenity --calendar
 Mod4 k :Exec galculator
 Mod4 f :Exec handbrake-gtk
 
