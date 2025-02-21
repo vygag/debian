@@ -33,9 +33,9 @@
     [submenu] (Инет) </home/vyga/.fluxbox/icon/firefox.png>
     [exec] (Telegram) {/home/vyga/prg/Telegram/Telegram} </home/vyga/.fluxbox/icon/telegram.png>
     [exec] (Chromium) {chromium} </home/vyga/.fluxbox/icon/chromium.png>
-    [exec] (Tor) {/home/vyga/prg/tor-browser/start-tor-browser.desktop} </home/vyga/.fluxbox/icon/tor.png>
+    [exec] (Tor) {torbrow.sh} </home/vyga/.fluxbox/icon/tor.png>
     [exec] (Карта) {GTK_THEME=Minwaita-Vanilla-Dark:dark gnome-maps} </home/vyga/.fluxbox/icon/maps.png>
-    [exec] (Palemoon) {/home/vyga/prg/palemoon/palemoon} </home/vyga/.fluxbox/icon/palemoon.png>
+    [exec] (Palemoon) {palemoon} </home/vyga/.fluxbox/icon/palemoon.png>
 	[exec] (Netsurf) {netsurf-gtk} </home/vyga/.fluxbox/icon/netsurf.png>
     [exec] (Wireshark) {wireshark} </home/vyga/.fluxbox/icon/wireshark.png>
      [end]

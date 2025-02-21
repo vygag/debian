@@ -352,6 +352,7 @@ sudo chroot /mnt
 
 https://vmblog.ru/izmenit-regionalnye-nastrojki-lokal-linux/
 https://interface31.ru/tech_it/2014/12/nastroyka-yazyka-i-regionalnyh-standartov-v-ubuntu-server-debian.html
+https://mnorin.com/console-cyrillic-i-systemd-v-debian.html
 
 apt update
 
@@ -630,7 +631,7 @@ sudo apt update
 sudo apt full-upgrade
 
 // Иксовый софт
-sudo apt install gnote evince cherrytree galculator gpicview geany-plugin-spellcheck gsimplecal
+sudo apt install gnote evince fbreader cherrytree galculator gpicview geany-plugin-spellcheck gsimplecal
 sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2
 sudo apt install xarchiver unrar pkexec zenity
 
@@ -1061,3 +1062,21 @@ catfish recoll
 onboard
 guvcview
 neofetch
+nala epm
+
+------------------------------------------------ДРУГИЕ РЕПОЗИТОРИИ----------------------------------------------
+http://iso.mxrepo.com/Downloads/Final/MX-23.5/
+https://mxrepo.com/
+https://mxrepo.com/MX23packages.html
+https://mxrepo.com/mx/repo/pool/main/p/palemoon/palemoon_33.6.0-1mx23_amd64.deb
+https://mxrepo.com/mx/repo/pool/main/s/seamonkey/seamonkey_2.53.20~mozillabinaries-1mx23+1_amd64.deb
+https://mxrepo.com/mx/repo/pool/main/r/roxterm/roxterm_3.12.1-1mx23_amd64.deb
+https://mxrepo.com/mx/repo/pool/main/r/roxterm/roxterm-data_3.12.1-1mx23_all.deb
+
+https://repo.sparkylinux.org/
+https://sourceforge.net/projects/sparkylinux/files/repo/pool/main/
+https://sourceforge.net/projects/sparkylinux/files/repo/pool/main/p/palemoon/palemoon_33.5.1~sparky7~0-1_amd64.deb/download
+http://sf1.repo.sparkylinux.org
+
+http://packages.linuxmint.com
+http://packages.linuxmint.com/list.php?release=faye

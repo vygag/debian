@@ -139,10 +139,11 @@ Mod4 F1 :Exec transmission-gtk
 Mod4 F2 :Exec mtpaint
 Mod4 F3 :Exec doublecmd
 Mod4 F4 :Exec /home/vyga/prg/LosslessCut-linux-x86_64.AppImage
+Mod4 F5 :Exec torbrow.sh
 
 Mod4 F12 :Exec pavucontrol
 
-Mod4 p :Exec netsurf-gtk
+Mod4 p :Exec palemoon
 Mod4 t :Exec /home/vyga/prg/Telegram/Telegram
 Mod4 h :Exec homebank
 
