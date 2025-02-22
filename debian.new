@@ -631,28 +631,30 @@ sudo apt update
 sudo apt full-upgrade
 
 // Иксовый софт
-sudo apt install gnote evince fbreader cherrytree galculator gpicview geany-plugin-spellcheck gsimplecal
-sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2
-sudo apt install xarchiver unrar pkexec zenity
+sudo apt install gnote evince fbreader cherrytree galculator gpicview geany-plugin-spellcheck
+sudo apt install thunar thunar-archive-plugin thunar-gtkhash gvfs gvfs-backends gvfs-fuse udisks2 meld
+sudo apt install zenity xarchiver gsimplecal lxappearance
 
 // Inet
 sudo apt install transmission-gtk transmission-cli thunderbird thunderbird-l10n-ru 
 sudo apt install git curl links yt-dlp gnome-maps
 
 // Шрифты
-sudo apt install fonts-cantarell fonts-noto-color-emoji             ??fonts-terminus??
+sudo apt install fonts-cantarell fonts-noto-color-emoji fonts-terminus
 
-// Консольный софт
-sudo apt install scrot lame sdcv bc ffmpeg mpv htop imagemagick fdupes mediainfo mediainfo-gui id3v2
-sudo apt install rhvoice rhvoice-russian zathura zathura-djvu recordmydesktop zbar-tools
+// Утилиты консоли
+sudo apt install pkexec usbutils pciutils ncal htop lm-sensors zbar-tools manpages-ru
+sudo apt install unrar p7zip scrot sdcv fdupes
 
-// Утилиты
-sudo apt install alsa-utils usbutils pciutils lm-sensors lxappearance qt5ct manpages-ru ncal
-sudo apt install pulseaudio gnome-disk-utility volumeicon-alsa pavucontrol
+// Медиа
+sudo apt install lame ffmpeg mpv id3v2 mediainfo mediainfo-gui
+sudo apt install alsa-utils pulseaudio volumeicon-alsa pavucontrol recordmydesktop
+sudo apt install rhvoice rhvoice-russian
 
 // Office
+sudo apt install zathura zathura-djvu imagemagick
 sudo apt install libreoffice-writer libreoffice-calc libreoffice-l10n-ru libreoffice-help-ru fbless
-sudo apt install abiword gnumeric homebank mtpaint gimp
+sudo apt install abiword gnumeric homebank mtpaint 
 
 --------------------------------------------------------------------------------------------------------
 
@@ -719,7 +721,10 @@ sudo apt install doublecmd-gtk
 -------------------------------------------------------------------------------------------------------------
 
 // Дополнительно
-sudo apt install handbrake-gtk netsurf-gtk simplescreenrecorder aria2 chromium chromium-l10n xchm gnome-clocks audacity
+sudo apt install chromium chromium-l10n netsurf-gtk aria2
+sudo apt install handbrake-gtk simplescreenrecorder audacity
+sudo apt install xchm gnome-clocks gnome-disk-utility gimp
+sudo apt install qt5ct
 
 // Шахматы
 sudo apt install gnome-chess gnuchess

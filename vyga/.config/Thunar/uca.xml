@@ -115,4 +115,43 @@
 	<other-files/>
 	<text-files/>
 </action>
+<action>
+	<icon>org.gtkhash.gtkhash</icon>
+	<name>GtkHash</name>
+	<submenu></submenu>
+	<unique-id>1722316617756494-1</unique-id>
+	<command>gtkhash %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>mpv</icon>
+	<name>ffplay</name>
+	<submenu></submenu>
+	<unique-id>1722489434028621-1</unique-id>
+	<command>ffplay %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>applications-mathematics</icon>
+	<name>Сравнить</name>
+	<submenu></submenu>
+	<unique-id>1740111114774751-1</unique-id>
+	<command>meld %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<text-files/>
+</action>
 </actions>
