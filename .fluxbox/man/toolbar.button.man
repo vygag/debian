@@ -1,0 +1,31 @@
+Настройка Кнопок button
+
+~/.fluxbox/init
+session.screen0.toolbar.tools:	                       button.homenu, button.togshowdesk, button.thunar, iconbar, systemtray, clock, button.gsimplecal
+session.screen0.toolbar.button.homenu.commands:        RootMenu
+session.screen0.toolbar.button.homenu.label:           Menu
+session.screen0.toolbar.button.togshowdesk.commands:   ShowDesktop
+session.screen0.toolbar.button.togshowdesk.label:      _
+session.screen0.toolbar.button.thunar.commands:        exec thunar
+session.screen0.toolbar.button.thunar.label:           Thunar
+session.screen0.toolbar.button.gsimplecal.commands:    exec gsimplecal
+session.screen0.toolbar.button.gsimplecal.label:       cal
+
+session.screen0.iconbar.iconWidth:	                   4  число ширина кнопки панели значков для выравнивания по левому/правому краю.  (128)
+session.screen0.iconbar.iconTextPadding:               4  расстояние между заголовком окна и краем кнопки  (10)
+
+
+~/.fluxbox/style
+toolbar.button.borderWidth:                            1                                        Толщина границы кнопок
+toolbar.button.scale:                                  1                                        толщина кнопок панели
+toolbar.button:						                   Flat                                     Текстура кнопки
+#toolbar.button.pixmap:					               /home/vyga/.fluxbox/icon/cal.png
+toolbar.button.border.color:                           #000000                                  Цвет рамки
+toolbar.button.color:					               #000000			                        Цвет фона
+toolbar.button.picColor:				               #ffffff                                  Цвет надписи
+toolbar.button.font:                                   sans-8                                   Шрифт надписи
+toolbar.button.pressed:					               Flat	                                    Текстура нажатой кнопки
+toolbar.button.pressed.color:					       #000000                                  Цвет фона нажатой кнопки
+toolbar.button.pressed.colorTo:	        
+toolbar.button.pressed.picColor:                       #ffffff                                  Цвет надписи нажатой кнопки  
+#toolbar.button.pressed.pixmap:                        tbarufcs.xpm

@@ -18,5 +18,7 @@ volumeicon &
 #xrandr --output VGA1 --brightness 0.4
 # Polkit-gnome add root access
 # /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+# Установка обоев
+#feh --no-fehbg --bg-scale /home/vyga/.fluxbox/ozero.jpeg
 
 exec fluxbox

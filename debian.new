@@ -17,6 +17,7 @@ https://blog.bayrell.org/ru/linux/linux-from-scratch/119-ustanovka-ubuntu-deboot
 https://manpages.debian.org/buster/debconf/dpkg-reconfigure.8.en.html
 https://manpages.debian.org/buster/debconf/debconf-show.1.en.html
 https://blog.bayrell.org/ru/linux/linux-from-scratch/504-ustanovka-debian-12-i-ubuntu-22-04-cherez-debootstrap.html
+https://lumpics.ru/configure-debian-after-installation/
 
 --------------------------------------------------------------------MANUALS--------------------------------------
 
@@ -582,9 +583,12 @@ iw dev wlxa0a3f0d1e106 link
 sudo apt install xserver-xorg-core x11-xserver-utils x11-xkb-utils xinit
 
 // Ставим иксы
-sudo apt install lxdm fluxbox xfce4-terminal geany network-manager-gnome wget
-
+// Fluxbox
+cd /mnt/debian
+sudo apt install ./fluxbox_1.3.7+git20220731-0mx23+1_amd64.deb
 cp -v /mnt/debian/home/vyga/.fluxbox /home/vyga/
+
+sudo apt install lxdm xfce4-terminal geany network-manager-gnome wget
 
 ------------------------------------------------------------LXDM------------------------------------------------------
 
@@ -644,11 +648,11 @@ sudo apt install fonts-cantarell fonts-noto-color-emoji fonts-terminus
 
 // Утилиты консоли
 sudo apt install pkexec usbutils pciutils ncal htop lm-sensors zbar-tools manpages-ru
-sudo apt install unrar p7zip scrot sdcv fdupes
+sudo apt install unrar p7zip scrot sdcv fdupes rename autoconf                          ? cmake libtool ?
 
 // Медиа
 sudo apt install lame ffmpeg mpv id3v2 mediainfo mediainfo-gui
-sudo apt install alsa-utils pulseaudio volumeicon-alsa pavucontrol recordmydesktop
+sudo apt install alsa-utils pipewire volumeicon-alsa pavucontrol recordmydesktop
 sudo apt install rhvoice rhvoice-russian
 
 // Office
@@ -743,9 +747,11 @@ sudo apt install wireshark-gtk tshark aircrack-ng nmap pixiewps traceroute john 
 
 // Установка Fluxbox со всеми обновами
 git clone https://github.com/fluxbox/fluxbox             Version 1.3.7 is a bug fix releas
-./configure
-make
-sudo make install
+$ ./configure
+$ ./configure --help
+$ ./configure --disable-slit
+$ make
+$ make install
 
 // Установка yt-dlp
 yt-dlp --version 2023.07.06
@@ -1052,7 +1058,7 @@ snap run gimp                    Запуск Snap-пакетов
 
 --------------------------------------------ИНТЕРЕСНЫЙ СОФТ----------------------------------------------- 
 
-pipewire pipewire-alsa pipewire-pulse  ?pipewire-audio?
+pipewire pipewire-pulse   ?pipewire-alsa pipewire-audio?
 jdupes
 parcellite xfce4-clipman-plugin
 rtorrent
@@ -1070,13 +1076,52 @@ neofetch
 nala epm
 
 ------------------------------------------------ДРУГИЕ РЕПОЗИТОРИИ----------------------------------------------
+MX Linux 23.5 Libretto
 http://iso.mxrepo.com/Downloads/Final/MX-23.5/
 https://mxrepo.com/
 https://mxrepo.com/MX23packages.html
+https://mxrepo.com/mx/repo/pool/main/
+https://mxrepo.com/mx/repo/pool/main/z/zzzfm/zzzfm_1.0.7-9~mx21+1_amd64.deb
+https://mxrepo.com/mx/repo/pool/main/z/zzzfm/zzzfm-gtk3_1.0.7-9~mx21+1_amd64.deb
+https://mxrepo.com/mx/repo/pool/main/z/zzzfm/zzzfm-common_1.0.7-9~mx21+1_all.deb
 https://mxrepo.com/mx/repo/pool/main/p/palemoon/palemoon_33.6.0-1mx23_amd64.deb
-https://mxrepo.com/mx/repo/pool/main/s/seamonkey/seamonkey_2.53.20~mozillabinaries-1mx23+1_amd64.deb
 https://mxrepo.com/mx/repo/pool/main/r/roxterm/roxterm_3.12.1-1mx23_amd64.deb
 https://mxrepo.com/mx/repo/pool/main/r/roxterm/roxterm-data_3.12.1-1mx23_all.deb
+https://mxrepo.com/mx/repo/pool/main/s/seamonkey/seamonkey_2.53.20~mozillabinaries-1mx23+1_amd64.deb
+https://mxrepo.com/mx/repo/pool/main/f/fluxbox/fluxbox_1.3.7+git20220731-0mx23+1_amd64.deb
+https://mxrepo.com/mx/repo/pool/main/f/fluxbox/fluxbox-dbgsym_1.3.7+git20220731-0mx23+1_amd64.deb
+
+http://mirror.yandex.ru
+MX
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/z/zzzfm/zzzfm_1.0.7-9~mx21%2B1_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/z/zzzfm/zzzfm-gtk3_1.0.7-9~mx21%2B1_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/z/zzzfm/zzzfm-common_1.0.7-9~mx21%2B1_all.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/p/palemoon/palemoon_33.6.0-1mx23_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/r/roxterm/roxterm-data_3.12.1-1mx23_all.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/r/roxterm/roxterm_3.12.1-1mx23_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/mx/repo/pool/main/s/seamonkey/seamonkey_2.53.20~mozillabinaries-1mx23%2B1_amd64.deb
+
+antiX
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/z/zzzfm/zzzfm_1.0.7-13_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/z/zzzfm/zzzfm-gtk3_1.0.7-13_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/z/zzzfm/zzzfm-common_1.0.7-13_all.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/p/palemoon/palemoon_33.5.1-1mx23_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/r/roxterm/roxterm-common_2.9.5-1_all.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/r/roxterm/roxterm-gtk3_2.9.5-1_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/r/roxterm/roxterm-gtk3-dbg_2.9.5-1_amd64.deb
+https://mirror.yandex.ru/mirrors/MX-Linux/MX-Packages/antix/bookworm/pool/main/s/seamonkey/seamonkey_2.53.20~mozillabinaries-1mx23%2B1_amd64.deb
+
+kali
+https://http.kali.org/kali/pool/main/f/fluxbox/fluxbox_1.3.7-1%2Bb1_amd64.deb   2024-Mar-25 03:36
+
+Astra
+https://mirror.yandex.ru/astra/stable/2.12_x86-64/repository/pool/main/
+
+Deepin
+https://mirror.yandex.ru/mirrors/deepin/packages/pool/main/
 
 https://repo.sparkylinux.org/
 https://sourceforge.net/projects/sparkylinux/files/repo/pool/main/

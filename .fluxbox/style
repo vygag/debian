@@ -123,3 +123,15 @@ window.grip.focus:                      flat
 window.grip.focus.color:                #6298e0
 window.grip.unfocus:                    flat
 window.grip.unfocus.color:              #515152
+
+toolbar.button.borderWidth:             1
+toolbar.button.scale:                   1
+toolbar.button:						    Flat
+#toolbar.button.pixmap:					/home/vyga/.fluxbox/icon/cal.png
+toolbar.button.border.color:            #000000
+toolbar.button.color:					#000000			
+toolbar.button.picColor:				#ffffff
+toolbar.button.font:                    sans-8
+toolbar.button.pressed:					Flat	
+toolbar.button.pressed.color:           #000000
+toolbar.button.pressed.picColor:        #ffffff

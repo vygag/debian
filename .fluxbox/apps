@@ -128,8 +128,8 @@
 [end]
 
 [transient] (name=transmission-gtk)
-[Dimensions] {705 630}
-[Position] (BottomRight) {0 0}
+[Dimensions] {890 540}
+[Position] (BottomCenter) {0 0}
 [end]
 
 [app] (name=Mail) (class=thunderbird-default) (role=3pane)
@@ -241,8 +241,7 @@
 [end]
 
 [app] (name=galculator)
-[Deco] {NONE}
-[Position]	(UPPERLEFT)	{1392 791}
+[Position]	(UPPERLEFT)	{1392 770}
 [end]
 
 [app] (name=homebank)
@@ -337,4 +336,9 @@
 
 [transient] (name=org.gnome.clocks)
 [Position] (BottomRight) {0 0}
+[end]
+
+[app] (name=org.gnome.Meld) (class=Meld)
+[Dimensions] {1210 650}
+[Position] (BottomLeft) {0 0}
 [end]

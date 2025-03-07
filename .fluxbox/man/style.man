@@ -27,8 +27,8 @@ STRUCTURE   структура
 
 window.* Окно.* директивы управляют внешним видом оконных рамок, window.tab.* управляет внешним видом вкладок окна, menu.* 
 управляет внешним видом всплывающего меню, которое вы видите при щелчке правой кнопкой мыши на рабочем столе. toolbar.* панель инструментов.* 
-- это панель, которую вы увидите в верхней или нижней части экрана. Наконец, slit.* разрез. * (щель) имеет опции, которые вы можете использовать 
-для настройки внешнего вида разреза (щели). Однако, если вы не задаете директивы slit специально, внешний вид slit вместо этого 
+- это панель, которую вы увидите в верхней или нижней части экрана. Наконец, slit.* (Докер) имеет опции, которые вы можете использовать 
+для настройки внешнего вида Докера. Однако, если вы не задаете директивы slit специально, внешний вид slit вместо этого 
 контролируется директивами панели инструментов.
          
 Чтобы понять, как работает механизм стилей, неплохо бы немного узнать о том, как работают ресурсы X11.
@@ -68,7 +68,7 @@ LOCATION   местоположение
 
 CREATING YOUR STYLE       СОЗДАЕМ СВОЙ СТИЛЬ
 Как обсуждалось выше, fluxbox(1) позволяет настраивать его четыре основных компонента: панель инструментов, меню, панель инструментов 
-и оформление окон. Помните, что вы можете настроить разрез (щель) с помощью его собственных директив, в противном случае разрез примет вид 
+и оформление окон. Помните, что вы можете настроить Докер с помощью его собственных директив, в противном случае Докер примет вид 
 панели инструментов.
 
        Вот несколько кратких примеров, иллюстрирующих базовый синтаксис:
@@ -195,16 +195,16 @@ BACKGROUND             Фон
            background.modX:               <integer> <целое число>                            Обои
            background.modY:               <integer> <целое число> 
 
-SLIT        Разрез щель Выподающие окна
+SLIT        Докер Выподающие окна
 
-       Вот все варианты разреза.
+       Вот все варианты Докера.
 
            -----------------------------------------
            slit:                           <texture type>                                    Выподающие окна
            slit.bevelWidth:                <integer> <целое число>                           Ширина скоса-наклона
            slit.borderColor:               <color>                                           Цвет границы рамки
            slit.borderWidth:               <integer> <целое число>                           Толщина границы
-           slit.color:                     <color>
+           slit.color:                     <color>                                           Цвет фона
            slit.colorTo:                   <color>
            slit.pixmap:                    <filename>
            -----------------------------------------
@@ -223,36 +223,36 @@ WINDOW OPTIONS        Настройка Окон
            window.button.focus:            <texture type> <тип текстуры>                      Кнопки свернуть развернуть закрыть
            window.button.focus.color:      <color>                                            Цвет фона кнопок
            window.button.focus.colorTo:    <color>
-           window.button.focus.picColor:   <color>                                            Цвет кнопок
+           window.button.focus.picColor:   <color>                                            Цвет кнопок Цвет надписи
            window.button.focus.pixmap:     <filename>
            window.button.pressed:          <texture type> <тип текстуры>                      Нажатая кнопка
-           window.button.pressed.color:    <color>                                            Нажатая кнопка цвет
+           window.button.pressed.color:    <color>                                            Нажатая кнопка Цвет фона
            window.button.pressed.colorTo:  <color>
            window.button.pressed.pixmap:   <filename>
            window.button.unfocus:          <texture type> <тип текстуры>
            window.button.unfocus.color:    <color>                                            Цвет фона кнопок
            window.button.unfocus.colorTo:  <color>
-           window.button.unfocus.picColor: <color>                                            Цвет кнопок
+           window.button.unfocus.picColor: <color>                                            Цвет кнопок Цвет надписи
            window.button.unfocus.pixmap:   <filename>
            
            window.frame.focusColor:        <color>                                            Оконная рама каркас
            window.frame.unfocusColor:      <color>                                            Оконная рама каркас
            
            window.grip.focus:              <texture type> <тип текстуры>                      Нижний уголок окна-изменить размер
-           window.grip.focus.color:        <color>                                            Цвет нижнего уголка изменить размер
+           window.grip.focus.color:        <color>                                            Цвет фона нижнего уголка изменить размер
            window.grip.focus.colorTo:      <color>
            window.grip.focus.pixmap:       <filename>
            window.grip.unfocus:            <texture type> <тип текстуры>
-           window.grip.unfocus.color:      <color>                                            Цвет нижнего уголка изменить размер
+           window.grip.unfocus.color:      <color>                                            Цвет фона нижнего уголка изменить размер
            window.grip.unfocus.colorTo:    <color>
            window.grip.unfocus.pixmap:     <filename>
            
            window.handle.focus:            <texture type> <тип текстуры>                      Нижний заголовок окна рукоятка
-           window.handle.focus.color:      <color>                                            Фон нижнего заголовка окна
+           window.handle.focus.color:      <color>                                            Цвет фона нижнего заголовка окна
            window.handle.focus.colorTo:    <color>
            window.handle.focus.pixmap:     <filename>
            window.handle.unfocus:          <texture type> <тип текстуры>                      
-           window.handle.unfocus.color:    <color>                                            Фон нижнего заголовка окна
+           window.handle.unfocus.color:    <color>                                            Цвет фона нижнего заголовка окна
            window.handle.unfocus.colorTo:  <color>
            window.handle.unfocus.pixmap:   <filename>
            window.handleWidth:             <integer> <целое число>                            Размер ширина нижнего заголовка окна
@@ -273,12 +273,12 @@ WINDOW OPTIONS        Настройка Окон
            window.label.unfocus.textColor: <color>                                            Цвет текста заголовка
            
            window.title.focus:             <texture type> <тип текстуры>                      Рамка заголовка и кнопок
-           window.title.focus.color:       <color>                                            Цвет рамки заголовка и кнопок
+           window.title.focus.color:       <color>                                            Цвет фона рамки заголовка и кнопок
            window.title.focus.colorTo:     <color>
            window.title.focus.pixmap:      <filename>
            window.title.height:            <integer> <целое число> 
            window.title.unfocus:           <texture type> <тип текстуры>
-           window.title.unfocus.color:     <color>                                            Цвет рамки заголовка и кнопок
+           window.title.unfocus.color:     <color>                                            Цвет фона рамки заголовка и кнопок
            window.title.unfocus.colorTo:   <color>
            window.title.unfocus.pixmap:    <filename>
            
@@ -319,7 +319,7 @@ MENU OPTIONS                Настройка меню
            menu.roundCorners:              <{Top|Bottom}{Left|Right}>                        Закругление углов меню
            
            menu.frame:                     <texture type> <тип текстуры>                     Рамка каркас окна
-           menu.frame.color:               <color>                                           Цвет меню
+           menu.frame.color:               <color>                                           Цвет фона меню
            menu.frame.colorTo:             <color>
            menu.frame.disableColor:        <color>                                           Отключенный цвет
            menu.frame.font:                <font>
@@ -328,7 +328,7 @@ MENU OPTIONS                Настройка меню
            menu.frame.textColor:           <color>                                           Цвет текста меню
            
            menu.hilite:                    <texture type> <тип текстуры>                     Выделение пункта меню
-           menu.hilite.color:              <color>                                           Цвет выделения
+           menu.hilite.color:              <color>                                           Цвет фона выделения
            menu.hilite.colorTo:            <color>
            menu.hilite.font:               <font>                                            Шрифт выделения            
            menu.hilite.justify:            <{left|center|right}>                             Выравнивание позиция
@@ -336,7 +336,7 @@ MENU OPTIONS                Настройка меню
            menu.hilite.textColor:          <color>                                           Цвет текста выделенного меню
            
            menu.title:                     <texture type>                                    Заголовок меню
-           menu.title.color:               <color>                                           Цвет заголовка
+           menu.title.color:               <color>                                           Цвет фона заголовка
            menu.title.colorTo:             <color>
            menu.title.font:                <font>                                            Шрифт заголовка
            menu.title.pixmap:              <filename>
@@ -359,7 +359,7 @@ TOOLBAR OPTIONS        Параметры панели инструментов
            toolbar.bevelWidth:             <integer (0-255)> <целое число>                  Ширина скоса наклона
            toolbar.borderColor:            <color>                                          Цвет рамки панели 
            toolbar.borderWidth:            <integer> <целое число>                          Толщина рамки панели
-           toolbar.color:                  <color>                                          Цвет рамки панели
+           toolbar.color:                  <color>                                          Цвет фона рамки панели
            toolbar.colorTo:                <color>
            toolbar.height:                 <integer> <целое число>                          Высота вышина
            toolbar.pixmap:                 <filename>
@@ -376,15 +376,15 @@ TOOLBAR OPTIONS        Параметры панели инструментов
            toolbar.clock.textColor:        <color>                                          Цвет текста часов
            
            toolbar.iconbar.focused:        <texture type> <тип текстуры>                    Панель окон
-           toolbar.iconbar.focused.color:  <color>                                          Фон активного окна
+           toolbar.iconbar.focused.color:  <color>                                          Цвет фона активного окна
            toolbar.iconbar.focused.colorTo:<color>
            toolbar.iconbar.focused.pixmap: <filename>
            toolbar.iconbar.unfocused:      <texture type> <тип текстуры> 
-           toolbar.iconbar.unfocused.color:  <color>                                        Фон неактивного окна
+           toolbar.iconbar.unfocused.color:  <color>                                        Цвет фона неактивного окна
            toolbar.iconbar.unfocused.colorTo: <color>
            toolbar.iconbar.unfocused.pixmap: <filename>
            toolbar.iconbar.empty:          <texture type> <тип текстуры>                    Панель инструментов
-           toolbar.iconbar.empty.color:    <color>                                          Фон панели инструментов
+           toolbar.iconbar.empty.color:    <color>                                          Цвет фона панели инструментов
            toolbar.iconbar.empty.colorTo:  <color>
            toolbar.iconbar.empty.pixmap:   <filename>
            toolbar.iconbar.focused.borderColor: <color>                                     Цвет боковой перегородки перед треем |
@@ -410,8 +410,8 @@ TOOLBAR OPTIONS        Параметры панели инструментов
            toolbar.workspace.colorTo:      <color>
            toolbar.workspace.pixmap:       <filename>
            
-           toolbar.button.color:			         #000000			                    фон кнопки	
-           toolbar.button.picColor:				     #ffffff                                цвет кнопки
+           toolbar.button.color:			         #000000			                    Цвет фона кнопки	
+           toolbar.button.picColor:				     #ffffff                                цвет кнопки Цвет надписи
            toolbar.button.pressed.color:			 #6298e0			                    нажатие кнопки
            toolbar.button.pressed.picColor:          #857280
            toolbar.button.scale:                    <integer> <целое число>                 Толщина кнопок панели
@@ -455,31 +455,31 @@ window.roundCorners:            TopRight TopLeft BottomRight BottomLeft         
 
 window.button.focus:            Flat
 window.button.focus.color:      #004dff                                           цвет фона кнопок
-window.button.focus.picColor:   #804030                                           цвет кнопок
+window.button.focus.picColor:   #804030                                           цвет кнопок Цвет надписи
 window.button.pressed:          Flat
-window.button.pressed.color:    #bebebe
+window.button.pressed.color:    #bebebe                                           Цвет фона
 window.button.unfocus:          Flat
 window.button.unfocus.color:    #ff0000                                           цвет фона кнопок
-window.button.unfocus.picColor: #ffff00                                           цвет кнопок
+window.button.unfocus.picColor: #ffff00                                           цвет кнопок Цвет надписи
 
 window.title.focus:             Flat
-window.title.focus.color:       #004dff                                         цвет рамки заголовка и кнопок
+window.title.focus.color:       #004dff                                         Цвет фона рамки заголовка и кнопок
 window.title.height:            16
 window.title.unfocus:           Flat
-window.title.unfocus.color:     #ffffff                                         цвет рамки заголовка и кнопок
+window.title.unfocus.color:     #ffffff                                         Цвет фона рамки заголовка и кнопок
 
 window.frame.focusColor:        #00ff00
 window.frame.unfocusColor:      #00bfff    
                                        
 window.grip.focus:              Flat
-window.grip.focus.color:        #ffc0cb                                           цвет нижнего уголка изменить размер
+window.grip.focus.color:        #ffc0cb                                           Цвет фона нижнего уголка изменить размер
 window.grip.unfocus:            Flat
 window.grip.unfocus.color:      #30d5c8                                           цвет нижнего уголка изменить размер
 
 window.handle.focus:            Flat
-window.handle.focus.color:      #6900c6                                           фон нижнего заголовка окна
+window.handle.focus.color:      #6900c6                                           Цвет фона нижнего заголовка окна
 window.handle.unfocus:          Flat
-window.handle.unfocus.color:    #ff6600                                           фон нижнего заголовка окна
+window.handle.unfocus.color:    #ff6600                                           Цвет фона нижнего заголовка окна
 window.handleWidth:             1                                                 размер нижнего заголовка окна
 
 window.label.active:            Flat
@@ -488,7 +488,7 @@ window.label.focus:             Flat
 window.label.focus.color:       #c400ab                                          цвет фона заголовка
 window.label.focus.font:        liberation mono-8
 window.label.unfocus:           Flat
-window.label.unfocus.color:     #ff0000
+window.label.unfocus.color:     #ff0000                                         Цвет фона 
 window.label.unfocus.font:      liberation mono-8
 window.label.focus.textColor:   #bebebe                                         цвет текста заголовка
 window.label.unfocus.textColor: #804030
@@ -501,14 +501,14 @@ menu.bullet.position:           right                                       ст
 menu.itemHeight:                14
 
 menu.frame:                     Flat                                        меню плоское
-menu.frame.color:               #ffffff                                     цвет меню
+menu.frame.color:               #ffffff                                     Цвет фона меню
 menu.frame.disableColor:        #c400ab                                     Отключенный цвет
 menu.frame.font:                liberation mono-8                           шрифт меню
 menu.frame.justify:             Center                                      шрифт меню по центру
 menu.frame.textColor:           #804030                                     цвет текста меню
 
 menu.hilite:                    Flat                                        выделение плоское
-menu.hilite.color:              #bebebe                                     цвет выделения
+menu.hilite.color:              #bebebe                                     Цвет фона выделения
 menu.hilite.font:               liberation mono-8                           шрифт выделения
 menu.hilite.justify:            center
 menu.hilite.textColor:          #ff0000                                     цвет текста выделенного меню
@@ -529,7 +529,7 @@ toolbar.button.scale:                   1                                   то
 toolbar.button.borderWidth:             1                                   Толщина границы кнопок
 toolbar.button.borderColor:             #222222                             Цвет рамки кнопок
 toolbar.button:                         Flat
-toolbar.color:                          #004dff                             цвет рамки панели
+toolbar.color:                          #004dff                             Цвет фона рамки панели
 toolbar.shaped:                         false
 toolbar.height:                         13
 
@@ -542,11 +542,11 @@ toolbar.clock.color:                    #bebebe                             цв
 toolbar.clock.textColor:                #ff0000                             цвет текста часов
 
 toolbar.iconbar.focused:                Flat
-toolbar.iconbar.focused.color:          #ffff00                             фон активного окна
+toolbar.iconbar.focused.color:          #ffff00                             Цвет фона активного окна
 toolbar.iconbar.unfocused:              Flat
-toolbar.iconbar.unfocused.color:        #00ff00                             фон неактивного окна
+toolbar.iconbar.unfocused.color:        #00ff00                             Цвет фона неактивного окна
 toolbar.iconbar.empty:                  Flat
-toolbar.iconbar.empty.color:            #00bfff                             фон названия рабочего стола
+toolbar.iconbar.empty.color:            #00bfff                             Цвет фона названия рабочего стола
 toolbar.iconbar.focused.borderColor:    #ffc0cb                             фон перед треем боковая перегородка
 toolbar.iconbar.focused.borderWidth:    1                                   толщина рамки
 toolbar.iconbar.unfocused.borderColor:  #30d5c8                             боковая перегородка

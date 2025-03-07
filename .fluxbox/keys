@@ -74,6 +74,8 @@ Mod4 End :MacroCmd {MoveTo 00 00 BottomLeft}
 Mod4 Next :MacroCmd {MoveTo 00 00 BottomRight}
 # Переместить окно в Центр
 Mod4 grave :MoveTo 00 00 Center
+# Переместить окно в Низ по центру
+Mod4 Tab :MoveTo 00 00 BottomCenter
 # Изменить размер окна Win+стрелки
 Mod4 Left :ResizeHorizontal -2
 Mod4 Right :ResizeHorizontal +2
